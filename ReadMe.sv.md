@@ -11,6 +11,7 @@ Mjukvara kan testas på olika sätt, på olika nivåer, http://en.wikipedia.org/wiki
 * enhetstest (unit test) – testa en minsta enhet, en metod/egenskap i en klass i ett system
 * integrationstest (integration test) – testa funktionalitet mellan enheter
 * systemtest (system test) – testa ett helt system
+
 För mig som programmerare handlar testbarhet mest om programmerbara/automatiska tester. Jag anser att begreppet testbarhet mest hör ihop med enhetstester (unit tests). Bygg dina klasser så att de blir testbara, vilket innebär att klassens beroenden är abstrakta och injicerbara (injectable).
 
 ###2.1 Fördelar
