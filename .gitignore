@@ -1,0 +1,13 @@
+_ReSharper*/
+bin/
+debug/
+FakesAssemblies/
+obj/
+packages/*
+release/
+testresults/
+*.suo
+*.user
+.nuget/NuGet.exe
+
+!packages/repositories.config
