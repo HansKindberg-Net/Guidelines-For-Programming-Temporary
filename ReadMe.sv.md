@@ -1,5 +1,4 @@
 [English](ReadMe.md)
-
 #Riktlinjer för programmering
 
 ##1. Inledning
