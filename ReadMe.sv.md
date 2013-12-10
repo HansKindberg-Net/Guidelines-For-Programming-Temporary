@@ -13,15 +13,15 @@ Det här dokumentet innehåller riktlinjer för programmering i huvudsak för **.NET
 * **Company-Windows** - innehåller ett Windows-forms-application projekt + tillhörande test-projekt
 
 Jag använder följande namngivning på test-projekten:
-* [PROJEKTUNDERTEST].IntegrationTests - innehåller integrerade enhetstester där inte allt mockas
-* [PROJEKTUNDERTEST].ShimTests - innehåller enhetstester där typer som behöver mockas inte är mockbara utan **Microsoft Fakes** används istället (se 1.1.1 Shim-tests och Microsoft Fakes)
-* [PROJEKTUNDERTEST].UnitTests - innehåller enhetstester där typer som behöver mockas är mockbara
+* [PROJEKTUNDERTEST].**IntegrationTests** - innehåller integrerade enhetstester där inte allt mockas
+* [PROJEKTUNDERTEST].**ShimTests** - innehåller enhetstester där typer som behöver mockas inte är mockbara utan **Microsoft Fakes** används istället (se **1.1.1 Shim-tests och Microsoft Fakes**)
+* [PROJEKTUNDERTEST].**UnitTests** - innehåller enhetstester där typer som behöver mockas är mockbara
 
 ####1.1.1 Shim-tests och Microsoft Fakes
-**Microsoft Fakes** kräver Visual Studio Premium/Ultimate 2012/2013. Om man har Visual Studio 2010 eller Visual Studio Professional 2012/2013 kan inte ett projekt där Microsoft Fakes används laddas. Om jag skulle blanda shim-tests med övriga enhets-tester skulle inga enhets-test projekt gå att ladda med dessa versioner. Det är därför jag gjort denna uppdelning.
+**Microsoft Fakes** kräver Visual Studio Premium/Ultimate 2012/2013. Om man har Visual Studio 2010 eller Visual Studio Professional 2012/2013 kan inte ett projekt där **Microsoft Fakes** används laddas. Om jag skulle blanda shim-tests med övriga enhets-tester skulle inga enhets-test projekt gå att ladda med dessa versioner. Det är därför jag gjort denna uppdelning.
 
 ###1.2 Övrigt
-Jag är systemutvecklare och utveckar/programmerar i huvudsak EPiServer-lösningar och andra webbapplikationer. Jag har mindre erfarenhet av .NET WCF, .NET WebServices, .NET Windows Forms, ändå har jag velat ta med exempel inom dessa typer av applikationer.
+Jag är systemutvecklare och utvecklar/programmerar i huvudsak EPiServer-lösningar och andra webbapplikationer. Jag har mindre erfarenhet av .NET WCF, .NET WebServices, .NET Windows Forms, ändå har jag velat ta med exempel inom dessa typer av applikationer.
 
 ##2. Testbarhet
 Det finns olika mål med testning ([SWEBOK - Chapter 5 Software Testing - Objectives of Testing](http://www.computer.org/portal/web/swebok/html/ch5#Ref2.2)). Detta avsnitt behandlar automatiserade/programmerbara funktionella tester, att skriva kod/programmera så att en applikation blir möjlig att automatiskt funktions-testa. 
