@@ -39,6 +39,9 @@
     <CodeAnalysisRuleSet>..\..\CodeAnalysis\Solution.Tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\..\packages\Moq.4.1.1311.0615\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -76,6 +79,9 @@
   <ItemGroup>
     <Folder Include="HardToTest\" />
     <Folder Include="Testable\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

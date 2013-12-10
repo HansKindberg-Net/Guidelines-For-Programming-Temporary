@@ -130,7 +130,16 @@ Om du vill skapa egna **NuGet** paket så kan du göra det direkt när du bygger. I
 &lt;/package&gt;
 </pre>
 
-Alla värden som börjar och slutar med **$, t.ex. **$author$**, är så kallade **Replacement Tokens** och kommer ersättas av värden från **AssemblyInfo.cs**.
+Alla värden som börjar och slutar med **$**, t.ex. **$author$**, är så kallade **Replacement Tokens** och kommer ersättas av värden från **AssemblyInfo.cs**.
+
+Lägg till ett **PostBuildEvent** i projektet:
+* Högerklicka ditt projekt i **Solution Explorer**
+* Välj fliken **Build Events**
+* I fältet **Post-build event command line:** - lägg till följande: **"$(SolutionDir).nuget\NuGet.exe" pack "$(ProjectPath)" -Properties Configuration=$(ConfigurationName) -IncludeReferencedProjects**
+
+Exempel i denna solution:
+* [**Company.nuspec**](Company-Shared/Company/Company.nuspec)
+* [**Company.csproj** - leta efter taggen **&lt;PostBuildEvent&gt;**](Company-Shared/Company/Company.csproj)
 
 Du kan läsa mer om **.nuspec**-filer här:
 * [**Nuspec Reference**](http://docs.nuget.org/docs/reference/nuspec-reference)
