@@ -4,6 +4,25 @@
 ##1. Inledning
 Det här dokumentet innehåller riktlinjer för programmering i huvudsak för **.NET** och **Visual Studio**. Avsnittet **Testbarhet** kan dock appliceras på andra programmeringsspråk. Jag anser att avsnittet **Testbarhet** är det viktigaste avsnittet och därför har jag valt att lägga det först.
 
+###1.1 Denna lösnings struktur
+**Riktlinjer för programmering** är byggd som en **Visual Studio Solution**. Jag vill visa hur jag menar genom exempel. Projekten i denna solution är strukturerade i **Solution Folders**:
+* **Company-Samples** - innehåller ett projekt (classlibrary) med mer allmän exempel-kod vad gäller testbarhet + tillhörande test-projekt
+* **Company-Services** - innehåller WCF och WebService (asmx) projekt + tillhörande test-projekt
+* **Company-Shared** - innehåller generella funktioner för hela lösningen
+* **Company-Web** - innehåller webbapplikationer (MVC, MVP och traditionell Web Forms) + tillhörande test-projekt
+* **Company-Windows** - innehåller ett Windows-forms-application projekt + tillhörande test-projekt
+
+Jag använder följande namngivning på test-projekten:
+* [PROJEKTUNDERTEST].IntegrationTests - innehåller integrerade enhetstester där inte allt mockas
+* [PROJEKTUNDERTEST].ShimTests - innehåller enhetstester där typer som behöver mockas inte är mockbara utan **Microsoft Fakes** används istället (se 1.1.1 Shim-tests och Microsoft Fakes)
+* [PROJEKTUNDERTEST].UnitTests - innehåller enhetstester där typer som behöver mockas är mockbara
+
+####1.1.1 Shim-tests och Microsoft Fakes
+**Microsoft Fakes** kräver Visual Studio Premium/Ultimate 2012/2013. Om man har Visual Studio 2010 eller Visual Studio Professional 2012/2013 kan inte ett projekt där Microsoft Fakes används laddas. Om jag skulle blanda shim-tests med övriga enhets-tester skulle inga enhets-test projekt gå att ladda med dessa versioner. Det är därför jag gjort denna uppdelning.
+
+###1.2 Övrigt
+Jag är systemutvecklare och utveckar/programmerar i huvudsak EPiServer-lösningar och andra webbapplikationer. Jag har mindre erfarenhet av .NET WCF, .NET WebServices, .NET Windows Forms, ändå har jag velat ta med exempel inom dessa typer av applikationer.
+
 ##2. Testbarhet
 Det finns olika mål med testning ([SWEBOK - Chapter 5 Software Testing - Objectives of Testing](http://www.computer.org/portal/web/swebok/html/ch5#Ref2.2)). Detta avsnitt behandlar automatiserade/programmerbara funktionella tester, att skriva kod/programmera så att en applikation blir möjlig att automatiskt funktions-testa. 
 
@@ -31,7 +50,7 @@ För att kunna enhetstesta en metod i en klass som har ett beroende till en annan
 
 Kortfattat innebär det att man inte hårdkodar ett beroende till en annan klass utan man gör det möjligt att styra beroendet under körning.
 
-Följande exempel visar en svårtestad metod ([se hela klassen](Company-Samples/Company.Samples/HardToTest/EmailForm.cs):
+Följande exempel visar en svårtestad metod ([se hela klassen](Company-Samples/Company.Samples/HardToTest/EmailForm.cs)):
 <pre>
 public void Send()
 {
@@ -53,9 +72,16 @@ public void Send()
 }
 </pre>
 
+Metoden ovan är svår att testa i huvudsak för att den skapar en instans av typen SmtpClient och sedan kallar på metoden Send(MailMessage mailMessage). Det finns bl.a två scenarior vi skulle vilja testa för denna metod:
+1. Om ValidateInput() returnerar ett object där IsValid == true, så ska Send(mailMessage) anropas.
+2. Om ValidateInput() returnerar ett object där IsValid == false, så ska den kasta ett fel och Send(mailMessage) ska inte anropas.
 
+Om vi skippar tänket på god kod-design så skulle vi kunna testa dessa två scenarior ändå om vi har tillgång till något av följande:
+* **Microsoft Fakes** - kräver Visual Studio Premium/Ultimate 2012/2013 ([Isolating Code Under Test with Microsoft Fakes](http://msdn.microsoft.com/en-us/library/hh549175.aspx))
+* [**Typemock Isolator**](http://www.typemock.com/isolator-product-page)
+* [**Telerik JustMock**](http://www.telerik.com/products/mocking.aspx)
 
-
+Exempel med [**Microsoft Fakes**]()
 
 ##3. Visual Studio
 
@@ -104,9 +130,9 @@ I början på **NuGet.targets** bör det se ut så här:
 </pre>
 
 Ändra till följande:
-* RequireRestoreConsent = false
-* DownloadNuGetExe = true
-* PackageSource Include="https://www.nuget.org/api/v2/"
+* **RequireRestoreConsent** = false
+* **DownloadNuGetExe** = true
+* **PackageSource Include** = "https://www.nuget.org/api/v2/"
 
 så att det ser ut så här:
 <pre>
