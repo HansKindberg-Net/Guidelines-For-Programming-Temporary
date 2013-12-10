@@ -19,7 +19,7 @@ Fördelar med testbarhet:
 * **Pluggbara** system – system/mjukvara där det är lätt att byta ut olika delar
 * System/mjukvara som kan köras i olika miljöer med olika förutsättningar, produktion, test, utveckling m.m.
 
-Även om man inte skriver/programmerar några tester men skriver sin kod testbar så anser jag att man får en bra mjukvaru-design. Jag anser också att det kommer att resultera i att de klasser man skriver/programmerar hanterar det de ska, vilket resulterar i kod som är lättare att underhålla och man undviker redundant kod (duplicate code). Samtidigt kräver det mer av den som programmerar att se till att klasser underhålls på rätt sätt eftersom det är mycket troligt att flera andra klasser har ett beroende till klassen.
+Även om man inte skriver/programmerar några tester men skriver sin kod testbar så anser jag att man får en bra mjukvaru-design. Jag anser också att det kommer att resultera i att de klasser man skriver/programmerar hanterar det de ska, vilket resulterar i kod som är lättare att underhålla och man undviker redundant kod (duplicate code). Samtidigt kräver det mer av den som programmerar att se till att klasser underhålls på rätt sätt eftersom det är mycket troligt att flera andra klasser har ett beroende till klassen. Med andra ord, bygger man testbart så bygger man objekt-orienterat.
 
 ###2.2 Beroenden (dependencies)
 Klasser har beroenden till andra klasser. Idén med enhetstestning är att testa kod utan att testa dess beroenden. Tanken är att om en klass fungerar som den är designad och dess beroende klasser likaså så borde de fungera tillsammans som tänkt.
@@ -31,7 +31,27 @@ För att kunna enhetstesta en metod i en klass som har ett beroende till en annan
 
 Kortfattat innebär det att man inte hårdkodar ett beroende till en annan klass utan man gör det möjligt att styra beroendet under körning.
 
+Följande exempel visar en svårtestad metod ([se hela klassen](Company-Samples/Company.Samples/HardToTest/EmailForm.cs):
+<pre>
+public void Send()
+{
+    IValidationResult validationResult = this.ValidateInput();
 
+    if(!validationResult.IsValid)
+        throw validationResult.Exceptions.First();
+
+    using(MailMessage mailMessage = new MailMessage("noreply@company.net", this.To))
+    {
+        mailMessage.Body = this.Message;
+        mailMessage.Subject = this.Subject;
+
+        using(SmtpClient smtpClient = new SmtpClient())
+        {
+            smtpClient.Send(mailMessage);
+        }
+    }
+}
+</pre>
 
 
 
@@ -136,6 +156,8 @@ Lägg till ett **PostBuildEvent** i projektet:
 * Högerklicka ditt projekt i **Solution Explorer**
 * Välj fliken **Build Events**
 * I fältet **Post-build event command line:** - lägg till följande: **"$(SolutionDir).nuget\NuGet.exe" pack "$(ProjectPath)" -Properties Configuration=$(ConfigurationName) -IncludeReferencedProjects**
+
+När du bygger din solution/ditt projekt kommer du få en [PROJEKTNAMN].[VERSION].nupkg i din **output** katalog för projektet.
 
 Exempel i denna solution:
 * [**Company.nuspec**](Company-Shared/Company/Company.nuspec)
