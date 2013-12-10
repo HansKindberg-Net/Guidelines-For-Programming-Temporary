@@ -5,12 +5,12 @@
 Det här dokumentet innehåller riktlinjer för programmering i huvudsak för **.NET** och **Visual Studio**. Avsnittet **Testbarhet** kan dock appliceras på andra programmeringsspråk. Jag anser att avsnittet **Testbarhet** är det viktigaste avsnittet och därför har jag valt att lägga det först.
 
 ##2. Testbarhet
-(Testbarhet innehåller riktlinjer för att skriva testbar-kod. Leder till kod/mjukvara som blir mer plugbar)
+Det finns olika mål med testning ([SWEBOK - Chapter 5 Software Testing - Objectives of Testing](http://www.computer.org/portal/web/swebok/html/ch5#Ref2.2)). Detta avsnitt behandlar automatiserade/programmerbara funktionella tester, att skriva kod/programmera så att en applikation blir möjlig att automatiskt funktions-testa. 
 
-Mjukvara kan testas på olika sätt, på olika nivåer, http://en.wikipedia.org/wiki/Software_testing#Testing_levels.
-* enhetstest (unit test) – testa en minsta enhet, en metod/egenskap i en klass i ett system
-* integrationstest (integration test) – testa funktionalitet mellan enheter
-* systemtest (system test) – testa ett helt system
+Mjukvara kan testas på på olika nivåer ([Software testing - Testing levels](http://en.wikipedia.org/wiki/Software_testing#Testing_levels), [SWEBOK - Chapter 5 Software Testing - Test Levels](http://www.computer.org/portal/web/swebok/html/ch5#Ref2))
+* **enhetstest** (unit test) – testa en minsta enhet, en metod/egenskap i en klass i ett system
+* **integrationstest** (integration test) – testa funktionalitet mellan enheter
+* **systemtest** (system test) – testa ett system som en helhet
 
 För mig som programmerare handlar testbarhet mest om programmerbara/automatiska tester. Jag anser att begreppet testbarhet mest hör ihop med enhetstester (unit tests). Bygg dina klasser så att de blir testbara, vilket innebär att klassens beroenden är abstrakta och injicerbara (injectable).
 
@@ -21,44 +21,146 @@ Fördelar med testbarhet:
 
 Även om man inte skriver/programmerar några tester men skriver sin kod testbar så anser jag att man får en bra mjukvaru-design. Jag anser också att det kommer att resultera i att de klasser man skriver/programmerar hanterar det de ska, vilket resulterar i kod som är lättare att underhålla och man undviker redundant kod (duplicate code). Samtidigt kräver det mer av den som programmerar att se till att klasser underhålls på rätt sätt eftersom det är mycket troligt att flera andra klasser har ett beroende till klassen.
 
-###2.2 Beroenden (dependencies) – dependency injection
+###2.2 Beroenden (dependencies)
 Klasser har beroenden till andra klasser. Idén med enhetstestning är att testa kod utan att testa dess beroenden. Tanken är att om en klass fungerar som den är designad och dess beroende klasser likaså så borde de fungera tillsammans som tänkt.
 
-##3. Visual Studio
-###3.1 NuGet
-Enable NuGet Package Restore
-In the Solution Explorer
-Right click you solution
-Click Enable NuGet Package Restore
-Följande katalog och filer har nu skapats under rotkatalogen för din solution:
-.nuget
-NuGet.Config
-NuGet.exe
-NuGet.targets
-        <!-- Determines if package restore consent is required to restore packages -->
-        <RequireRestoreConsent Condition=" '$(RequireRestoreConsent)' != 'false' ">true</RequireRestoreConsent>
-        
-        <!-- Download NuGet.exe if it does not already exist -->
-        <DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' ">false</DownloadNuGetExe>
-    </PropertyGroup>
-    
-    <ItemGroup Condition=" '$(PackageSources)' == '' ">
-        <!-- Package sources used to restore packages. By default, registered sources under %APPDATA%\NuGet\NuGet.Config will be used -->
-        <!-- The official NuGet package source (https://www.nuget.org/api/v2/) will be excluded if package sources are specified and it does not appear in the list -->
-        <!--
-            <PackageSource Include="https://www.nuget.org/api/v2/" />
-            <PackageSource Include="https://my-nuget-source/nuget/" />
-        -->
-    </ItemGroup>
-RequireRestoreConsent = false
-DownloadNuGetExe = true
-PackageSource Include=”https://www.nuget.org/api/v2/
-”
+###2.3 Hantera beroenden
+För att kunna enhetstesta en metod i en klass som har ett beroende till en annan klass på ett bra sätt så måste man kunna hantera detta beroende. Detta kan hanteras med hjälp av:
+* [**Inversion of control**](http://en.wikipedia.org/wiki/Inversion_of_control) - en programmerings teknik
+* [**Dependency injection**](http://en.wikipedia.org/wiki/Dependency_injection) - ett design mönster
 
-Code Analysis
+Kortfattat innebär det att man inte hårdkodar ett beroende till en annan klass utan man gör det möjligt att styra beroendet under körning.
+
+
+
+
+
+
+
+##3. Visual Studio
+
+###3.1 NuGet
+Använd NuGet för att hantera referenser till external bibliotek. När du lägger till **NuGet** paket så hamnar paketen som standard i katalogen **packages** på samma nivå som din solution-fil. Om du slår på (enable) **NuGet Package Restore** så kan utvecklare bygga din solution direkt efter att de öppnat din solution från **Source Control**. Alla paket som behövs laddas ner automatiskt vid första bygget (kan behöva byggas 2 gånger ibland för att det ska fungera). Det är viktigt att inte checka in eventuella **NuGet** paket, för då ser jag inte så så stor vits med **NuGet**. Om du dessutom korrigerar inställningarna (3.1.2 Korrigera NuGet.targets) så behöver du inte ckecka in **NuGet.exe** heller, det laddas också ner vid första bygget.
+
+####3.1.1 Enable NuGet Package Restore
+* I **Solution Explorer** högerklicka på din **Solution**
+* Klicka **Enable NuGet Package Restore**
+
+Följande katalog och filer har nu skapats under rotkatalogen för din solution:
+<pre>
+.nuget
+    NuGet.Config
+    NuGet.exe
+    NuGet.targets
+</pre>
+
+**.nuget** katalogen läggs även till som en **Solution Folder** i din solution så att du kan se den i **Solution Explorer**.
+
+####3.1.2 Korrigera NuGet.targets
+I början på **NuGet.targets** bör det se ut så här:
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&gt;
+    &lt;PropertyGroup&gt;
+        ...
+
+        &lt;!-- Determines if package restore consent is required to restore packages --&gt;
+        &lt;RequireRestoreConsent Condition=" '$(RequireRestoreConsent)' != 'false' "&gt;true&lt;/RequireRestoreConsent&gt;
+
+        &lt;!-- Download NuGet.exe if it does not already exist --&gt;
+        &lt;DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' "&gt;false&lt;/DownloadNuGetExe&gt;
+    &lt;/PropertyGroup&gt;
+
+    &lt;ItemGroup Condition=" '$(PackageSources)' == '' "&gt;
+        &lt;!-- Package sources used to restore packages. By default, registered sources under %APPDATA%\NuGet\NuGet.Config will be used --&gt;
+        &lt;!-- The official NuGet package source (https://www.nuget.org/api/v2/) will be excluded if package sources are specified and it does not appear in the list --&gt;
+        &lt;!--
+            &lt;PackageSource Include="https://www.nuget.org/api/v2/" /&gt;
+            &lt;PackageSource Include="https://my-nuget-source/nuget/" /&gt;
+        --&gt;
+    &lt;/ItemGroup&gt;
+    ...
+&lt;/Project&gt;
+</pre>
+
+Ändra till följande:
+* RequireRestoreConsent = false
+* DownloadNuGetExe = true
+* PackageSource Include="https://www.nuget.org/api/v2/"
+
+så att det ser ut så här:
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&gt;
+    &lt;PropertyGroup&gt;
+        ...
+
+        &lt;!-- Determines if package restore consent is required to restore packages --&gt;
+        &lt;RequireRestoreConsent Condition=" '$(RequireRestoreConsent)' != 'false' "&gt;false&lt;/RequireRestoreConsent&gt;
+
+        &lt;!-- Download NuGet.exe if it does not already exist --&gt;
+        &lt;DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' "&gt;true&lt;/DownloadNuGetExe&gt;
+    &lt;/PropertyGroup&gt;
+
+    &lt;ItemGroup Condition=" '$(PackageSources)' == '' "&gt;
+        &lt;!-- Package sources used to restore packages. By default, registered sources under %APPDATA%\NuGet\NuGet.Config will be used --&gt;
+        &lt;!-- The official NuGet package source (https://www.nuget.org/api/v2/) will be excluded if package sources are specified and it does not appear in the list --&gt;
+        &lt;PackageSource Include="https://www.nuget.org/api/v2/" /&gt;
+    &lt;/ItemGroup&gt;
+    ...
+&lt;/Project&gt;
+</pre>
+
+Det går även att lägga till fler sökvägar till ytterligare **PackageSources**, om ni t.ex. har någon intern sökväg till era egna **NuGet** paket.
+
+####3.1.3 Bygg NuGet paket av ett projekt
+Om du vill skapa egna **NuGet** paket så kan du göra det direkt när du bygger. I rooten på det projekt som du vill skapa ett **NuGet** paket av lägg till en xml-fil och döp den till [PROJECTNAMN].nuspec, dvs. kopiera namnet på projekt-filen och byt ut **csproj** mot **nuspec**. Den ska innehålla följande:
+<pre>
+&lt;?xml version="1.0"?&gt;
+&lt;package&gt;
+    &lt;metadata&gt;
+        &lt;id&gt;$id$&lt;/id&gt;
+        &lt;version&gt;$version$&lt;/version&gt;
+        &lt;title&gt;$title$&lt;/title&gt;
+        &lt;authors&gt;$author$&lt;/authors&gt;
+        &lt;owners&gt;$author$&lt;/owners&gt;
+        &lt;requireLicenseAcceptance&gt;false&lt;/requireLicenseAcceptance&gt;
+        &lt;description&gt;$description$&lt;/description&gt;
+    &lt;/metadata&gt;
+&lt;/package&gt;
+</pre>
+
+Alla värden som börjar och slutar med **$, t.ex. **$author$**, är så kallade **Replacement Tokens** och kommer ersättas av värden från **AssemblyInfo.cs**.
+
+Du kan läsa mer om **.nuspec**-filer här:
+* [**Nuspec Reference**](http://docs.nuget.org/docs/reference/nuspec-reference)
+* [**Replacement Tokens**](http://docs.nuget.org/docs/reference/nuspec-reference#Replacement_Tokens)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###3.2 Code Analysis
 I have started to use Code Analysis
-ReSharper
-Nuget
+
+###3.3 *.config transformering
 *.config/XML file transformation
 Web.config transforms are built into Visual Studio. You can transform the Web.config file when publishing/deploying a Visual Studio web-application.
 Web.config Transformation Syntax for Web Project Deployment Using Visual Studio: http://msdn.microsoft.com/en-us/library/dd465326(v=vs.110).aspx
@@ -67,3 +169,5 @@ Is a Visual Studio extension to handle transformation of any xml-file. And it tr
 SlowCheetah - XML Transforms: http://visualstudiogallery.msdn.microsoft.com/69023d00-a4f9-4a34-a6cd-7e854ba318b5
 SlowCheetah on NuGet: http://www.nuget.org/packages/SlowCheetah/
 SlowCheetah on GitHub: https://github.com/sayedihashimi/slow-cheetah
+
+###3.4 ReSharper
