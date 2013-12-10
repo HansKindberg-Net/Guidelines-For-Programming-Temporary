@@ -81,7 +81,7 @@ Om vi skippar tänket på god kod-design så skulle vi kunna testa dessa två scenar
 * [**Typemock Isolator**](http://www.typemock.com/isolator-product-page)
 * [**Telerik JustMock**](http://www.telerik.com/products/mocking.aspx)
 
-Exempel med [**Microsoft Fakes**]()
+[Exempel med **Microsoft Fakes**](Company-Samples/Company.Samples.ShimTests/HardToTest/EmailFormTest.cs)
 
 ##3. Visual Studio
 
