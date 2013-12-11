@@ -7,7 +7,7 @@
     - [1.2 Projekt-struktur](/ReadMe.sv.md#12-projekt-struktur)
     - [1.3 Namnkonvention](/ReadMe.sv.md#13-namnkonvention)
         - [VS-test-project](/ReadMe.sv.md#131-vs-test-project)
-    - [1.4 Övrigt](/ReadMe.sv.md#12-%C3%96vrigt)
+    - [1.4 Övrigt](/ReadMe.sv.md#14-%C3%96vrigt)
 - [2 Testbarhet](/ReadMe.sv.md#2-testbarhet)
 
 ## 1 Inledning
