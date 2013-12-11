@@ -72,7 +72,7 @@ För att kunna enhetstesta en metod i en klass som har ett beroende till en annan
 
 Kortfattat innebär det att man inte hårdkodar ett beroende till en annan klass utan man gör det möjligt att styra beroendet under körning.
 
-Följande exempel visar en svårtestad metod ([se hela klassen](Company-Samples/Company.Samples/HardToTest/EmailForm.cs)):
+Följande exempel visar en svårtestad metod ([/Company-Samples/Company.Samples/HardToTest/EmailForm.cs](/Company-Samples/Company.Samples/HardToTest/EmailForm.cs)):
 
 	public void Send()
 	{
@@ -99,16 +99,59 @@ Metoden ovan är svår att testa i huvudsak för att den skapar en instans av typen
 2. Om ValidateInput() returnerar ett object där IsValid == false, så ska den kasta ett fel och Send(mailMessage) ska inte anropas.
 
 Om vi skippar tänket på god kod-design så skulle vi kunna testa dessa två scenarier ändå om vi har tillgång till något av följande:
+
 - [**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx) - kräver Visual Studio Premium/Ultimate 2012/2013 ([Isolating Code Under Test with Microsoft Fakes](http://msdn.microsoft.com/en-us/library/hh549175.aspx))
 - [**Typemock Isolator**](http://www.typemock.com/isolator-product-page)
 - [**Telerik JustMock**](http://www.telerik.com/products/mocking.aspx)
 
-[Exempel med **Microsoft Fakes**](Company-Samples/Company.Samples.ShimTests/HardToTest/EmailFormTest.cs)
+Test för scenario 1, löst med [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims) ([/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs](/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs)):
+
+	[TestMethod]
+	public void Send_IfTheInputIsValid_SmtpClientSendShouldBeCalled()
+	{
+		using (ShimsContext.Create())
+		{
+			bool sendIsCalled = false;
+			MailMessage sentMailMessage = null;
+
+			ShimSmtpClient.AllInstances.SendMailMessage = delegate(SmtpClient client, MailMessage mailMessage)
+			{
+				sentMailMessage = mailMessage;
+				sendIsCalled = true;
+			};
+
+			Assert.IsFalse(sendIsCalled);
+			Assert.IsNull(sentMailMessage);
+
+			EmailForm emailForm = new EmailForm
+			{
+				Message = _testMessage,
+				Subject = _testSubject,
+				To = _testReceiver
+			};
+
+			emailForm.Send();
+				
+			Assert.IsTrue(sendIsCalled);
+			Assert.IsNotNull(sentMailMessage);
+			Assert.AreEqual(_testMessage, sentMailMessage.Body);
+			Assert.AreEqual(_testReceiver, sentMailMessage.To.First().Address);
+			Assert.AreEqual(_testSubject, sentMailMessage.Subject);
+		}
+	}
+
+Test för scenario 1, löst med [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims) ([/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs](/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs)) :
+
+
+
 
 ## 3. Visual Studio
 
 ### 3.1 NuGet
-Använd NuGet för att hantera referenser till external bibliotek. När du lägger till **NuGet** paket så hamnar paketen som standard i katalogen **packages** på samma nivå som din solution-fil. Om du slår på (enable) **NuGet Package Restore** så kan utvecklare bygga din solution direkt efter att de öppnat din solution från **Source Control**. Alla paket som behövs laddas ner automatiskt vid första bygget (kan behöva byggas 2 gånger ibland för att det ska fungera). Det är viktigt att inte checka in eventuella **NuGet** paket, för då ser jag inte så så stor vits med **NuGet**. Om du dessutom korrigerar inställningarna (3.1.2 Korrigera NuGet.targets) så behöver du inte ckecka in **NuGet.exe** heller, det laddas också ner vid första bygget.
+Använd NuGet för att hantera referenser till external bibliotek. När du lägger till **NuGet** paket så hamnar paketen som standard i katalogen **packages** på samma nivå som din solution-fil. Om du slår på (enable) **NuGet Package Restore** så kan utvecklare bygga din VS-solution direkt efter att de öppnat din VS-solution från **Source Control**. Alla paket som behövs laddas ner automatiskt vid första bygget (kan behöva byggas 2 gånger ibland för att det ska fungera). Det är viktigt att inte checka in eventuella **NuGet** paket, för då ser jag inte så så stor vits med **NuGet**. Om du dessutom korrigerar inställningarna ([3.1.2 Korrigera NuGet.targets](/ReadMe.sv.md#312-korrigera-nugettargets)) så:
+
+- behöver du inte ckecka in/commita **NuGet.exe** heller, det laddas också ner vid första bygget.
+- behöver inte andra utvecklare/programmerare som öppnar din solution från **Source Control** ha **NuGet Package Manager** installerat över huvudtaget eller inte konfigurerat på samma sätt som dig för att de ändå ska kunna bygga VS-solution
 
 #### 3.1.1 Enable NuGet Package Restore
 - I **Solution Explorer** högerklicka på din **Solution**
@@ -123,120 +166,97 @@ Följande katalog och filer har nu skapats under rotkatalogen för din solution:
 
 **.nuget** katalogen läggs även till som en **Solution Folder** i din VS-solution så att du kan se den i **Solution Explorer**.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-####3.1.2 Korrigera NuGet.targets
+#### 3.1.2 Korrigera NuGet.targets
 I början på **NuGet.targets** bör det se ut så här:
-<pre>
-&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&gt;
-    &lt;PropertyGroup&gt;
-        ...
 
-        &lt;!-- Determines if package restore consent is required to restore packages --&gt;
-        &lt;RequireRestoreConsent Condition=" '$(RequireRestoreConsent)' != 'false' "&gt;true&lt;/RequireRestoreConsent&gt;
+	<?xml version="1.0" encoding="utf-8"?>
+	<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			...
 
-        &lt;!-- Download NuGet.exe if it does not already exist --&gt;
-        &lt;DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' "&gt;false&lt;/DownloadNuGetExe&gt;
-    &lt;/PropertyGroup&gt;
+			<!-- Determines if package restore consent is required to restore packages -->
+			<RequireRestoreConsent Condition=" '$(RequireRestoreConsent)' != 'false' ">true</RequireRestoreConsent>
 
-    &lt;ItemGroup Condition=" '$(PackageSources)' == '' "&gt;
-        &lt;!-- Package sources used to restore packages. By default, registered sources under %APPDATA%\NuGet\NuGet.Config will be used --&gt;
-        &lt;!-- The official NuGet package source (https://www.nuget.org/api/v2/) will be excluded if package sources are specified and it does not appear in the list --&gt;
-        &lt;!--
-            &lt;PackageSource Include="https://www.nuget.org/api/v2/" /&gt;
-            &lt;PackageSource Include="https://my-nuget-source/nuget/" /&gt;
-        --&gt;
-    &lt;/ItemGroup&gt;
-    ...
-&lt;/Project&gt;
-</pre>
+			<!-- Download NuGet.exe if it does not already exist -->
+			<DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' ">false</DownloadNuGetExe>
+		</PropertyGroup>
+
+		<ItemGroup Condition=" '$(PackageSources)' == '' ">
+			<!-- Package sources used to restore packages. By default, registered sources under %APPDATA%\NuGet\NuGet.Config will be used -->
+			<!-- The official NuGet package source (https://www.nuget.org/api/v2/) will be excluded if package sources are specified and it does not appear in the list -->
+			<!--
+				<PackageSource Include="https://www.nuget.org/api/v2/" />
+				<PackageSource Include="https://my-nuget-source/nuget/" />
+			-->
+		</ItemGroup>
+		...
+	</Project>
 
 Ändra till följande:
-* **RequireRestoreConsent** = false
-* **DownloadNuGetExe** = true
-* **PackageSource Include** = "https://www.nuget.org/api/v2/"
+
+- **RequireRestoreConsent** = false
+- **DownloadNuGetExe** = true
+- **PackageSource Include** = "https://www.nuget.org/api/v2/"
 
 så att det ser ut så här:
-<pre>
-&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&gt;
-    &lt;PropertyGroup&gt;
-        ...
 
-        &lt;!-- Determines if package restore consent is required to restore packages --&gt;
-        &lt;RequireRestoreConsent Condition=" '$(RequireRestoreConsent)' != 'false' "&gt;false&lt;/RequireRestoreConsent&gt;
+	<?xml version="1.0" encoding="utf-8"?>
+	<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			...
 
-        &lt;!-- Download NuGet.exe if it does not already exist --&gt;
-        &lt;DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' "&gt;true&lt;/DownloadNuGetExe&gt;
-    &lt;/PropertyGroup&gt;
+			<!-- Determines if package restore consent is required to restore packages -->
+			<RequireRestoreConsent Condition=" '$(RequireRestoreConsent)' != 'false' ">false</RequireRestoreConsent>
 
-    &lt;ItemGroup Condition=" '$(PackageSources)' == '' "&gt;
-        &lt;!-- Package sources used to restore packages. By default, registered sources under %APPDATA%\NuGet\NuGet.Config will be used --&gt;
-        &lt;!-- The official NuGet package source (https://www.nuget.org/api/v2/) will be excluded if package sources are specified and it does not appear in the list --&gt;
-        &lt;PackageSource Include="https://www.nuget.org/api/v2/" /&gt;
-    &lt;/ItemGroup&gt;
-    ...
-&lt;/Project&gt;
-</pre>
+			<!-- Download NuGet.exe if it does not already exist -->
+			<DownloadNuGetExe Condition=" '$(DownloadNuGetExe)' == '' ">true</DownloadNuGetExe>
+		</PropertyGroup>
+
+		<ItemGroup Condition=" '$(PackageSources)' == '' ">
+			<!-- Package sources used to restore packages. By default, registered sources under %APPDATA%\NuGet\NuGet.Config will be used -->
+			<!-- The official NuGet package source (https://www.nuget.org/api/v2/) will be excluded if package sources are specified and it does not appear in the list -->
+			<PackageSource Include="https://www.nuget.org/api/v2/" />
+		</ItemGroup>
+		...
+	</Project>
 
 Det går även att lägga till fler sökvägar till ytterligare **PackageSources**, om ni t.ex. har någon intern sökväg till era egna **NuGet** paket.
 
-####3.1.3 Bygg NuGet paket av ett projekt
-Om du vill skapa egna **NuGet** paket så kan du göra det direkt när du bygger. I rooten på det projekt som du vill skapa ett **NuGet** paket av lägg till en xml-fil och döp den till [PROJECTNAMN].nuspec, dvs. kopiera namnet på projekt-filen och byt ut **csproj** mot **nuspec**. Den ska innehålla följande:
-<pre>
-&lt;?xml version="1.0"?&gt;
-&lt;package&gt;
-    &lt;metadata&gt;
-        &lt;id&gt;$id$&lt;/id&gt;
-        &lt;version&gt;$version$&lt;/version&gt;
-        &lt;title&gt;$title$&lt;/title&gt;
-        &lt;authors&gt;$author$&lt;/authors&gt;
-        &lt;owners&gt;$author$&lt;/owners&gt;
-        &lt;requireLicenseAcceptance&gt;false&lt;/requireLicenseAcceptance&gt;
-        &lt;description&gt;$description$&lt;/description&gt;
-    &lt;/metadata&gt;
-&lt;/package&gt;
-</pre>
+#### 3.1.3 Bygg NuGet paket av ett projekt
+Om du vill skapa egna **NuGet** paket så kan du göra det direkt när du bygger. I rooten på det VS-project som du vill skapa ett **NuGet** paket av lägg till en xml-fil och döp den till [VS-project namn].nuspec, dvs. kopiera namnet på projekt-filen och byt ut **csproj** mot **nuspec**. Den kan t.ex. se ut så här:
+
+	<?xml version="1.0"?>
+	<package>
+		<metadata>
+			<id>$id$</id>
+			<version>$version$</version>
+			<title>$title$</title>
+			<authors>$author$</authors>
+			<owners>$author$</owners>
+			<requireLicenseAcceptance>false</requireLicenseAcceptance>
+			<description>$description$</description>
+		</metadata>
+	</package>
 
 Alla värden som börjar och slutar med **$**, t.ex. **$author$**, är så kallade **Replacement Tokens** och kommer ersättas av värden från **AssemblyInfo.cs**.
 
 Lägg till ett **PostBuildEvent** i projektet:
-* Högerklicka ditt projekt i **Solution Explorer**
-* Välj fliken **Build Events**
-* I fältet **Post-build event command line:** - lägg till följande: **"$(SolutionDir).nuget\NuGet.exe" pack "$(ProjectPath)" -Properties Configuration=$(ConfigurationName) -IncludeReferencedProjects**
 
-När du bygger din solution/ditt projekt kommer du få en [PROJEKTNAMN].[VERSION].nupkg i din **output** katalog för projektet.
+- Högerklicka ditt projekt i **Solution Explorer**
+- Välj fliken **Build Events**
+- I fältet **Post-build event command line:** - lägg till följande: **"$(SolutionDir).nuget\NuGet.exe" pack "$(ProjectPath)" -Properties Configuration=$(ConfigurationName) -IncludeReferencedProjects**
 
-Exempel i denna solution:
-* [**Company.nuspec**](Company-Shared/Company/Company.nuspec)
-* [**Company.csproj** - leta efter taggen **&lt;PostBuildEvent&gt;**](Company-Shared/Company/Company.csproj)
+När du bygger din solution/ditt projekt kommer du få en [VS-project namn].[version].nupkg i din **output** katalog för ditt VS-project.
+
+Exempel i detta projekt:
+
+- [**/Company-Shared/Company/Company.nuspec**](/Company-Shared/Company/Company.nuspec)
+- [**/Company-Shared/Company/Company.csproj** - leta efter taggen **&lt;PostBuildEvent&gt;**](/Company-Shared/Company/Company.csproj)
 
 Du kan läsa mer om **.nuspec**-filer här:
-* [**Nuspec Reference**](http://docs.nuget.org/docs/reference/nuspec-reference)
-* [**Replacement Tokens**](http://docs.nuget.org/docs/reference/nuspec-reference#Replacement_Tokens)
+
+- [**Nuspec Reference**](http://docs.nuget.org/docs/reference/nuspec-reference)
+- [**Replacement Tokens**](http://docs.nuget.org/docs/reference/nuspec-reference#Replacement_Tokens)
 
 
 
@@ -259,10 +279,10 @@ Du kan läsa mer om **.nuspec**-filer här:
 
 
 
-###3.2 Code Analysis
+### 3.2 Code Analysis
 I have started to use Code Analysis
 
-###3.3 *.config transformering
+### 3.3 *.config transformering
 *.config/XML file transformation
 Web.config transforms are built into Visual Studio. You can transform the Web.config file when publishing/deploying a Visual Studio web-application.
 Web.config Transformation Syntax for Web Project Deployment Using Visual Studio: http://msdn.microsoft.com/en-us/library/dd465326(v=vs.110).aspx
@@ -272,4 +292,4 @@ SlowCheetah - XML Transforms: http://visualstudiogallery.msdn.microsoft.com/6902
 SlowCheetah on NuGet: http://www.nuget.org/packages/SlowCheetah/
 SlowCheetah on GitHub: https://github.com/sayedihashimi/slow-cheetah
 
-###3.4 ReSharper
+### 3.4 ReSharper
