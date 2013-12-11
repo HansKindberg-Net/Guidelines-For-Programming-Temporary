@@ -5,6 +5,27 @@
 [1 Inledning]()
     [1.1 Denna lösnings struktur]()
 
+
+
+<code>this is code</code>
+
+<pre>this is pre</pre>
+
+<ul>
+	<li>Hej
+		<ul>
+			<li>Hej</li>
+			<li>Hej
+				<ul>
+					<li>Hej</li>
+					<li>Hej</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li>Hej</li>
+</ul>
+
 ##1 Inledning
 Det här dokumentet innehåller riktlinjer för programmering i huvudsak för **.NET** och **Visual Studio**. Avsnittet **Testbarhet** kan dock appliceras på andra programmeringsspråk. Jag anser att avsnittet **Testbarhet** är det viktigaste avsnittet och därför har jag valt att lägga det först.
 
