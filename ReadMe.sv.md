@@ -2,35 +2,9 @@
 # Riktlinjer för programmering
 
 ## Innehållsförteckning
-
 - [1 Inledning](/ReadMe.sv.md#1-inledning)
-	- [1.1 Denna lösnings struktur](/ReadMe.sv.md#11-denna-l%C3%B6snings-struktur)
-	- [1.2 Denna lösnings struktur](/ReadMe.sv.md#11-denna-l%C3%B6snings-struktur)
-
-
-
-	this is code by indenting
-
-<code>this is code with code-tag</code>
-
-`this is code with hyphens`
-
-<pre>this is pre</pre>
-
-<ul>
-	<li>Hej
-		<ul>
-			<li>Hej</li>
-			<li>Hej
-				<ul>
-					<li>Hej</li>
-					<li>Hej</li>
-				</ul>
-			</li>
-		</ul>
-	</li>
-	<li>Hej</li>
-</ul>
+    - [1.1 Denna lösnings struktur](/ReadMe.sv.md#11-denna-l%C3%B6snings-struktur)
+    - [1.2 Denna lösnings struktur](/ReadMe.sv.md#11-denna-l%C3%B6snings-struktur)
 
 ##1 Inledning
 Det här dokumentet innehåller riktlinjer för programmering i huvudsak för **.NET** och **Visual Studio**. Avsnittet **Testbarhet** kan dock appliceras på andra programmeringsspråk. Jag anser att avsnittet **Testbarhet** är det viktigaste avsnittet och därför har jag valt att lägga det först.
