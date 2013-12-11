@@ -3,10 +3,9 @@
 
 ## Innehållsförteckning
 
-<pre>
 [1 Inledning](/ReadMe.sv.md#1-Inleding)
 	[1.1 Denna lösnings struktur](/ReadMe.sv.md#11-denna-l%C3%B6snings-struktur)
-</pre>
+
 
 
 	this is code by indenting
