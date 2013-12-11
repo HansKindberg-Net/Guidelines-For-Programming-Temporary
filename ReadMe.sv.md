@@ -1,13 +1,18 @@
-[English](ReadMe.md)
-#Riktlinjer för programmering
+[English](/ReadMe.md)
+# Riktlinjer för programmering
 
 ## Innehållsförteckning
-[1 Inledning]()
-    [1.1 Denna lösnings struktur]()
+
+	[1 Inledning](/ReadMe.sv.md#1-Inleding)
+		[1.1 Denna lösnings struktur](/ReadMe.sv.md#11-denna-l%C3%B6snings-struktur)
 
 
 
-<code>this is code</code>
+	this is code by indenting
+
+<code>this is code with code-tag</code>
+
+`this is code with hyphens`
 
 <pre>this is pre</pre>
 
