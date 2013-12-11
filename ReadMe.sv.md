@@ -18,7 +18,7 @@ Det här projektet innehåller riktlinjer för programmering. Riktlinjerna gäller i
 Detta projekt består av en **VS-solution** med diverse **VS-project** med exempel kod. Programmeringsspråket som används är **C#**. Jag vill visa hur jag menar genom exempel. **VS-solution** innehåller flera **VS-project** och därför har jag valt att gruppera/strukturera dem med hjälp av **Solution Folders**.
 - **.nuget** - katalogen innehåller filer för **NuGet Package Restore**, dessa filer skapas när man slår på **NuGet Package Restore** ([3.1.1 Enable NuGet Package Restore](/ReadMe.sv.md#311-enable-nuget-package-restore))
 - **CodeAnalysis** - globala filer/inställningar för **Code Analysis** ([Code Analysis for Managed Code Overview](http://msdn.microsoft.com/en-us/library/3z0aeatx.aspx)), länkas in av **VS-project**
-- **Company-Examples** - innehåller ett **VS-project** (classlibrary) med mer allmän exempel-kod vad gäller testbarhet + tillhörande **VS-test-project**
+- **Company-Examples** - innehåller ett **Class Library** (**VS-project**) med mer allmän exempel-kod vad gäller testbarhet + tillhörande **VS-test-project**
 - **Company-Services** - innehåller WCF och WebService (asmx) projekt + tillhörande **VS-test-project**
 - **Company-Shared** - innehåller generella funktioner för hela lösningen
 - **Company-Web** - innehåller webbapplikationer (MVC, MVP och traditionell Web Forms) + tillhörande **VS-test-project**
