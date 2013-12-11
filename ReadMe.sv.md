@@ -49,16 +49,16 @@ Jag är systemutvecklare och utvecklar/programmerar i huvudsak EPiServer-lösninga
 Det finns olika mål med testning ([SWEBOK - Chapter 5 Software Testing - Objectives of Testing](http://www.computer.org/portal/web/swebok/html/ch5#Ref2.2)). Detta avsnitt behandlar automatiserade/programmerbara funktionella tester, att skriva kod/programmera så att en applikation blir möjlig att automatiskt funktions-testa. 
 
 Mjukvara kan testas på på olika nivåer ([Software testing - Testing levels](http://en.wikipedia.org/wiki/Software_testing#Testing_levels), [SWEBOK - Chapter 5 Software Testing - Test Levels](http://www.computer.org/portal/web/swebok/html/ch5#Ref2))
-* **enhetstest** (unit test) – testa en minsta enhet, en metod/egenskap i en klass i ett system
-* **integrationstest** (integration test) – testa funktionalitet mellan enheter
-* **systemtest** (system test) – testa ett system som en helhet
+- **enhetstest** (unit test) – testa en minsta enhet, en metod/egenskap i en klass i ett system
+- **integrationstest** (integration test) – testa funktionalitet mellan enheter
+- **systemtest** (system test) – testa ett system som en helhet
 
 För mig som programmerare handlar testbarhet mest om programmerbara/automatiska tester. Jag anser att begreppet testbarhet mest hör ihop med enhetstester (unit tests). Bygg dina klasser så att de blir testbara, vilket innebär att klassens beroenden är abstrakta och injicerbara (injectable).
 
 ###2.1 Fördelar
 Fördelar med testbarhet:
-* **Pluggbara** system – system/mjukvara där det är lätt att byta ut olika delar
-* System/mjukvara som kan köras i olika miljöer med olika förutsättningar, produktion, test, utveckling m.m.
+- **Pluggbara** system – system/mjukvara där det är lätt att byta ut olika delar
+- System/mjukvara som kan köras i olika miljöer med olika förutsättningar, produktion, test, utveckling m.m.
 
 Även om man inte skriver/programmerar några tester men skriver sin kod testbar så anser jag att man får en bra mjukvaru-design. Jag anser också att det kommer att resultera i att de klasser man skriver/programmerar hanterar det de ska, vilket resulterar i kod som är lättare att underhålla och man undviker redundant kod (duplicate code). Samtidigt kräver det mer av den som programmerar att se till att klasser underhålls på rätt sätt eftersom det är mycket troligt att flera andra klasser har ett beroende till klassen. Med andra ord, bygger man testbart så bygger man objekt-orienterat.
 
@@ -67,62 +67,85 @@ Klasser har beroenden till andra klasser. Idén med enhetstestning är att testa k
 
 ###2.3 Hantera beroenden
 För att kunna enhetstesta en metod i en klass som har ett beroende till en annan klass på ett bra sätt så måste man kunna hantera detta beroende. Detta kan hanteras med hjälp av:
-* [**Inversion of control**](http://en.wikipedia.org/wiki/Inversion_of_control) - en programmerings teknik
-* [**Dependency injection**](http://en.wikipedia.org/wiki/Dependency_injection) - ett design mönster
+- [**Inversion of control**](http://en.wikipedia.org/wiki/Inversion_of_control) - en programmerings teknik
+- [**Dependency injection**](http://en.wikipedia.org/wiki/Dependency_injection) - ett design mönster
 
 Kortfattat innebär det att man inte hårdkodar ett beroende till en annan klass utan man gör det möjligt att styra beroendet under körning.
 
 Följande exempel visar en svårtestad metod ([se hela klassen](Company-Samples/Company.Samples/HardToTest/EmailForm.cs)):
-<pre>
-public void Send()
-{
-    IValidationResult validationResult = this.ValidateInput();
 
-    if(!validationResult.IsValid)
-        throw validationResult.Exceptions.First();
+	public void Send()
+	{
+		IValidationResult validationResult = this.ValidateInput();
 
-    using(MailMessage mailMessage = new MailMessage("noreply@company.net", this.To))
-    {
-        mailMessage.Body = this.Message;
-        mailMessage.Subject = this.Subject;
+		if(!validationResult.IsValid)
+			throw validationResult.Exceptions.First();
 
-        using(SmtpClient smtpClient = new SmtpClient())
-        {
-            smtpClient.Send(mailMessage);
-        }
-    }
-}
-</pre>
+		using(MailMessage mailMessage = new MailMessage("noreply@company.net", this.To))
+		{
+			mailMessage.Body = this.Message;
+			mailMessage.Subject = this.Subject;
 
-Metoden ovan är svår att testa i huvudsak för att den skapar en instans av typen SmtpClient och sedan kallar på metoden Send(MailMessage mailMessage). Det finns bl.a två scenarior vi skulle vilja testa för denna metod:
+			using(SmtpClient smtpClient = new SmtpClient())
+			{
+				smtpClient.Send(mailMessage);
+			}
+		}
+	}
+
+Metoden ovan är svår att testa i huvudsak för att den skapar en instans av typen SmtpClient och sedan kallar på metoden Send(MailMessage mailMessage). Det finns bl.a två scenarier vi skulle vilja testa för denna metod:
+
 1. Om ValidateInput() returnerar ett object där IsValid == true, så ska Send(mailMessage) anropas.
 2. Om ValidateInput() returnerar ett object där IsValid == false, så ska den kasta ett fel och Send(mailMessage) ska inte anropas.
 
-Om vi skippar tänket på god kod-design så skulle vi kunna testa dessa två scenarior ändå om vi har tillgång till något av följande:
-* **Microsoft Fakes** - kräver Visual Studio Premium/Ultimate 2012/2013 ([Isolating Code Under Test with Microsoft Fakes](http://msdn.microsoft.com/en-us/library/hh549175.aspx))
-* [**Typemock Isolator**](http://www.typemock.com/isolator-product-page)
-* [**Telerik JustMock**](http://www.telerik.com/products/mocking.aspx)
+Om vi skippar tänket på god kod-design så skulle vi kunna testa dessa två scenarier ändå om vi har tillgång till något av följande:
+- [**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx) - kräver Visual Studio Premium/Ultimate 2012/2013 ([Isolating Code Under Test with Microsoft Fakes](http://msdn.microsoft.com/en-us/library/hh549175.aspx))
+- [**Typemock Isolator**](http://www.typemock.com/isolator-product-page)
+- [**Telerik JustMock**](http://www.telerik.com/products/mocking.aspx)
 
 [Exempel med **Microsoft Fakes**](Company-Samples/Company.Samples.ShimTests/HardToTest/EmailFormTest.cs)
 
-##3. Visual Studio
+## 3. Visual Studio
 
-###3.1 NuGet
+### 3.1 NuGet
 Använd NuGet för att hantera referenser till external bibliotek. När du lägger till **NuGet** paket så hamnar paketen som standard i katalogen **packages** på samma nivå som din solution-fil. Om du slår på (enable) **NuGet Package Restore** så kan utvecklare bygga din solution direkt efter att de öppnat din solution från **Source Control**. Alla paket som behövs laddas ner automatiskt vid första bygget (kan behöva byggas 2 gånger ibland för att det ska fungera). Det är viktigt att inte checka in eventuella **NuGet** paket, för då ser jag inte så så stor vits med **NuGet**. Om du dessutom korrigerar inställningarna (3.1.2 Korrigera NuGet.targets) så behöver du inte ckecka in **NuGet.exe** heller, det laddas också ner vid första bygget.
 
-####3.1.1 Enable NuGet Package Restore
-* I **Solution Explorer** högerklicka på din **Solution**
-* Klicka **Enable NuGet Package Restore**
+#### 3.1.1 Enable NuGet Package Restore
+- I **Solution Explorer** högerklicka på din **Solution**
+- Klicka **Enable NuGet Package Restore**
 
 Följande katalog och filer har nu skapats under rotkatalogen för din solution:
-<pre>
-.nuget
-    NuGet.Config
-    NuGet.exe
-    NuGet.targets
-</pre>
 
-**.nuget** katalogen läggs även till som en **Solution Folder** i din solution så att du kan se den i **Solution Explorer**.
+	.nuget
+		NuGet.Config
+		NuGet.exe
+		NuGet.targets
+
+**.nuget** katalogen läggs även till som en **Solution Folder** i din VS-solution så att du kan se den i **Solution Explorer**.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ####3.1.2 Korrigera NuGet.targets
 I början på **NuGet.targets** bör det se ut så här:
