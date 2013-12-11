@@ -5,9 +5,13 @@
 - [1 Inledning](/ReadMe.sv.md#1-inledning)
     - [1.1 Ordlista](/ReadMe.sv.md#11-ordlista)
     - [1.2 Projekt-struktur](/ReadMe.sv.md#12-projekt-struktur)
+    - [1.3 Namnkonvention](/ReadMe.sv.md#13-namnkonvention)
+        - [VS-test-project](/ReadMe.sv.md#131-vs-test-project)
+    - [1.4 Övrigt](/ReadMe.sv.md#12-%C3%96vrigt)
+- [2 Testbarhet](/ReadMe.sv.md#2-testbarhet)
 
 ## 1 Inledning
-Det här projektet innehåller riktlinjer för programmering. Riktlinjerna gäller i huvudsak för **.NET**, **C#** och **Visual Studio**. Avsnittet **2 Testbarhet** kan dock appliceras på andra programmeringsspråk. Jag anser att avsnittet **2 Testbarhet** är det viktigaste avsnittet och därför har jag valt att lägga det först.
+Det här projektet innehåller riktlinjer för programmering. Riktlinjerna gäller i huvudsak för **.NET**, **C#** och **Visual Studio**. Avsnittet [**2 Testbarhet**](/ReadMe.sv.md#2-testbarhet) kan dock appliceras på andra programmeringsspråk. Jag anser att avsnittet [**2 Testbarhet**](/ReadMe.sv.md#2-testbarhet) är det viktigaste avsnittet och därför har jag valt att lägga det först.
 
 ### 1.1 Ordlista
 - **VS-project** = **Visual Studio** project
@@ -27,16 +31,19 @@ Detta projekt består av en **VS-solution** med diverse **VS-project** med exempe
 - **Properties** - globala **Assembly** inställningar, länkas in av **VS-project**
 - **Signing** - global **Strong Name Key** fil, länkas in av **VS-project**
 
-Jag använder följande namngivning på test-projekten:
-* [PROJEKTUNDERTEST].**IntegrationTests** - innehåller integrerade enhetstester där inte allt mockas
-* [PROJEKTUNDERTEST].**ShimTests** - innehåller enhetstester där typer som behöver mockas inte är mockbara utan **Microsoft Fakes** används istället (se **1.1.1 Shim-tests och Microsoft Fakes**)
-* [PROJEKTUNDERTEST].**UnitTests** - innehåller enhetstester där typer som behöver mockas är mockbara
+### 1.3 Namnkonvention
+Jag inleder alla **VS-project** namn med ansvarigt företags namn (eller organisation). I detta projekt har jag valt att inleda alla **VS-project** namn med **Company**. Resten av namnet bygger på funtions-namn eller produkt-namn.
 
-####1.1.1 Shim-tests och Microsoft Fakes
-**Microsoft Fakes** kräver Visual Studio Premium/Ultimate 2012/2013. Om man har Visual Studio 2010 eller Visual Studio Professional 2012/2013 kan inte ett projekt där **Microsoft Fakes** används laddas. Om jag skulle blanda shim-tests med övriga enhets-tester skulle inga enhets-test projekt gå att ladda med dessa versioner. Det är därför jag gjort denna uppdelning.
+#### 1.3.1 VS-test-project
+Jag använder följande namngivning på **VS-test-project**:
+- [VS-project som ska testas].**IntegrationTests** - innehåller integrerade enhetstester där inte allt mockas
+- [VS-project som ska testas].**ShimTests** - innehåller enhetstester där typer som behöver mockas inte är mockbara utan [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims) ([**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx)) används istället ([Using shims to isolate your application from other assemblies for unit testing](http://msdn.microsoft.com/en-us/library/hh549176.aspx))
+- [VS-project som ska testas].**UnitTests** - innehåller enhetstester där typer som behöver mockas är mockbara
 
-###1.2 Övrigt
-Jag är systemutvecklare och utvecklar/programmerar i huvudsak EPiServer-lösningar och andra webbapplikationer. Jag har mindre erfarenhet av .NET WCF, .NET WebServices, .NET Windows Forms, ändå har jag velat ta med exempel inom dessa typer av applikationer.
+[**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx) kräver Visual Studio Premium/Ultimate 2012/2013. Om man har Visual Studio 2010 eller Visual Studio Professional 2012/2013 kan inte ett projekt där [**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx) används laddas. Om jag skulle blanda shim-tests med övriga enhets-tester skulle inga enhets-test projekt gå att ladda med dessa versioner. Det är därför jag gjort denna uppdelning.
+
+### 1.4 Övrigt
+Jag är systemutvecklare och utvecklar/programmerar i huvudsak EPiServer-lösningar och andra webbapplikationer. Jag har mindre erfarenhet av .NET WCF, .NET WebServices, .NET Windows Forms, ändå har jag velat ta med exempel inom dessa typer av applikationer. Jag anser mig heller inte expert på att skriva/programmera tester, däremot har jag byggt upp min kunskap på att göra programkod testbar.
 
 ## 2 Testbarhet
 Det finns olika mål med testning ([SWEBOK - Chapter 5 Software Testing - Objectives of Testing](http://www.computer.org/portal/web/swebok/html/ch5#Ref2.2)). Detta avsnitt behandlar automatiserade/programmerbara funktionella tester, att skriva kod/programmera så att en applikation blir möjlig att automatiskt funktions-testa. 
