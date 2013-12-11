@@ -2,8 +2,8 @@
 #Riktlinjer för programmering
 
 ## Innehållsförteckning
-[1. Inledning](1 Inledning)
-    [1.1. Denna lösnings struktur](1.1 Denna lösnings struktur)
+[1 Inledning]()
+    [1.1 Denna lösnings struktur]()
 
 ##1 Inledning
 Det här dokumentet innehåller riktlinjer för programmering i huvudsak för **.NET** och **Visual Studio**. Avsnittet **Testbarhet** kan dock appliceras på andra programmeringsspråk. Jag anser att avsnittet **Testbarhet** är det viktigaste avsnittet och därför har jag valt att lägga det först.
