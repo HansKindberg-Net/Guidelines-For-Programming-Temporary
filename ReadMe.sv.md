@@ -3,8 +3,7 @@
 
 ## Innehållsförteckning
 [1 Inledning](/ReadMe.sv.md#1-inledning)
-
-    [1.1 Denna lösnings struktur](/ReadMe.sv.md#11-denna-l%C3%B6snings-struktur)
+&nbsp;&nbsp;&nbsp;&nbsp;[1.1 Denna lösnings struktur](/ReadMe.sv.md#11-denna-l%C3%B6snings-struktur)
 
 
 
