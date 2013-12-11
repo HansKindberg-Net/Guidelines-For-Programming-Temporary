@@ -3,19 +3,29 @@
 
 ## Innehållsförteckning
 - [1 Inledning](/ReadMe.sv.md#1-inledning)
-    - [1.1 Denna lösnings struktur](/ReadMe.sv.md#11-denna-l%C3%B6snings-struktur)
-    - [1.2 Denna lösnings struktur](/ReadMe.sv.md#11-denna-l%C3%B6snings-struktur)
+    - [1.1 Ordlista](/ReadMe.sv.md#11-ordlista)
+    - [1.2 Projekt-struktur](/ReadMe.sv.md#12-projekt-struktur)
 
-##1 Inledning
-Det här dokumentet innehåller riktlinjer för programmering i huvudsak för **.NET** och **Visual Studio**. Avsnittet **Testbarhet** kan dock appliceras på andra programmeringsspråk. Jag anser att avsnittet **Testbarhet** är det viktigaste avsnittet och därför har jag valt att lägga det först.
+## 1 Inledning
+Det här projektet innehåller riktlinjer för programmering. Riktlinjerna gäller i huvudsak för **.NET**, **C#** och **Visual Studio**. Avsnittet **2 Testbarhet** kan dock appliceras på andra programmeringsspråk. Jag anser att avsnittet **2 Testbarhet** är det viktigaste avsnittet och därför har jag valt att lägga det först.
 
-###1.1 Denna lösnings struktur
-**Riktlinjer för programmering** är byggd som en **Visual Studio Solution**. Jag vill visa hur jag menar genom exempel. Projekten i denna solution är strukturerade i **Solution Folders**:
-* **Company-Samples** - innehåller ett projekt (classlibrary) med mer allmän exempel-kod vad gäller testbarhet + tillhörande test-projekt
-* **Company-Services** - innehåller WCF och WebService (asmx) projekt + tillhörande test-projekt
-* **Company-Shared** - innehåller generella funktioner för hela lösningen
-* **Company-Web** - innehåller webbapplikationer (MVC, MVP och traditionell Web Forms) + tillhörande test-projekt
-* **Company-Windows** - innehåller ett Windows-forms-application projekt + tillhörande test-projekt
+### 1.1 Ordlista
+- **VS-project** = **Visual Studio** project
+- **VS-solution** = **Visual Studio** solution
+- **VS-test-project** = ett **Visual Studio** project för att testa ett annat **Visual Studio** project
+
+### 1.2 Projekt-struktur
+Detta projekt består av en **VS-solution** med diverse **VS-project** med exempel kod. Programmeringsspråket som används är **C#**. Jag vill visa hur jag menar genom exempel. **VS-solution** innehåller flera **VS-project** och därför har jag valt att gruppera/strukturera dem med hjälp av **Solution Folders**.
+- **.nuget** - katalogen innehåller filer för **NuGet Package Restore**, dessa filer skapas när man slår på **NuGet Package Restore** ([3.1.1 Enable NuGet Package Restore](/ReadMe.sv.md#311-enable-nuget-package-restore))
+- **CodeAnalysis** - globala filer/inställningar för **Code Analysis** ([Code Analysis for Managed Code Overview](http://msdn.microsoft.com/en-us/library/3z0aeatx.aspx)), länkas in av **VS-project**
+- **Company-Examples** - innehåller ett **VS-project** (classlibrary) med mer allmän exempel-kod vad gäller testbarhet + tillhörande **VS-test-project**
+- **Company-Services** - innehåller WCF och WebService (asmx) projekt + tillhörande **VS-test-project**
+- **Company-Shared** - innehåller generella funktioner för hela lösningen
+- **Company-Web** - innehåller webbapplikationer (MVC, MVP och traditionell Web Forms) + tillhörande **VS-test-project**
+- **Company-Windows** - innehåller ett Windows-forms-application projekt + tillhörande **VS-test-project**
+- **Documents** - **ReadMe.md** filerna för detta projekt
+- **Properties** - globala **Assembly** inställningar, länkas in av **VS-project**
+- **Signing** - global **Strong Name Key** fil, länkas in av **VS-project**
 
 Jag använder följande namngivning på test-projekten:
 * [PROJEKTUNDERTEST].**IntegrationTests** - innehåller integrerade enhetstester där inte allt mockas
@@ -28,7 +38,7 @@ Jag använder följande namngivning på test-projekten:
 ###1.2 Övrigt
 Jag är systemutvecklare och utvecklar/programmerar i huvudsak EPiServer-lösningar och andra webbapplikationer. Jag har mindre erfarenhet av .NET WCF, .NET WebServices, .NET Windows Forms, ändå har jag velat ta med exempel inom dessa typer av applikationer.
 
-##2. Testbarhet
+## 2 Testbarhet
 Det finns olika mål med testning ([SWEBOK - Chapter 5 Software Testing - Objectives of Testing](http://www.computer.org/portal/web/swebok/html/ch5#Ref2.2)). Detta avsnitt behandlar automatiserade/programmerbara funktionella tester, att skriva kod/programmera så att en applikation blir möjlig att automatiskt funktions-testa. 
 
 Mjukvara kan testas på på olika nivåer ([Software testing - Testing levels](http://en.wikipedia.org/wiki/Software_testing#Testing_levels), [SWEBOK - Chapter 5 Software Testing - Test Levels](http://www.computer.org/portal/web/swebok/html/ch5#Ref2))
