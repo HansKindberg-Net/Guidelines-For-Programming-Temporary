@@ -6,8 +6,8 @@
     <ProjectGuid>{452E4B5E-4BC1-4C0E-B280-50C1AC23F3B4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Company.Samples.ShimTests</RootNamespace>
-    <AssemblyName>Company.Samples.ShimTests</AssemblyName>
+    <RootNamespace>Company.Examples.ShimTests</RootNamespace>
+    <AssemblyName>Company.Examples.ShimTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -82,9 +82,9 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Company.Samples\Company.Samples.csproj">
+    <ProjectReference Include="..\Company.Examples\Company.Examples.csproj">
       <Project>{47f8b1cf-27fe-447f-8059-ec3519939472}</Project>
-      <Name>Company.Samples</Name>
+      <Name>Company.Examples</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

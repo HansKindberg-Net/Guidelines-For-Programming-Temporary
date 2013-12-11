@@ -40,7 +40,7 @@ Jag använder följande namngivning på **VS-test-project**:
 - [VS-project som ska testas].**ShimTests** - innehåller enhetstester där typer som behöver mockas inte är mockbara utan [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims) ([**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx)) används istället ([Using shims to isolate your application from other assemblies for unit testing](http://msdn.microsoft.com/en-us/library/hh549176.aspx))
 - [VS-project som ska testas].**UnitTests** - innehåller enhetstester där typer som behöver mockas är mockbara
 
-[**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx) kräver Visual Studio Premium/Ultimate 2012/2013. Om man har Visual Studio 2010 eller Visual Studio Professional 2012/2013 kan inte ett projekt där [**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx) används laddas. Om jag skulle blanda shim-tests med övriga enhets-tester skulle inga enhets-test projekt gå att ladda med dessa versioner. Det är därför jag gjort denna uppdelning.
+[**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx) kräver Visual Studio Premium/Ultimate 2012/2013. Om man har Visual Studio 2010 eller Visual Studio Professional 2012/2013 kan inte ett VS-project där [**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx) används laddas. Om jag skulle blanda shim-tests med övriga enhets-tester skulle inga enhets-test projekt gå att ladda med dessa versioner. Det är därför jag gjort denna uppdelning.
 
 ### 1.4 Övrigt
 Jag är systemutvecklare och utvecklar/programmerar i huvudsak EPiServer-lösningar och andra webbapplikationer. Jag har mindre erfarenhet av .NET WCF, .NET WebServices, .NET Windows Forms, ändå har jag velat ta med exempel inom dessa typer av applikationer. Jag anser mig heller inte expert på att skriva/programmera tester, däremot har jag byggt upp min kunskap på att göra programkod testbar.
@@ -72,7 +72,7 @@ För att kunna enhetstesta en metod i en klass som har ett beroende till en annan
 
 Kortfattat innebär det att man inte hårdkodar ett beroende till en annan klass utan man gör det möjligt att styra beroendet under körning.
 
-Följande exempel visar en svårtestad metod ([/Company-Samples/Company.Samples/HardToTest/EmailForm.cs](/Company-Samples/Company.Samples/HardToTest/EmailForm.cs)):
+Följande exempel visar en svårtestad metod ([/Company-Examples/Company.Examples/HardToTest/EmailForm.cs](/Company-Examples/Company.Examples/HardToTest/EmailForm.cs)):
 
 	public void Send()
 	{
@@ -107,9 +107,9 @@ Om vi skippar tänket på god kod-design så skulle vi kunna testa dessa två scenar
 Test för scenario 1, löst med [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims) ([/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs](/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs)):
 
 	[TestMethod]
-	public void Send_IfTheInputIsValid_SmtpClientSendShouldBeCalled()
+	public void Send_IfTheInputIsValid_ShouldCallSmtpClientSend()
 	{
-		using (ShimsContext.Create())
+		using(ShimsContext.Create())
 		{
 			bool sendIsCalled = false;
 			MailMessage sentMailMessage = null;
@@ -124,14 +124,14 @@ Test för scenario 1, löst med [**Shims**](http://msdn.microsoft.com/en-us/librar
 			Assert.IsNull(sentMailMessage);
 
 			EmailForm emailForm = new EmailForm
-			{
-				Message = _testMessage,
-				Subject = _testSubject,
-				To = _testReceiver
-			};
+				{
+					Message = _testMessage,
+					Subject = _testSubject,
+					To = _testReceiver
+				};
 
 			emailForm.Send();
-				
+
 			Assert.IsTrue(sendIsCalled);
 			Assert.IsNotNull(sentMailMessage);
 			Assert.AreEqual(_testMessage, sentMailMessage.Body);
@@ -140,24 +140,65 @@ Test för scenario 1, löst med [**Shims**](http://msdn.microsoft.com/en-us/librar
 		}
 	}
 
-Test för scenario 1, löst med [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims) ([/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs](/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs)) :
+Test för scenario 2, löst med [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims) ([/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs](/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs)) :
 
+	[TestMethod]
+	[ExpectedException(typeof(Exception))]
+	public void Send_IfTheInputIsNotValid_ShouldNotCallSmtpClientSendAndShouldThrowAnException()
+	{
+		using(ShimsContext.Create())
+		{
+			bool sendIsCalled = false;
+			MailMessage sentMailMessage = null;
 
+			ShimSmtpClient.AllInstances.SendMailMessage = delegate(SmtpClient client, MailMessage mailMessage)
+			{
+				sentMailMessage = mailMessage;
+				sendIsCalled = true;
+			};
 
+			Assert.IsFalse(sendIsCalled);
+			Assert.IsNull(sentMailMessage);
+
+			EmailForm emailForm = new EmailForm
+				{
+					Message = _testMessage,
+					Subject = _testSubject,
+					To = null
+				};
+
+			Exception expectedException = null;
+
+			try
+			{
+				emailForm.Send();
+			}
+			catch(Exception exception)
+			{
+				expectedException = exception;
+			}
+
+			Assert.IsFalse(sendIsCalled);
+			Assert.IsNull(sentMailMessage);
+
+			if(expectedException != null)
+				throw new Exception();
+		}
+	}
 
 ## 3. Visual Studio
 
 ### 3.1 NuGet
-Använd NuGet för att hantera referenser till external bibliotek. När du lägger till **NuGet** paket så hamnar paketen som standard i katalogen **packages** på samma nivå som din solution-fil. Om du slår på (enable) **NuGet Package Restore** så kan utvecklare bygga din VS-solution direkt efter att de öppnat din VS-solution från **Source Control**. Alla paket som behövs laddas ner automatiskt vid första bygget (kan behöva byggas 2 gånger ibland för att det ska fungera). Det är viktigt att inte checka in eventuella **NuGet** paket, för då ser jag inte så så stor vits med **NuGet**. Om du dessutom korrigerar inställningarna ([3.1.2 Korrigera NuGet.targets](/ReadMe.sv.md#312-korrigera-nugettargets)) så:
+Använd NuGet för att hantera referenser till external bibliotek. När du lägger till **NuGet** paket så hamnar paketen som standard i katalogen **packages** på samma nivå som din VS-solution-fil. Om du slår på (enable) **NuGet Package Restore** så kan utvecklare bygga din VS-solution direkt efter att de öppnat din VS-solution från **Source Control**. Alla paket som behövs laddas ner automatiskt vid första bygget (kan behöva byggas 2 gånger ibland för att det ska fungera). Det är viktigt att inte checka in eventuella **NuGet** paket, för då ser jag inte så så stor vits med **NuGet**. Om du dessutom korrigerar inställningarna ([3.1.2 Korrigera NuGet.targets](/ReadMe.sv.md#312-korrigera-nugettargets)) så:
 
 - behöver du inte ckecka in/commita **NuGet.exe** heller, det laddas också ner vid första bygget.
-- behöver inte andra utvecklare/programmerare som öppnar din solution från **Source Control** ha **NuGet Package Manager** installerat över huvudtaget eller inte konfigurerat på samma sätt som dig för att de ändå ska kunna bygga VS-solution
+- behöver inte andra utvecklare/programmerare som öppnar din VS-solution från **Source Control** ha **NuGet Package Manager** installerat över huvudtaget eller inte konfigurerat på samma sätt som dig för att de ändå ska kunna bygga VS-solution
 
 #### 3.1.1 Enable NuGet Package Restore
 - I **Solution Explorer** högerklicka på din **Solution**
 - Klicka **Enable NuGet Package Restore**
 
-Följande katalog och filer har nu skapats under rotkatalogen för din solution:
+Följande katalog och filer har nu skapats under rotkatalogen för din VS-solution:
 
 	.nuget
 		NuGet.Config
@@ -242,11 +283,11 @@ Alla värden som börjar och slutar med **$**, t.ex. **$author$**, är så kallade *
 
 Lägg till ett **PostBuildEvent** i projektet:
 
-- Högerklicka ditt projekt i **Solution Explorer**
+- Högerklicka ditt VS-project i **Solution Explorer**
 - Välj fliken **Build Events**
 - I fältet **Post-build event command line:** - lägg till följande: **"$(SolutionDir).nuget\NuGet.exe" pack "$(ProjectPath)" -Properties Configuration=$(ConfigurationName) -IncludeReferencedProjects**
 
-När du bygger din solution/ditt projekt kommer du få en [VS-project namn].[version].nupkg i din **output** katalog för ditt VS-project.
+När du bygger din VS-solution/ditt VS-project kommer du få en [VS-project namn].[version].nupkg i din **output** katalog för ditt VS-project.
 
 Exempel i detta projekt:
 

@@ -5,7 +5,7 @@ using System.Net.Mail;
 using Company.Net.Mail;
 using Company.Validation;
 
-namespace Company.Samples.HardToTest
+namespace Company.Examples.HardToTest
 {
 	public class EmailForm
 	{
@@ -53,7 +53,7 @@ namespace Company.Samples.HardToTest
 			if(string.IsNullOrEmpty(this.Message))
 				validationResult.Exceptions.Add(new InvalidOperationException("\"Message\" can not be null or empty."));
 
-			return new ValidationResult();
+			return validationResult;
 		}
 
 		#endregion

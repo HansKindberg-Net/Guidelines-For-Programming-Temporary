@@ -7,8 +7,8 @@
     <ProjectGuid>{47F8B1CF-27FE-447F-8059-EC3519939472}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Company.Samples</RootNamespace>
-    <AssemblyName>Company.Samples</AssemblyName>
+    <RootNamespace>Company.Examples</RootNamespace>
+    <AssemblyName>Company.Examples</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,11 +36,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\CodeAnalysis\SolutionSuppressions.cs">
