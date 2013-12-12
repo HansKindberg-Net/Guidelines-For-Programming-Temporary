@@ -2,16 +2,16 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyDescription("Unit-tests for Company.Examples.")]
+[assembly: AssemblyDescription("Integration-tests for Company.")]
 [assembly: CLSCompliant(true)]
-[assembly: Guid("39870da5-2044-4adc-8c40-28de3fdb0da4")]
+[assembly: Guid("688cfb96-7e77-4747-b946-4c85bc808330")]
 // ReSharper disable CheckNamespace
 internal static class AssemblyInfo
 // ReSharper restore CheckNamespace
 {
 	#region Fields
 
-	internal const string AssemblyName = "Company.Examples.UnitTests";
+	internal const string AssemblyName = "Company.IntegrationTests";
 
 	#endregion
 }

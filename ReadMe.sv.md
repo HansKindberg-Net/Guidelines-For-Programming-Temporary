@@ -19,7 +19,7 @@ Det här projektet innehåller riktlinjer för programmering. Riktlinjerna gäller i
 - **VS-test-project** = ett **Visual Studio** project för att testa ett annat **Visual Studio** project
 
 ### 1.2 Projekt-struktur
-Detta projekt består av en **VS-solution** med diverse **VS-project** med exempel kod. Programmeringsspråket som används är **C#**. Jag vill visa hur jag menar genom exempel. **VS-solution** innehåller flera **VS-project** och därför har jag valt att gruppera/strukturera dem med hjälp av **Solution Folders**.
+Detta projekt består av en **VS-solution** med diverse **VS-project** med exempel kod. Programmeringsspråket som används är **C#**, **.NET Framework 4.5**. Jag vill visa hur jag menar genom exempel. **VS-solution** innehåller flera **VS-project** och därför har jag valt att gruppera/strukturera dem med hjälp av **Solution Folders**.
 - **.nuget** - katalogen innehåller filer för **NuGet Package Restore**, dessa filer skapas när man slår på **NuGet Package Restore** ([3.1.1 Enable NuGet Package Restore](/ReadMe.sv.md#311-enable-nuget-package-restore))
 - **CodeAnalysis** - globala filer/inställningar för **Code Analysis** ([Code Analysis for Managed Code Overview](http://msdn.microsoft.com/en-us/library/3z0aeatx.aspx)), länkas in av **VS-project**
 - **Company-Examples** - innehåller ett **Class Library** (**VS-project**) med mer allmän exempel-kod vad gäller testbarhet + tillhörande **VS-test-project**
@@ -35,7 +35,7 @@ Detta projekt består av en **VS-solution** med diverse **VS-project** med exempe
 Jag inleder alla **VS-project** namn med ansvarigt företags namn (eller organisation). I detta projekt har jag valt att inleda alla **VS-project** namn med **Company**. Resten av namnet bygger på funtions-namn eller produkt-namn.
 
 #### 1.3.1 VS-test-project
-Jag använder följande namngivning på **VS-test-project**:
+Alla **VS-test-project** i den **VS-solution** som detta projekt består av är av typen **Unit Test Project**. Jag använder följande namngivning på **VS-test-project**:
 - [VS-project som ska testas].**IntegrationTests** - innehåller integrerade enhetstester där inte allt mockas
 - [VS-project som ska testas].**ShimTests** - innehåller enhetstester där typer som behöver mockas inte är mockbara utan [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims) ([**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx)) används istället ([Using shims to isolate your application from other assemblies for unit testing](http://msdn.microsoft.com/en-us/library/hh549176.aspx))
 - [VS-project som ska testas].**UnitTests** - innehåller enhetstester där typer som behöver mockas är mockbara
@@ -55,22 +55,45 @@ Mjukvara kan testas på på olika nivåer ([Software testing - Testing levels](http
 
 För mig som programmerare handlar testbarhet mest om programmerbara/automatiska tester. Jag anser att begreppet testbarhet mest hör ihop med enhetstester (unit tests). Bygg dina klasser så att de blir testbara, vilket innebär att klassens beroenden är abstrakta och injicerbara (injectable).
 
-###2.1 Fördelar
+### 2.1 Fördelar
 Fördelar med testbarhet:
 - **Pluggbara** system – system/mjukvara där det är lätt att byta ut olika delar
 - System/mjukvara som kan köras i olika miljöer med olika förutsättningar, produktion, test, utveckling m.m.
 
 Även om man inte skriver/programmerar några tester men skriver sin kod testbar så anser jag att man får en bra mjukvaru-design. Jag anser också att det kommer att resultera i att de klasser man skriver/programmerar hanterar det de ska, vilket resulterar i kod som är lättare att underhålla och man undviker redundant kod (duplicate code). Samtidigt kräver det mer av den som programmerar att se till att klasser underhålls på rätt sätt eftersom det är mycket troligt att flera andra klasser har ett beroende till klassen. Med andra ord, bygger man testbart så bygger man objekt-orienterat.
 
-###2.2 Beroenden (dependencies)
+### 2.2 Beroenden (dependencies)
 Klasser har beroenden till andra klasser. Idén med enhetstestning är att testa kod utan att testa dess beroenden. Tanken är att om en klass fungerar som den är designad och dess beroende klasser likaså så borde de fungera tillsammans som tänkt.
 
-###2.3 Hantera beroenden
+### 2.3 Hantera beroenden
 För att kunna enhetstesta en metod i en klass som har ett beroende till en annan klass på ett bra sätt så måste man kunna hantera detta beroende. Detta kan hanteras med hjälp av:
-- [**Inversion of control**](http://en.wikipedia.org/wiki/Inversion_of_control) - en programmerings teknik
 - [**Dependency injection**](http://en.wikipedia.org/wiki/Dependency_injection) - ett design mönster
+- [**Inversion of control**](http://en.wikipedia.org/wiki/Inversion_of_control) - en programmerings teknik
 
-Kortfattat innebär det att man inte hårdkodar ett beroende till en annan klass utan man gör det möjligt att styra beroendet under körning.
+Mitt sätt att se det: [**Inversion of control**](http://en.wikipedia.org/wiki/Inversion_of_control) är en teknik man kan använda för att hantera [**Dependency injection**](http://en.wikipedia.org/wiki/Dependency_injection).
+
+Kortfattat innebär det att man inte hårdkodar ett beroende till en annan klass utan man gör det möjligt att styra beroendet under körning. Martin Fowler har skrivit en artikel som behandlar detta område, [**Inversion of Control Containers and the Dependency Injection pattern**](http://martinfowler.com/articles/injection.html#ServiceLocatorVsDependencyInjection).
+
+
+
+
+
+
+
+
+#### [2.3.1 Dependency Injection (DI)](http://en.wikipedia.org/wiki/Dependency_injection)
+
+#### [2.3.2 Inversion of Control (IoC)](http://en.wikipedia.org/wiki/Inversion_of_control)
+
+##### 2.3.2.1 Inversion of Control Containers (IoC Containers)
+
+
+### 2.4 Exempel
+
+
+
+
+
 
 Följande exempel visar en svårtestad metod ([/Company-Examples/Company.Examples/HardToTest/EmailForm.cs](/Company-Examples/Company.Examples/HardToTest/EmailForm.cs)):
 
@@ -185,6 +208,23 @@ Test för scenario 2, löst med [**Shims**](http://msdn.microsoft.com/en-us/librar
 				throw new Exception();
 		}
 	}
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
 
 ## 3. Visual Studio
 

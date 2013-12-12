@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyDescription("Shim-tests for Company.Samples.")]
+[assembly: AssemblyDescription("Shim-tests for Company.Examples.")]
 [assembly: CLSCompliant(true)]
 [assembly: Guid("e12f0e7f-234b-4156-9907-1ab00bc65ba5")]
 // ReSharper disable CheckNamespace
@@ -11,7 +11,7 @@ internal static class AssemblyInfo
 {
 	#region Fields
 
-	internal const string AssemblyName = "Company.Samples.ShimTests";
+	internal const string AssemblyName = "Company.Examples.ShimTests";
 
 	#endregion
 }
