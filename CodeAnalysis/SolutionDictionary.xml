@@ -5,4 +5,9 @@
 			<Acronym>Io</Acronym><!-- Inversion of (Inversion of Control) -->
 		</CasingExceptions>
 	</Acronyms>
+	<Words>
+		<DiscreteExceptions>
+			<Term>placeholder</Term>
+		</DiscreteExceptions>
+	</Words>
 </Dictionary>

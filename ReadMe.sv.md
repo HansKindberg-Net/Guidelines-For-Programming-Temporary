@@ -365,7 +365,7 @@ I have started to use Code Analysis
 
 ### 3.3 *.config transformering
 *.config/XML file transformation
-Web.config transforms are built into Visual Studio. You can transform the Web.config file when publishing/deploying a Visual Studio web-application.
+Web.config transforms are built into Visual Studio. You can transform the Web.config file when publishing/deploying a Visual Studio webapplication.
 Web.config Transformation Syntax for Web Project Deployment Using Visual Studio: http://msdn.microsoft.com/en-us/library/dd465326(v=vs.110).aspx
 SlowCheetah
 Is a Visual Studio extension to handle transformation of any xml-file. And it transforms on build (F5)

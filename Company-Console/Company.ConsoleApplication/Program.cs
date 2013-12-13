@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Company.ConsoleApplication
+﻿namespace Company.ConsoleApplication
 {
-	class Program
+	internal class Program
 	{
+		#region Methods
+
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "args")]
-		static void Main(string[] args)
-		{
-		}
+		private static void Main(string[] args) {}
+
+		#endregion
 	}
 }

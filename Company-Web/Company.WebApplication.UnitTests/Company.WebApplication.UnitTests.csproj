@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{171DBE6D-BE18-45A1-A70C-B1C06999349A}</ProjectGuid>
+    <ProjectGuid>{75CA39B9-850C-4D3B-B079-D1731DAF2881}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Company.ConsoleApplication.UnitTests</RootNamespace>
-    <AssemblyName>Company.ConsoleApplication.UnitTests</AssemblyName>
+    <RootNamespace>Company.WebApplication.UnitTests</RootNamespace>
+    <AssemblyName>Company.WebApplication.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -60,14 +60,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="..\..\codeanalysis\SolutionSuppressions.cs">
+    <Compile Include="..\..\CodeAnalysis\SolutionSuppressions.cs">
       <Link>CodeAnalysis\SolutionSuppressions.cs</Link>
     </Compile>
     <Compile Include="..\..\Properties\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="CodeAnalysis\AssemblySuppressions.cs" />
-    <Compile Include="ProgramTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,20 +75,14 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\codeanalysis\SolutionDictionary.xml">
+    <CodeAnalysisDictionary Include="..\..\CodeAnalysis\SolutionDictionary.xml">
       <Link>CodeAnalysis\SolutionDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Signing\Company.snk">
+    <Content Include="..\..\Signing\Company.snk">
       <Link>Company.snk</Link>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Company.ConsoleApplication\Company.ConsoleApplication.csproj">
-      <Project>{b792cb96-aef0-457b-87cd-fa7ab049b03b}</Project>
-      <Name>Company.ConsoleApplication</Name>
-    </ProjectReference>
+    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
