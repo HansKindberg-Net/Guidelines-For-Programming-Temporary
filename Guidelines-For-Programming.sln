@@ -78,13 +78,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.ConsoleApplication"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.ConsoleApplication.UnitTests", "Company-Console\Company.ConsoleApplication.UnitTests\Company.ConsoleApplication.UnitTests.csproj", "{171DBE6D-BE18-45A1-A70C-B1C06999349A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.WindowsFormsApplication", "Company.WindowsFormsApplication\Company.WindowsFormsApplication.csproj", "{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.WebApplication", "Company-Web\Company.WebApplication\Company.WebApplication.csproj", "{F54DDB9D-AA8B-4155-BA5E-BE3E92A6F05C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.WebApplication.ShimTests", "Company-Web\Company.WebApplication.ShimTests\Company.WebApplication.ShimTests.csproj", "{AD7C1E65-12FB-4070-B3FD-7B344CA797DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.WebApplication.UnitTests", "Company-Web\Company.WebApplication.UnitTests\Company.WebApplication.UnitTests.csproj", "{75CA39B9-850C-4D3B-B079-D1731DAF2881}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.WindowsFormsApplication", "Company-Windows\Company.WindowsFormsApplication\Company.WindowsFormsApplication.csproj", "{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -195,12 +195,6 @@ Global
 		{171DBE6D-BE18-45A1-A70C-B1C06999349A}.Production|Any CPU.Build.0 = Release|Any CPU
 		{171DBE6D-BE18-45A1-A70C-B1C06999349A}.Test|Any CPU.ActiveCfg = Debug|Any CPU
 		{171DBE6D-BE18-45A1-A70C-B1C06999349A}.Test|Any CPU.Build.0 = Debug|Any CPU
-		{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}.Development|Any CPU.ActiveCfg = Development|Any CPU
-		{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}.Development|Any CPU.Build.0 = Development|Any CPU
-		{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}.Production|Any CPU.ActiveCfg = Production|Any CPU
-		{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}.Production|Any CPU.Build.0 = Production|Any CPU
-		{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}.Test|Any CPU.ActiveCfg = Test|Any CPU
-		{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}.Test|Any CPU.Build.0 = Test|Any CPU
 		{F54DDB9D-AA8B-4155-BA5E-BE3E92A6F05C}.Development|Any CPU.ActiveCfg = Development|Any CPU
 		{F54DDB9D-AA8B-4155-BA5E-BE3E92A6F05C}.Development|Any CPU.Build.0 = Development|Any CPU
 		{F54DDB9D-AA8B-4155-BA5E-BE3E92A6F05C}.Production|Any CPU.ActiveCfg = Production|Any CPU
@@ -219,6 +213,12 @@ Global
 		{75CA39B9-850C-4D3B-B079-D1731DAF2881}.Production|Any CPU.Build.0 = Release|Any CPU
 		{75CA39B9-850C-4D3B-B079-D1731DAF2881}.Test|Any CPU.ActiveCfg = Debug|Any CPU
 		{75CA39B9-850C-4D3B-B079-D1731DAF2881}.Test|Any CPU.Build.0 = Debug|Any CPU
+		{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}.Development|Any CPU.ActiveCfg = Development|Any CPU
+		{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}.Development|Any CPU.Build.0 = Development|Any CPU
+		{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}.Production|Any CPU.ActiveCfg = Production|Any CPU
+		{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}.Production|Any CPU.Build.0 = Production|Any CPU
+		{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}.Test|Any CPU.Build.0 = Test|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
