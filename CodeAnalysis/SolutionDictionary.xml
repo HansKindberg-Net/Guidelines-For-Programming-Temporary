@@ -9,5 +9,8 @@
 		<DiscreteExceptions>
 			<Term>placeholder</Term>
 		</DiscreteExceptions>
+		<Recognized>
+			<Word>Mvp</Word><!-- Model-View-Presenter -->
+		</Recognized>
 	</Words>
 </Dictionary>

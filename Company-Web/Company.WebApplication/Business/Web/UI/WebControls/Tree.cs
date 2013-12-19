@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq;
 using System.Web.UI;
 using Company.Web.UI.Extensions;
@@ -12,6 +14,7 @@ namespace Company.WebApplication.Business.Web.UI.WebControls
 	{
 		#region Fields
 
+		private const string _currentViewStateName = "Current";
 		private const string _dataBindAutomaticallyViewStateName = "DataBindAutomatically";
 		private const string _dataCategory = "Data";
 		private const string _includeRootViewStateName = "IncludeRoot";
@@ -28,6 +31,17 @@ namespace Company.WebApplication.Business.Web.UI.WebControls
 		#endregion
 
 		#region Properties
+
+		[Bindable(true), Category(_dataCategory), DefaultValue(null)]
+		public virtual IHierarchyData Current
+		{
+			get { return (IHierarchyData) this.ViewState[_currentViewStateName]; }
+			set
+			{
+				this.ViewState[_currentViewStateName] = value;
+				this.OnPropertyChanged(_currentViewStateName);
+			}
+		}
 
 		[Bindable(true), Category(_informationCategory), DefaultValue(false)]
 		public virtual bool DataBindAutomatically
@@ -101,6 +115,18 @@ namespace Company.WebApplication.Business.Web.UI.WebControls
 			}
 		}
 
+		[Browsable(false), PersistenceMode(PersistenceMode.InnerProperty), TemplateContainer(typeof(HierarchyDataContainer))]
+		public virtual ITemplate SelectedAncestorHeaderTemplate { get; set; }
+
+		[Browsable(false), PersistenceMode(PersistenceMode.InnerProperty), TemplateContainer(typeof(HierarchyDataContainer))]
+		public virtual ITemplate SelectedAncestorTemplate { get; set; }
+
+		[Browsable(false), PersistenceMode(PersistenceMode.InnerProperty), TemplateContainer(typeof(HierarchyDataContainer))]
+		public virtual ITemplate SelectedItemHeaderTemplate { get; set; }
+
+		[Browsable(false), PersistenceMode(PersistenceMode.InnerProperty), TemplateContainer(typeof(HierarchyDataContainer))]
+		public virtual ITemplate SelectedItemTemplate { get; set; }
+
 		#endregion
 
 		#region Methods
@@ -118,48 +144,63 @@ namespace Company.WebApplication.Business.Web.UI.WebControls
 			this.Controls.Add(container);
 		}
 
+		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		[SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-		protected internal virtual void CreateChildControls(IHierarchyData hierarchyData)
+		protected internal virtual void CreateChildControls(IEnumerable<IHierarchyData> items, int level)
 		{
-			if(hierarchyData == null)
-				throw new ArgumentNullException("hierarchyData");
+			if(items == null)
+				throw new ArgumentNullException("items");
 
-			int level = hierarchyData.GetLevel();
+			if(level < 0 || level == int.MaxValue)
+				throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "The level must be between 0 and {0}.", int.MaxValue - 1));
+
+			// ReSharper disable PossibleMultipleEnumeration
+
+			if(!items.Any())
+				return;
 
 			if(!this.IncludeLevel(level))
 				return;
 
-			bool isRoot = hierarchyData.Equals(this.Root);
-
-			if(isRoot && this.HeaderTemplate != null)
-				this.AddTemplate(new HierarchyDataContainer(hierarchyData), this.HeaderTemplate);
+			if(level == 0 && this.HeaderTemplate != null)
+				this.AddTemplate(new HierarchyDataContainer(items.First()), this.HeaderTemplate);
 			else if(this.LevelHeaderTemplate != null)
-				this.AddTemplate(new HierarchyDataContainer(hierarchyData), this.LevelHeaderTemplate);
+				this.AddTemplate(new HierarchyDataContainer(items.First()), this.LevelHeaderTemplate);
 
-			if(this.ItemHeaderTemplate != null)
-				this.AddTemplate(new HierarchyDataContainer(hierarchyData), this.ItemHeaderTemplate);
-
-			if(this.ItemTemplate != null)
-				this.AddTemplate(new HierarchyDataContainer(hierarchyData), this.ItemTemplate);
-
-			foreach(var child in hierarchyData.GetChildren().OfType<IHierarchyData>())
+			foreach(var item in items)
 			{
-				this.CreateChildControls(child);
+				if(item.Equals(this.Current) && this.SelectedItemHeaderTemplate != null)
+					this.AddTemplate(new HierarchyDataContainer(item), this.SelectedItemHeaderTemplate);
+				else if(this.SelectedAncestorHeaderTemplate != null && this.Current != null && this.Current.GetAncestors().Contains(item))
+					this.AddTemplate(new HierarchyDataContainer(item), this.SelectedAncestorHeaderTemplate);
+				else if(this.ItemHeaderTemplate != null)
+					this.AddTemplate(new HierarchyDataContainer(item), this.ItemHeaderTemplate);
+
+				if(item.Equals(this.Current) && this.SelectedItemTemplate != null)
+					this.AddTemplate(new HierarchyDataContainer(item), this.SelectedItemTemplate);
+				else if(this.SelectedAncestorTemplate != null && this.Current != null && this.Current.GetAncestors().Contains(item))
+					this.AddTemplate(new HierarchyDataContainer(item), this.SelectedAncestorTemplate);
+				else if(this.ItemTemplate != null)
+					this.AddTemplate(new HierarchyDataContainer(item), this.ItemTemplate);
+
+				this.CreateChildControls(item.GetChildren().OfType<IHierarchyData>().ToArray(), level + 1);
+
+				if(this.ItemFooterTemplate != null)
+					this.AddTemplate(new HierarchyDataContainer(item), this.ItemFooterTemplate);
 			}
 
-			if(this.ItemFooterTemplate != null)
-				this.AddTemplate(new HierarchyDataContainer(hierarchyData), this.ItemFooterTemplate);
-
-			if(isRoot && this.FooterTemplate != null)
-				this.AddTemplate(new HierarchyDataContainer(hierarchyData), this.FooterTemplate);
+			if(level == 0 && this.FooterTemplate != null)
+				this.AddTemplate(new HierarchyDataContainer(items.Last()), this.FooterTemplate);
 			else if(this.LevelFooterTemplate != null)
-				this.AddTemplate(new HierarchyDataContainer(hierarchyData), this.LevelFooterTemplate);
+				this.AddTemplate(new HierarchyDataContainer(items.Last()), this.LevelFooterTemplate);
+
+			// ReSharper restore PossibleMultipleEnumeration
 		}
 
 		protected override void CreateChildControls()
 		{
 			if(this.Root != null)
-				this.CreateChildControls(this.Root);
+				this.CreateChildControls(this.IncludeRoot ? new[] {this.Root} : this.Root.GetChildren().OfType<IHierarchyData>().ToArray(), 0);
 		}
 
 		public override void DataBind()

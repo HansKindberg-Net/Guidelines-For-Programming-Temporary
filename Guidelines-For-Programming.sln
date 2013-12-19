@@ -86,6 +86,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.WebApplication.Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.WindowsFormsApplication", "Company-Windows\Company.WindowsFormsApplication\Company.WindowsFormsApplication.csproj", "{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.MvpApplication", "Company-Web\Company.MvpApplication\Company.MvpApplication.csproj", "{3B29910F-A594-446C-BE10-FF66B15406E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{6F7DE438-240E-4A62-A10E-D1771DFD38BB}"
+	ProjectSection(SolutionItems) = preProject
+		Targets\Configuration.Transformations.targets = Targets\Configuration.Transformations.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|Any CPU = Development|Any CPU
@@ -219,6 +226,12 @@ Global
 		{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}.Production|Any CPU.Build.0 = Production|Any CPU
 		{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}.Test|Any CPU.ActiveCfg = Test|Any CPU
 		{4DAF698A-9588-4BBA-B856-9AC23AB6DEAB}.Test|Any CPU.Build.0 = Test|Any CPU
+		{3B29910F-A594-446C-BE10-FF66B15406E2}.Development|Any CPU.ActiveCfg = Development|Any CPU
+		{3B29910F-A594-446C-BE10-FF66B15406E2}.Development|Any CPU.Build.0 = Development|Any CPU
+		{3B29910F-A594-446C-BE10-FF66B15406E2}.Production|Any CPU.ActiveCfg = Production|Any CPU
+		{3B29910F-A594-446C-BE10-FF66B15406E2}.Production|Any CPU.Build.0 = Production|Any CPU
+		{3B29910F-A594-446C-BE10-FF66B15406E2}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{3B29910F-A594-446C-BE10-FF66B15406E2}.Test|Any CPU.Build.0 = Test|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -240,6 +253,7 @@ Global
 		{F54DDB9D-AA8B-4155-BA5E-BE3E92A6F05C} = {C8D2AAF6-2C2B-440C-9FD6-ECD6EA5EBD0C}
 		{AD7C1E65-12FB-4070-B3FD-7B344CA797DA} = {C8D2AAF6-2C2B-440C-9FD6-ECD6EA5EBD0C}
 		{75CA39B9-850C-4D3B-B079-D1731DAF2881} = {C8D2AAF6-2C2B-440C-9FD6-ECD6EA5EBD0C}
+		{3B29910F-A594-446C-BE10-FF66B15406E2} = {C8D2AAF6-2C2B-440C-9FD6-ECD6EA5EBD0C}
 		{47F8B1CF-27FE-447F-8059-EC3519939472} = {DD1101BD-7F68-4812-92A8-E1F7EBCDBA07}
 		{452E4B5E-4BC1-4C0E-B280-50C1AC23F3B4} = {DD1101BD-7F68-4812-92A8-E1F7EBCDBA07}
 		{21DB2F4D-003F-4E10-8818-96A77C7F8981} = {DD1101BD-7F68-4812-92A8-E1F7EBCDBA07}

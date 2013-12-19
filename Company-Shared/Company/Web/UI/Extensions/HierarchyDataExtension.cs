@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
 
 namespace Company.Web.UI.Extensions
@@ -7,23 +9,28 @@ namespace Company.Web.UI.Extensions
 	{
 		#region Methods
 
-		public static int GetLevel(this IHierarchyData hierarchyData)
+		public static IEnumerable<IHierarchyData> GetAncestors(this IHierarchyData hierarchyData)
 		{
 			if(hierarchyData == null)
 				throw new ArgumentNullException("hierarchyData");
 
-			int level = 0;
+			List<IHierarchyData> ancestors = new List<IHierarchyData>();
 
 			IHierarchyData parent = hierarchyData.GetParent();
 
 			while(parent != null)
 			{
-				level++;
+				ancestors.Add(parent);
 
 				parent = parent.GetParent();
 			}
 
-			return level;
+			return ancestors.ToArray();
+		}
+
+		public static int GetLevel(this IHierarchyData hierarchyData)
+		{
+			return hierarchyData.GetAncestors().Count();
 		}
 
 		#endregion

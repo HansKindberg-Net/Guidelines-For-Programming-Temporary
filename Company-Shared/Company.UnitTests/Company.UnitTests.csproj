@@ -73,6 +73,9 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="CodeAnalysis\AssemblySuppressions.cs" />
+    <Compile Include="Collections\Generic\TreeFactoryTest.cs" />
+    <Compile Include="Collections\Generic\TreeNodeCollectionTest.cs" />
+    <Compile Include="Collections\Generic\TreeNodeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\UI\Extensions\HierarchyDataExtensionTest.cs" />
   </ItemGroup>

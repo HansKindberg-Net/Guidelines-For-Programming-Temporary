@@ -9,5 +9,7 @@ testresults/
 *.suo
 *.user
 .nuget/NuGet.exe
+Company-Web\Company.MvpApplication\Web.config
+Company-Web\Company.MvcApplication\Web.config
 
 !packages/repositories.config

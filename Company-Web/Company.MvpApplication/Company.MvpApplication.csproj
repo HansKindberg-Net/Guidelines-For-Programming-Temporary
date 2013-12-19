@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" />
+  <PropertyGroup>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Company.MvpApplication</AssemblyName>
+    <AssemblyOriginatorKeyFile>..\..\Signing\Company.snk</AssemblyOriginatorKeyFile>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressSSLPort />
+    <IISExpressUseClassicPipelineMode />
+    <IISExpressWindowsAuthentication />
+    <OutputType>Library</OutputType>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion />
+    <ProjectGuid>{3B29910F-A594-446C-BE10-FF66B15406E2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <RestorePackages>true</RestorePackages>
+    <RootNamespace>Company.MvpApplication</RootNamespace>
+    <SchemaVersion>2.0</SchemaVersion>
+    <SignAssembly>true</SignAssembly>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Development|AnyCPU' ">
+    <CodeAnalysisRuleSet>..\..\CodeAnalysis\Solution.ruleset</CodeAnalysisRuleSet>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Production|AnyCPU' ">
+    <CodeAnalysisRuleSet>..\..\CodeAnalysis\Solution.ruleset</CodeAnalysisRuleSet>
+    <DebugType>pdbonly</DebugType>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <CodeAnalysisRuleSet>..\..\CodeAnalysis\Solution.ruleset</CodeAnalysisRuleSet>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineConstants>CODE_ANALYSIS;DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputPath>bin\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Company-Shared\Company.IoC.StructureMap\Company.IoC.StructureMap.csproj">
+      <Name>Company.IoC.StructureMap</Name>
+      <Project>{9fc9c108-8cc9-493b-b217-cbc0f8c81463}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Company-Shared\Company\Company.csproj">
+      <Name>Company</Name>
+      <Project>{4a0595f1-27b1-426b-b597-a27d0dd6ab93}</Project>
+    </ProjectReference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebFormsMvp">
+      <HintPath>..\packages\WebFormsMvp.1.4.3.0\lib\WebFormsMvp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\..\CodeAnalysis\SolutionDictionary.xml">
+      <Link>CodeAnalysis\SolutionDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+    <CodeAnalysisDictionary Include="CodeAnalysis\AssemblyDictionary.xml">
+      <SubType>Designer</SubType>
+    </CodeAnalysisDictionary>
+    <Compile Include="..\..\CodeAnalysis\SolutionSuppressions.cs">
+      <Link>CodeAnalysis\SolutionSuppressions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Properties\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
+    <Compile Include="Business\Bootstrapper.cs" />
+    <Compile Include="Business\Mvp\Models\IModelFactory.cs" />
+    <Compile Include="Business\Mvp\Models\ModelFactory.cs" />
+    <Compile Include="Business\Mvp\Presenters\Presenter.cs" />
+    <Compile Include="Business\Mvp\Views\IView.cs" />
+    <Compile Include="Business\Registry.cs" />
+    <Compile Include="Business\Web\ISiteMap.cs" />
+    <Compile Include="Business\Web\ISiteMapNode.cs" />
+    <Compile Include="Business\Web\Mvp\UI\Views\Control.cs" />
+    <Compile Include="Business\Web\Mvp\UI\Views\MasterPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Business\Web\Mvp\UI\Views\Page.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Business\Web\Mvp\UI\Views\UserControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Business\Web\Mvp\UI\WebControls\Models\PageTreeModel.cs" />
+    <Compile Include="Business\Web\Mvp\UI\WebControls\Models\TreeModel.cs" />
+    <Compile Include="Business\Web\Mvp\UI\WebControls\Presenters\PageTreePresenter.cs" />
+    <Compile Include="Business\Web\Mvp\UI\WebControls\Presenters\TreePresenter.cs" />
+    <Compile Include="Business\Web\Mvp\UI\WebControls\Views\IPageTree.cs" />
+    <Compile Include="Business\Web\Mvp\UI\WebControls\Views\ITreeView.cs" />
+    <Compile Include="Business\Web\Mvp\UI\WebControls\Views\PageTree.cs" />
+    <Compile Include="Business\Web\Mvp\UI\WebControls\Views\TreeView.cs" />
+    <Compile Include="Business\Web\SiteMapNodeWrapper.cs" />
+    <Compile Include="Business\Web\SiteMapWrapper.cs" />
+    <Compile Include="Business\Web\UI\PageTreeNodeContainer.cs" />
+    <Compile Include="CodeAnalysis\AssemblySuppressions.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HomeModel.cs" />
+    <Compile Include="Models\LayoutModel.cs" />
+    <Compile Include="Presenters\HomePresenter.cs" />
+    <Compile Include="Presenters\LayoutPresenter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Home\IHomeView.cs" />
+    <Compile Include="Views\Shared\ILayoutView.cs" />
+    <Compile Include="Views\Shared\Layout.master.cs">
+      <DependentUpon>Layout.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Shared\Layout.master.designer.cs">
+      <DependentUpon>Layout.master</DependentUpon>
+    </Compile>
+    <Content Include="..\..\Signing\Company.snk">
+      <Link>Company.snk</Link>
+    </Content>
+    <Content Include="Global.asax" />
+    <Content Include="Index.aspx" />
+    <Content Include="packages.config" />
+    <Content Include="Web.config" />
+    <Content Include="Web.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Shared\Layout.master" />
+    <None Include="Web.Development.config">
+      <DependentUpon>Web.Template.config</DependentUpon>
+    </None>
+    <None Include="Web.Production.config">
+      <DependentUpon>Web.Template.config</DependentUpon>
+    </None>
+    <None Include="Web.Template.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Test.config">
+      <DependentUpon>Web.Template.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Condition="'$(VSToolsPath)' != ''" Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Condition="false" Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" Project="$(SolutionDir)\.nuget\NuGet.targets" />
+  <Import Condition="Exists('$(SolutionDir)\Targets\Configuration.Transformations.targets')" Project="$(SolutionDir)\Targets\Configuration.Transformations.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1688/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

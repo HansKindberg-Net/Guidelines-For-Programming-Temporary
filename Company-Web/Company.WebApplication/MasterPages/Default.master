@@ -37,25 +37,31 @@
 				color: #777;
 				border-top: 1px solid #e5e5e5;
 			}
-
-
-
-
-
-			/* Remove */
-			.list-group-item {
-				border-color: red;
-				border-width: 5px;
+			.navigation {
+				background-color: #fff;
+				border: 1px solid #ddd;
+				border-radius: 4px;
 			}
-
-
-
-
-
-
-
-			.list-group-item .list-group-item {
-				border: 0 none transparent;
+			.navigation,
+			.navigation ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			.navigation li,
+			.navigation li.selected li {
+				font-weight: normal;
+				padding-left: 20px;
+			}
+			.navigation li.selected {
+				font-weight: bold;
+			}
+			.navigation .glyphicon {
+				margin-left: 10px;
+				font-size: 80%;
+			}
+			.padding-0 {
+				padding: 0;
 			}
 			.x-scroll {
 				overflow-x: scroll;
@@ -87,22 +93,27 @@
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="/">Company - webapplication</a>
+					<a class="navbar-brand" href="/">Home</a>
 				</div>
 			</div>
 		</div>
 		<div class="container">
 			<div class="jumbotron row">
-				<div class="col-md-4">
-					<WebControls:Tree DataBindAutomatically="true" Root="<%# SiteMap.Enabled && SiteMap.Provider != null ? SiteMap.Provider.RootNode : null %>" runat="server">
-						<LevelHeaderTemplate><ul class="list-group"></LevelHeaderTemplate>
-						<ItemHeaderTemplate><li class="list-group-item"></ItemHeaderTemplate>
+				<div class="col-md-3 padding-0">
+					<WebControls:Tree Current="<%# SiteMap.CurrentNode %>" DataBindAutomatically="true" IncludeRoot="false" Root="<%# SiteMap.Enabled && SiteMap.Provider != null ? SiteMap.Provider.RootNode : null %>" runat="server">
+						<HeaderTemplate><ul class="navigation"></HeaderTemplate>
+						<LevelHeaderTemplate><ul></LevelHeaderTemplate>
+						<SelectedItemHeaderTemplate><li class="selected"></SelectedItemHeaderTemplate>
+						<ItemHeaderTemplate><li></ItemHeaderTemplate>
+						<SelectedItemTemplate><a href="<%# ((SiteMapNode) Container.HierarchyData).Url %>" title="<%# ((SiteMapNode) Container.HierarchyData).Description %>"><%# ((SiteMapNode) Container.HierarchyData).Title %></a><span class="glyphicon glyphicon-arrow-right"></span></SelectedItemTemplate>
+						<SelectedAncestorTemplate><a href="<%# ((SiteMapNode) Container.HierarchyData).Url %>" title="<%# ((SiteMapNode) Container.HierarchyData).Description %>"><%# ((SiteMapNode) Container.HierarchyData).Title %></a><span class="glyphicon glyphicon-arrow-down"></span></SelectedAncestorTemplate>
 						<ItemTemplate><a href="<%# ((SiteMapNode) Container.HierarchyData).Url %>" title="<%# ((SiteMapNode) Container.HierarchyData).Description %>"><%# ((SiteMapNode) Container.HierarchyData).Title %></a></ItemTemplate>
 						<ItemFooterTemplate></li></ItemFooterTemplate>
 						<LevelFooterTemplate></ul></LevelFooterTemplate>
+						<FooterTemplate></ul></FooterTemplate>
 					</WebControls:Tree>
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-9">
 					<h1><asp:ContentPlaceHolder id="HeadingContentPlaceHolder" runat="server" /></h1>
 					<asp:ContentPlaceHolder id="MainContentPlaceHolder" runat="server" />	
 				</div>
