@@ -93,6 +93,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{6F7D
 		Targets\Configuration.Transformations.targets = Targets\Configuration.Transformations.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.MvcApplication", "Company-Web\Company.MvcApplication\Company.MvcApplication.csproj", "{045B57B3-8521-4B5D-A134-FC3327D3908D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Style", "Style", "{6B81724B-749E-45D2-AA38-76172697DC79}"
+	ProjectSection(SolutionItems) = preProject
+		Company-Web\Style\Company.css = Company-Web\Style\Company.css
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|Any CPU = Development|Any CPU
@@ -232,6 +239,12 @@ Global
 		{3B29910F-A594-446C-BE10-FF66B15406E2}.Production|Any CPU.Build.0 = Production|Any CPU
 		{3B29910F-A594-446C-BE10-FF66B15406E2}.Test|Any CPU.ActiveCfg = Test|Any CPU
 		{3B29910F-A594-446C-BE10-FF66B15406E2}.Test|Any CPU.Build.0 = Test|Any CPU
+		{045B57B3-8521-4B5D-A134-FC3327D3908D}.Development|Any CPU.ActiveCfg = Development|Any CPU
+		{045B57B3-8521-4B5D-A134-FC3327D3908D}.Development|Any CPU.Build.0 = Development|Any CPU
+		{045B57B3-8521-4B5D-A134-FC3327D3908D}.Production|Any CPU.ActiveCfg = Production|Any CPU
+		{045B57B3-8521-4B5D-A134-FC3327D3908D}.Production|Any CPU.Build.0 = Production|Any CPU
+		{045B57B3-8521-4B5D-A134-FC3327D3908D}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{045B57B3-8521-4B5D-A134-FC3327D3908D}.Test|Any CPU.Build.0 = Test|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -254,6 +267,8 @@ Global
 		{AD7C1E65-12FB-4070-B3FD-7B344CA797DA} = {C8D2AAF6-2C2B-440C-9FD6-ECD6EA5EBD0C}
 		{75CA39B9-850C-4D3B-B079-D1731DAF2881} = {C8D2AAF6-2C2B-440C-9FD6-ECD6EA5EBD0C}
 		{3B29910F-A594-446C-BE10-FF66B15406E2} = {C8D2AAF6-2C2B-440C-9FD6-ECD6EA5EBD0C}
+		{045B57B3-8521-4B5D-A134-FC3327D3908D} = {C8D2AAF6-2C2B-440C-9FD6-ECD6EA5EBD0C}
+		{6B81724B-749E-45D2-AA38-76172697DC79} = {C8D2AAF6-2C2B-440C-9FD6-ECD6EA5EBD0C}
 		{47F8B1CF-27FE-447F-8059-EC3519939472} = {DD1101BD-7F68-4812-92A8-E1F7EBCDBA07}
 		{452E4B5E-4BC1-4C0E-B280-50C1AC23F3B4} = {DD1101BD-7F68-4812-92A8-E1F7EBCDBA07}
 		{21DB2F4D-003F-4E10-8818-96A77C7F8981} = {DD1101BD-7F68-4812-92A8-E1F7EBCDBA07}

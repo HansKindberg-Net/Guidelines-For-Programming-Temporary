@@ -6,13 +6,19 @@
 		AfterTargets="PipelineCollectFilesPhase"
 		Condition="Exists('Web.Template.config')"
 	>
+		<ItemGroup>
+			<ConfigName Include="Web" />
+			<ConfigName Include="Views\Web" />
+		</ItemGroup>
 		<Message
+			Condition="Exists('%(ConfigName.Identity).Template.config')"
 			Importance="high"
-			Text="Copying Web.Template.config to Web.config."
+			Text="Copying %(ConfigName.Identity).Template.config to %(ConfigName.Identity).config."
 		/>
 		<Copy
-			DestinationFiles="Web.config"
-			SourceFiles="Web.Template.config"
+			Condition="Exists('%(ConfigName.Identity).Template.config')"
+			DestinationFiles="%(ConfigName.Identity).config"
+			SourceFiles="%(ConfigName.Identity).Template.config"
 		/>
 	</Target>
 	<!-- Before running the application we transform -->
@@ -22,6 +28,7 @@
 	>
 		<ItemGroup>
 			<ConfigName Include="Web" />
+			<ConfigName Include="Views\Web" />
 		</ItemGroup>
 		<Message
 			Condition="Exists('%(ConfigName.Identity).Template.config') AND Exists('%(ConfigName.Identity).$(Configuration).config')"

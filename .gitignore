@@ -9,7 +9,8 @@ testresults/
 *.suo
 *.user
 .nuget/NuGet.exe
-Company-Web/Company.MvpApplication/Web.config
 Company-Web/Company.MvcApplication/Web.config
+Company-Web/Company.MvcApplication/Views/Web.config
+Company-Web/Company.MvpApplication/Web.config
 
 !packages/repositories.config

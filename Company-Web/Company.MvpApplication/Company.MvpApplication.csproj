@@ -23,6 +23,7 @@
     <UseIISExpress>true</UseIISExpress>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Development|AnyCPU' ">
     <CodeAnalysisRuleSet>..\..\CodeAnalysis\Solution.ruleset</CodeAnalysisRuleSet>
@@ -75,9 +76,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebFormsMvp, Version=1.4.3.0, Culture=neutral, PublicKeyToken=537f18701145dff0, processorArchitecture=MSIL">
+    <Reference Include="WebFormsMvp, Version=1.4.5.0, Culture=neutral, PublicKeyToken=537f18701145dff0, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\WebFormsMvp.1.4.3.0\lib\WebFormsMvp.dll</HintPath>
+      <HintPath>..\..\packages\WebFormsMvp.1.4.5.0\lib\WebFormsMvp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +151,9 @@
     <Content Include="..\..\Signing\Company.snk">
       <Link>Company.snk</Link>
     </Content>
+    <Content Include="..\Style\Company.css">
+      <Link>Style\Company.css</Link>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Index.aspx" />
     <Content Include="packages.config" />
@@ -195,4 +199,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>XCOPY "$(SolutionDir)Company-Web\Style" "$(ProjectDir)Style" /S /Y</PreBuildEvent>
+  </PropertyGroup>
 </Project>
