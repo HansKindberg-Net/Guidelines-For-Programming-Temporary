@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 using Company.Collections.Generic;
+using Company.Web;
 
 namespace Company.MvpApplication.Business.Web.UI
 {

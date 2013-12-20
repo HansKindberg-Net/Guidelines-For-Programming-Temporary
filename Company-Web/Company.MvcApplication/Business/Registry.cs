@@ -1,6 +1,8 @@
-﻿using Company.MvpApplication.Business.Mvp.Models;
+﻿using System.Web.Mvc;
+using Company.MvcApplication.Business.Web.Mvc.Models;
+using DependencyResolver = Company.MvcApplication.Business.Web.Mvc.DependencyResolver;
 
-namespace Company.MvpApplication.Business
+namespace Company.MvcApplication.Business
 {
 	public abstract class Registry : StructureMap.Configuration.DSL.Registry
 	{
@@ -10,6 +12,7 @@ namespace Company.MvpApplication.Business
 		{
 			Company.IoC.StructureMap.Web.Registry.Register(this);
 
+			this.For<IDependencyResolver>().Use<DependencyResolver>();
 			this.For<IModelFactory>().Singleton().Use<ModelFactory>();
 		}
 

@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Company.MvcApplication.Business;
 using Company.MvcApplication.Business.Configuration;
 
 namespace Company.MvcApplication
@@ -13,6 +14,7 @@ namespace Company.MvcApplication
 		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
 		protected void Application_Start()
 		{
+			Bootstrapper.Bootstrap();
 			AreaRegistration.RegisterAllAreas();
 			FilterConfiguration.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfiguration.RegisterRoutes(RouteTable.Routes);

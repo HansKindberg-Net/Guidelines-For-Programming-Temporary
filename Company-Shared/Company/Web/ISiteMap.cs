@@ -1,6 +1,6 @@
-﻿using Company.Collections.Generic;
+using Company.Collections.Generic;
 
-namespace Company.MvpApplication.Business.Web
+namespace Company.Web
 {
 	public interface ISiteMap
 	{

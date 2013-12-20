@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Company.Collections.Generic.ITreeNode<Company.Web.ISiteMapNode>>
+@foreach(var siteMapNode in this.Model)
+{
+	if(siteMapNode.IsFirstSibling)
+	{
+		if(siteMapNode.Level == 1)
+		{
+			@:<ul class="navigation">
+		}
+		else
+		{
+			@:<ul>
+		}
+	}
+
+	<li><a href="@siteMapNode.Value.Url">@siteMapNode.Value.Title</a></li>
+
+	if(siteMapNode.IsLastSibling)
+	{
+		@:</ul>
+	}
+}

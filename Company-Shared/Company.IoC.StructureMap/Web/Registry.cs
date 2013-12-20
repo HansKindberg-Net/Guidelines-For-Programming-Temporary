@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Web;
 using System.Web.SessionState;
+using Company.Collections.Generic;
+using Company.Web;
 using StructureMap.Configuration.DSL;
 
 namespace Company.IoC.StructureMap.Web
@@ -36,6 +38,9 @@ namespace Company.IoC.StructureMap.Web
 			registry.For<HttpServerUtilityBase>().HybridHttpOrThreadLocalScoped().Use<HttpServerUtilityWrapper>();
 			registry.For<HttpSessionState>().HybridHttpOrThreadLocalScoped().Use(() => HttpContext.Current.Session);
 			registry.For<HttpSessionStateBase>().HybridHttpOrThreadLocalScoped().Use<HttpSessionStateWrapper>();
+
+			registry.For<ISiteMap>().Singleton().Use<SiteMapWrapper>();
+			registry.For<ITreeFactory<ISiteMapNode>>().Singleton().Use<TreeFactory<ISiteMapNode>>();
 		}
 
 		#endregion

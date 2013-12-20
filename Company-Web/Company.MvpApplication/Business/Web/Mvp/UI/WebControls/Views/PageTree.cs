@@ -3,6 +3,7 @@ using System.Web.UI;
 using Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Models;
 using Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Presenters;
 using Company.MvpApplication.Business.Web.UI;
+using Company.Web;
 using WebFormsMvp;
 
 namespace Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Views

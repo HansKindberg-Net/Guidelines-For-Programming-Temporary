@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Web;
 
-namespace Company.MvpApplication.Business.Web
+namespace Company.Web
 {
 	public class SiteMapNodeWrapper : ISiteMapNode
 	{
@@ -49,9 +49,29 @@ namespace Company.MvpApplication.Business.Web
 
 		#region Methods
 
+		protected internal virtual bool Equals(SiteMapNodeWrapper siteMapNodeWrapper)
+		{
+			if(siteMapNodeWrapper == null)
+				return false;
+
+			return ReferenceEquals(this, siteMapNodeWrapper) || Equals(this.SiteMapNode, siteMapNodeWrapper.SiteMapNode);
+		}
+
+		public override bool Equals(object obj)
+		{
+			SiteMapNodeWrapper siteMapNodeWrapper = obj as SiteMapNodeWrapper;
+
+			return obj != null && this.Equals(siteMapNodeWrapper);
+		}
+
 		public static SiteMapNodeWrapper FromSiteMapNode(SiteMapNode siteMapNode)
 		{
 			return siteMapNode;
+		}
+
+		public override int GetHashCode()
+		{
+			return this.SiteMapNode.GetHashCode();
 		}
 
 		#endregion

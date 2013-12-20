@@ -1,6 +1,6 @@
 ﻿using System;
 using Company.Collections.Generic;
-using Company.MvpApplication.Business.Web;
+using Company.Web;
 
 namespace Company.MvpApplication.Models
 {

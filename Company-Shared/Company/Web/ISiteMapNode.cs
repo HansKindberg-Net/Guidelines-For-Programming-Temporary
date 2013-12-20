@@ -1,6 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 
-namespace Company.MvpApplication.Business.Web
+namespace Company.Web
 {
 	public interface ISiteMapNode
 	{

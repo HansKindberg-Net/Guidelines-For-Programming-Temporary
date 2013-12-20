@@ -65,6 +65,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\IValidationResult.cs" />
     <Compile Include="Validation\ValidationResult.cs" />
+    <Compile Include="Web\ISiteMap.cs" />
+    <Compile Include="Web\ISiteMapNode.cs" />
+    <Compile Include="Web\SiteMapNodeWrapper.cs" />
+    <Compile Include="Web\SiteMapWrapper.cs" />
     <Compile Include="Web\UI\Extensions\HierarchyDataExtension.cs" />
   </ItemGroup>
   <ItemGroup>

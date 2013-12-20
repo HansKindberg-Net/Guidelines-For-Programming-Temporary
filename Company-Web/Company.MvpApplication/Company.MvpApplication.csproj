@@ -100,8 +100,6 @@
     <Compile Include="Business\Mvp\Presenters\Presenter.cs" />
     <Compile Include="Business\Mvp\Views\IView.cs" />
     <Compile Include="Business\Registry.cs" />
-    <Compile Include="Business\Web\ISiteMap.cs" />
-    <Compile Include="Business\Web\ISiteMapNode.cs" />
     <Compile Include="Business\Web\Mvp\UI\Views\Control.cs" />
     <Compile Include="Business\Web\Mvp\UI\Views\MasterPage.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -120,8 +118,6 @@
     <Compile Include="Business\Web\Mvp\UI\WebControls\Views\ITreeView.cs" />
     <Compile Include="Business\Web\Mvp\UI\WebControls\Views\PageTree.cs" />
     <Compile Include="Business\Web\Mvp\UI\WebControls\Views\TreeView.cs" />
-    <Compile Include="Business\Web\SiteMapNodeWrapper.cs" />
-    <Compile Include="Business\Web\SiteMapWrapper.cs" />
     <Compile Include="Business\Web\UI\PageTreeNodeContainer.cs" />
     <Compile Include="CodeAnalysis\AssemblySuppressions.cs" />
     <Compile Include="Global.asax.cs">

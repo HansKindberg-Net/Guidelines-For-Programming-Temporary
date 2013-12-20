@@ -4,6 +4,7 @@ using Company.MvpApplication.Business.Mvp.Models;
 using Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Models;
 using Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Views;
 using Company.MvpApplication.Business.Web.UI;
+using Company.Web;
 
 namespace Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Presenters
 {

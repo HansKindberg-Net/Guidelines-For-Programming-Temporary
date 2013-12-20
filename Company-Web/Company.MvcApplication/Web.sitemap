@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="~/" title="Home"  description="The startpage of the application.">
+        <siteMapNode url="~/Index.aspx" title="Email-form" description="An email-form example." />
+		<siteMapNode url="~/Index.aspx?index=1" title="Email-form 1" description="An email-form example." />
+		<siteMapNode url="~/Index.aspx?index=2" title="Email-form 2" description="An email-form example." />
+		<siteMapNode url="~/Index.aspx?index=3" title="Email-form 3">
+			<siteMapNode url="~/Index.aspx?index=31" title="Email-form 3.1" />
+			<siteMapNode url="~/Index.aspx?index=32" title="Email-form 3.2">
+				<siteMapNode url="~/Index.aspx?index=321" title="Email-form 3.2.1" />
+				<siteMapNode url="~/Index.aspx?index=322" title="Email-form 3.2.2" />
+			</siteMapNode>
+		</siteMapNode>
+    </siteMapNode>
+</siteMap>

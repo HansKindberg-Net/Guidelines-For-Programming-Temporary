@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Web;
 using Company.Collections.Generic;
 
-namespace Company.MvpApplication.Business.Web
+namespace Company.Web
 {
 	public class SiteMapWrapper : ISiteMap
 	{
@@ -37,7 +37,9 @@ namespace Company.MvpApplication.Business.Web
 
 				ITreeNode<ISiteMapNode> rootNode = this.RootNode;
 
-				return Equals(SiteMap.CurrentNode, SiteMap.RootNode) ? rootNode : rootNode.Descendants.FirstOrDefault(treeNode => treeNode.Value.Url.Equals(SiteMap.CurrentNode.Url));
+				// ReSharper disable SuspiciousTypeConversion.Global
+				return Equals(SiteMap.CurrentNode, SiteMap.RootNode) ? rootNode : rootNode.Descendants.FirstOrDefault(treeNode => treeNode.Value.Equals((SiteMapNodeWrapper) SiteMap.CurrentNode));
+				// ReSharper restore SuspiciousTypeConversion.Global
 			}
 		}
 
