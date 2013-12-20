@@ -180,7 +180,7 @@
   <Import Condition="'$(VSToolsPath)' != ''" Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" />
   <Import Condition="false" Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <Import Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" Project="$(SolutionDir)\.nuget\NuGet.targets" />
-  <Import Condition="Exists('$(SolutionDir)\Targets\Configuration.Transformations.targets')" Project="$(SolutionDir)\Targets\Configuration.Transformations.targets" />
+  <Import Condition="Exists('$(SolutionDir)\Targets\Web\Configuration.Transformations.targets')" Project="$(SolutionDir)\Targets\Web\Configuration.Transformations.targets" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">

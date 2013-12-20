@@ -184,7 +184,7 @@
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Import Condition="Exists('$(SolutionDir)\Targets\Configuration.Transformations.targets')" Project="$(SolutionDir)\Targets\Configuration.Transformations.targets" />
+  <Import Condition="Exists('$(SolutionDir)\Targets\Web\Configuration.Transformations.targets')" Project="$(SolutionDir)\Targets\Web\Configuration.Transformations.targets" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
   </Target>
