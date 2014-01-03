@@ -24,6 +24,7 @@ namespace Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Views
 		ControlCollection Controls { get; }
 		ITreeNode<T> Current { get; }
 		bool DataBindAutomatically { get; }
+		bool ExpandAllNodes { get; }
 		ITemplate FooterTemplate { get; }
 		ITemplate HeaderTemplate { get; }
 		bool IncludeRoot { get; }

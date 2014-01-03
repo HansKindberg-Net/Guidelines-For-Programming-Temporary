@@ -28,7 +28,7 @@
 		<div class="container">
 			<div class="jumbotron row">
 				<div class="col-md-3 padding-0">
-					<WebControls:SiteMapNodeTree Current="<%# this.Model.CurrentPageTreeNode %>" DataBindAutomatically="true" IncludeRoot="false" Root="<%# this.Model.PageTreeRoot %>" runat="server">
+					<WebControls:SiteMapNodeTree Current="<%# this.Model.CurrentPageTreeNode %>" DataBindAutomatically="true" ExpandAllNodes="false" IncludeRoot="false" Root="<%# this.Model.PageTreeRoot %>" runat="server">
 						<HeaderTemplate><ul class="navigation"></HeaderTemplate>
 						<LevelHeaderTemplate><ul></LevelHeaderTemplate>
 						<SelectedItemHeaderTemplate><li class="selected"></SelectedItemHeaderTemplate>

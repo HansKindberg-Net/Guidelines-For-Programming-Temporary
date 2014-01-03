@@ -1,5 +1,6 @@
 ﻿using System.Web.UI;
 using Company.Collections.Generic;
+using Company.Collections.Generic.Traversing;
 using Company.MvpApplication.Business.Mvp.Models;
 using Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Models;
 using Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Views;
@@ -12,7 +13,7 @@ namespace Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Presenters
 	{
 		#region Constructors
 
-		public SiteMapNodeTreePresenter(ISiteMapNodeTree view, IModelFactory modelFactory) : base(view, modelFactory) {}
+		public SiteMapNodeTreePresenter(ISiteMapNodeTree view, IModelFactory modelFactory, ITreeTraverserFactory<ISiteMapNode> treeTraverserFactory) : base(view, modelFactory, treeTraverserFactory) {}
 
 		#endregion
 

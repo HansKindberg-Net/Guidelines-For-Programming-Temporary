@@ -14,6 +14,7 @@ namespace Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Views
 		private const string _currentViewStateName = "Current";
 		private const string _dataBindAutomaticallyViewStateName = "DataBindAutomatically";
 		private const string _dataCategory = "Data";
+		private const string _expandAllNodesViewStateName = "ExpandAllNodes";
 		private const string _includeRootViewStateName = "IncludeRoot";
 		private const string _informationCategory = "Information";
 		private const string _numberOfLevelsViewStateName = "NumberOfLevels";
@@ -48,6 +49,17 @@ namespace Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Views
 			{
 				this.ViewState[_dataBindAutomaticallyViewStateName] = value;
 				this.OnPropertyChanged(_dataBindAutomaticallyViewStateName);
+			}
+		}
+
+		[Bindable(true), Category(_informationCategory), DefaultValue(true)]
+		public virtual bool ExpandAllNodes
+		{
+			get { return ((bool?) this.ViewState[_expandAllNodesViewStateName] ?? true as bool?).Value; }
+			set
+			{
+				this.ViewState[_expandAllNodesViewStateName] = value;
+				this.OnPropertyChanged(_expandAllNodesViewStateName);
 			}
 		}
 
