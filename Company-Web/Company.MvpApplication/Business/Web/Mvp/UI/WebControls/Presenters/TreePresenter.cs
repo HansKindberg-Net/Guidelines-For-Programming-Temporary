@@ -38,10 +38,6 @@ namespace Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Presenters
 
 		#endregion
 
-		#region Eventhandlers
-
-		#endregion
-
 		#region Properties
 
 		protected internal virtual bool EnsureChildControls { get; set; }
@@ -70,47 +66,6 @@ namespace Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Presenters
 			this.View.Controls.Add(container);
 		}
 
-		//[SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-		//[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-		//protected internal virtual void CreateChildControls(IEnumerable<ITreeNode<T>> items, int level)
-		//{
-		//	if(items == null)
-		//		throw new ArgumentNullException("items");
-		//	if(level < 0 || level == int.MaxValue)
-		//		throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "The level must be between 0 and {0}.", int.MaxValue - 1));
-		//	// ReSharper disable PossibleMultipleEnumeration
-		//	if(!items.Any())
-		//		return;
-		//	if(!this.IncludeLevel(level))
-		//		return;
-		//	if(level == 0 && this.View.HeaderTemplate != null)
-		//		this.AddTemplate(this.CreateTreeNodeContainer(items.First()), this.View.HeaderTemplate);
-		//	else if(this.View.LevelHeaderTemplate != null)
-		//		this.AddTemplate(this.CreateTreeNodeContainer(items.First()), this.View.LevelHeaderTemplate);
-		//	foreach(var item in items)
-		//	{
-		//		if(item.Equals(this.View.Current) && this.View.SelectedItemHeaderTemplate != null)
-		//			this.AddTemplate(this.CreateTreeNodeContainer(item), this.View.SelectedItemHeaderTemplate);
-		//		else if(this.View.SelectedAncestorHeaderTemplate != null && this.View.Current != null && this.View.Current.Ancestors.Contains(item))
-		//			this.AddTemplate(this.CreateTreeNodeContainer(item), this.View.SelectedAncestorHeaderTemplate);
-		//		else if(this.View.ItemHeaderTemplate != null)
-		//			this.AddTemplate(this.CreateTreeNodeContainer(item), this.View.ItemHeaderTemplate);
-		//		if(item.Equals(this.View.Current) && this.View.SelectedItemTemplate != null)
-		//			this.AddTemplate(this.CreateTreeNodeContainer(item), this.View.SelectedItemTemplate);
-		//		else if(this.View.SelectedAncestorTemplate != null && this.View.Current != null && this.View.Current.Ancestors.Contains(item))
-		//			this.AddTemplate(this.CreateTreeNodeContainer(item), this.View.SelectedAncestorTemplate);
-		//		else if(this.View.ItemTemplate != null)
-		//			this.AddTemplate(this.CreateTreeNodeContainer(item), this.View.ItemTemplate);
-		//		this.CreateChildControls(item.Children, level + 1);
-		//		if(this.View.ItemFooterTemplate != null)
-		//			this.AddTemplate(this.CreateTreeNodeContainer(item), this.View.ItemFooterTemplate);
-		//	}
-		//	if(level == 0 && this.View.FooterTemplate != null)
-		//		this.AddTemplate(this.CreateTreeNodeContainer(items.Last()), this.View.FooterTemplate);
-		//	else if(this.View.LevelFooterTemplate != null)
-		//		this.AddTemplate(this.CreateTreeNodeContainer(items.Last()), this.View.LevelFooterTemplate);
-		//	// ReSharper restore PossibleMultipleEnumeration
-		//}
 		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		protected internal virtual void CreateChildControls(ITreeNode<T> rootNode)
 		{
@@ -162,11 +117,6 @@ namespace Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Presenters
 
 		#region Eventhandlers
 
-		//protected internal virtual void OnViewCreatingChildControls(CancelEventArgs e)
-		//{
-		//	if(this.View.Root != null)
-		//		this.CreateChildControls(this.View.IncludeRoot ? new[] {this.View.Root} : (IEnumerable<ITreeNode<T>>) this.View.Root.Children, 0);
-		//}
 		protected internal virtual void OnViewCreatingChildControls(CancelEventArgs e)
 		{
 			if(this.View.Root != null)
