@@ -18,14 +18,16 @@
 	{
 		@:<li>
 	}
-	
+
 	if(siteMapNode.IsSelectedItem)
 	{
-		<a href="@siteMapNode.TreeNode.Value.Url" title="@siteMapNode.TreeNode.Value.Description">@siteMapNode.TreeNode.Value.Title</a><span class="glyphicon glyphicon-arrow-right"></span>
+		<a href="@siteMapNode.TreeNode.Value.Url" title="@siteMapNode.TreeNode.Value.Description">@siteMapNode.TreeNode.Value.Title</a>
+		<span class="glyphicon glyphicon-arrow-right"></span>
 	}
 	else if(siteMapNode.IsSelectedAncestor)
 	{
-		<a href="@siteMapNode.TreeNode.Value.Url" title="@siteMapNode.TreeNode.Value.Description">@siteMapNode.TreeNode.Value.Title</a><span class="glyphicon glyphicon-arrow-down"></span>
+		<a href="@siteMapNode.TreeNode.Value.Url" title="@siteMapNode.TreeNode.Value.Description">@siteMapNode.TreeNode.Value.Title</a>
+		<span class="glyphicon glyphicon-arrow-down"></span>
 	}
 	else if(siteMapNode.IsItem)
 	{

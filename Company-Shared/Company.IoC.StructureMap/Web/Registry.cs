@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web;
 using System.Web.SessionState;
-using Company.Collections.Generic;
 using Company.Web;
 using StructureMap.Configuration.DSL;
 
