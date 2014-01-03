@@ -1,14 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
     <siteMapNode url="~/" title="Home"  description="The startpage of the application.">
-        <siteMapNode url="~/Index.aspx" title="Email-form" description="An email-form example." />
-		<siteMapNode url="~/Index.aspx?index=1" title="Email-form 1" description="An email-form example." />
-		<siteMapNode url="~/Index.aspx?index=2" title="Email-form 2" description="An email-form example." />
-		<siteMapNode url="~/Index.aspx?index=3" title="Email-form 3">
-			<siteMapNode url="~/Index.aspx?index=31" title="Email-form 3.1" />
-			<siteMapNode url="~/Index.aspx?index=32" title="Email-form 3.2">
-				<siteMapNode url="~/Index.aspx?index=321" title="Email-form 3.2.1" />
-				<siteMapNode url="~/Index.aspx?index=322" title="Email-form 3.2.2" />
+        <siteMapNode url="~/?index=1" title="Home 1" description="An example." />
+		<siteMapNode url="~/?index=2" title="Home 2" description="An example.">
+			<siteMapNode url="~/?index=21" title="Home 2.1">
+				<siteMapNode url="~/?index=211" title="Home 2.1.1" />
+				<siteMapNode url="~/?index=212" title="Home 2.1.2" />
+				<siteMapNode url="~/?index=213" title="Home 2.1.3" />
+			</siteMapNode>
+			<siteMapNode url="~/?index=22" title="Home 2.2">
+				<siteMapNode url="~/?index=221" title="Home 2.2.1" />
+				<siteMapNode url="~/?index=222" title="Home 2.2.2" />
+			</siteMapNode>
+		</siteMapNode>
+		<siteMapNode url="~/?index=3" title="Home 3" description="An example." />
+		<siteMapNode url="~/?index=4" title="Home 4">
+			<siteMapNode url="~/?index=41" title="Home 4.1" />
+			<siteMapNode url="~/?index=42" title="Home 4.2">
+				<siteMapNode url="~/?index=421" title="Home 4.2.1" />
+				<siteMapNode url="~/?index=422" title="Home 4.2.2" />
 			</siteMapNode>
 		</siteMapNode>
     </siteMapNode>
