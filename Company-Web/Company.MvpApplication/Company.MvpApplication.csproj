@@ -110,13 +110,13 @@
     <Compile Include="Business\Web\Mvp\UI\Views\UserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Business\Web\Mvp\UI\WebControls\Models\PageTreeModel.cs" />
+    <Compile Include="Business\Web\Mvp\UI\WebControls\Models\SiteMapNodeTreeModel.cs" />
     <Compile Include="Business\Web\Mvp\UI\WebControls\Models\TreeModel.cs" />
-    <Compile Include="Business\Web\Mvp\UI\WebControls\Presenters\PageTreePresenter.cs" />
+    <Compile Include="Business\Web\Mvp\UI\WebControls\Presenters\SiteMapNodeTreePresenter.cs" />
     <Compile Include="Business\Web\Mvp\UI\WebControls\Presenters\TreePresenter.cs" />
-    <Compile Include="Business\Web\Mvp\UI\WebControls\Views\IPageTree.cs" />
+    <Compile Include="Business\Web\Mvp\UI\WebControls\Views\ISiteMapNodeTree.cs" />
     <Compile Include="Business\Web\Mvp\UI\WebControls\Views\ITreeView.cs" />
-    <Compile Include="Business\Web\Mvp\UI\WebControls\Views\PageTree.cs" />
+    <Compile Include="Business\Web\Mvp\UI\WebControls\Views\SiteMapNodeTree.cs" />
     <Compile Include="Business\Web\Mvp\UI\WebControls\Views\TreeView.cs" />
     <Compile Include="Business\Web\UI\PageTreeNodeContainer.cs" />
     <Compile Include="CodeAnalysis\AssemblySuppressions.cs" />

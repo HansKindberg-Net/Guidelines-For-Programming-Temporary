@@ -4,7 +4,7 @@
 	{
 		#region Constructors
 
-		public HomeModel(NavigationModel navigationModel) : base(navigationModel) {}
+		public HomeModel(LayoutModel layoutModel) : base(layoutModel) {}
 
 		#endregion
 	}

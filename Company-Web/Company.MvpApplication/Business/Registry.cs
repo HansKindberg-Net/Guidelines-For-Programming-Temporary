@@ -1,4 +1,6 @@
-﻿using Company.MvpApplication.Business.Mvp.Models;
+﻿using Company.Collections.Generic;
+using Company.MvpApplication.Business.Mvp.Models;
+using Company.Web;
 
 namespace Company.MvpApplication.Business
 {
@@ -11,6 +13,7 @@ namespace Company.MvpApplication.Business
 			Company.IoC.StructureMap.Web.Registry.Register(this);
 
 			this.For<IModelFactory>().Singleton().Use<ModelFactory>();
+			this.For<ITreeFactory<ISiteMapNode>>().Singleton().Use<TreeFactory<ISiteMapNode>>();
 		}
 
 		#endregion

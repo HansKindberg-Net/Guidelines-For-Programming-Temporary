@@ -8,11 +8,11 @@ using Company.Web;
 
 namespace Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Presenters
 {
-	public class PageTreePresenter : TreePresenter<IPageTree, PageTreeModel, ISiteMapNode>
+	public class SiteMapNodeTreePresenter : TreePresenter<ISiteMapNodeTree, SiteMapNodeTreeModel, ISiteMapNode>
 	{
 		#region Constructors
 
-		public PageTreePresenter(IPageTree view, IModelFactory modelFactory) : base(view, modelFactory) {}
+		public SiteMapNodeTreePresenter(ISiteMapNodeTree view, IModelFactory modelFactory) : base(view, modelFactory) {}
 
 		#endregion
 

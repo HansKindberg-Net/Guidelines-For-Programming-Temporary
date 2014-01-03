@@ -1,21 +1,43 @@
-﻿@model IEnumerable<Company.Collections.Generic.ITreeNode<Company.Web.ISiteMapNode>>
-@foreach(var siteMapNode in this.Model)
+﻿@model Company.MvcApplication.Models.LayoutModel
+@foreach(var siteMapNode in this.Model.GetSiteMapNodes(false, null, true))
 {
-	if(siteMapNode.IsFirstSibling)
+	if(siteMapNode.IsHeader)
 	{
-		if(siteMapNode.Level == 1)
-		{
-			@:<ul class="navigation">
-		}
-		else
-		{
-			@:<ul>
-		}
+		@:<ul class="navigation">
+	}
+	else if(siteMapNode.IsLevelHeader)
+	{
+		@:<ul>
 	}
 
-	<li><a href="@siteMapNode.Value.Url">@siteMapNode.Value.Title</a></li>
+	if(siteMapNode.IsSelectedHeader)
+	{
+		@:<li class="selected">
+	}
+	else if(siteMapNode.IsItemHeader)
+	{
+		@:<li>
+	}
+	
+	if(siteMapNode.IsSelectedItem)
+	{
+		<a href="@siteMapNode.TreeNode.Value.Url" title="@siteMapNode.TreeNode.Value.Description">@siteMapNode.TreeNode.Value.Title</a><span class="glyphicon glyphicon-arrow-right"></span>
+	}
+	else if(siteMapNode.IsSelectedAncestor)
+	{
+		<a href="@siteMapNode.TreeNode.Value.Url" title="@siteMapNode.TreeNode.Value.Description">@siteMapNode.TreeNode.Value.Title</a><span class="glyphicon glyphicon-arrow-down"></span>
+	}
+	else if(siteMapNode.IsItem)
+	{
+		<a href="@siteMapNode.TreeNode.Value.Url" title="@siteMapNode.TreeNode.Value.Description">@siteMapNode.TreeNode.Value.Title</a>
+	}
 
-	if(siteMapNode.IsLastSibling)
+	if(siteMapNode.IsItemFooter)
+	{
+		@:</li>
+	}
+
+	if(siteMapNode.IsLevelFooter)
 	{
 		@:</ul>
 	}

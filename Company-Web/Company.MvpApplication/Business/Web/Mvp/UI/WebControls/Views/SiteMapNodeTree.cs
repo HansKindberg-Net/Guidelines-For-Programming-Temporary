@@ -8,8 +8,8 @@ using WebFormsMvp;
 
 namespace Company.MvpApplication.Business.Web.Mvp.UI.WebControls.Views
 {
-	[PresenterBinding(typeof(PageTreePresenter))]
-	public class PageTree : TreeView<PageTreeModel, ISiteMapNode>, IPageTree
+	[PresenterBinding(typeof(SiteMapNodeTreePresenter))]
+	public class SiteMapNodeTree : TreeView<SiteMapNodeTreeModel, ISiteMapNode>, ISiteMapNodeTree
 	{
 		#region Properties
 

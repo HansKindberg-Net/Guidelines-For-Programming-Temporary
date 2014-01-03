@@ -55,6 +55,12 @@
     <Compile Include="Collections\Generic\ITreeFactory.cs" />
     <Compile Include="Collections\Generic\ITreeNode.cs" />
     <Compile Include="Collections\Generic\ITreeNodeCollection.cs" />
+    <Compile Include="Collections\Generic\Traversing\ITreeTraverserFactory.cs" />
+    <Compile Include="Collections\Generic\Traversing\ITreeTraversingNode.cs" />
+    <Compile Include="Collections\Generic\Traversing\TreeTraverserFactory.cs" />
+    <Compile Include="Collections\Generic\Traversing\TreeTraversingItemNode.cs" />
+    <Compile Include="Collections\Generic\Traversing\TreeTraversingMetadataNode.cs" />
+    <Compile Include="Collections\Generic\Traversing\TreeTraversingNode.cs" />
     <Compile Include="Collections\Generic\TreeFactory.cs" />
     <Compile Include="Collections\Generic\TreeNode.cs" />
     <Compile Include="Collections\Generic\TreeNodeCollection.cs" />

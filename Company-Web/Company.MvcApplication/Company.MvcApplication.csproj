@@ -130,7 +130,7 @@
     </Compile>
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\SiteModel.cs" />
-    <Compile Include="Models\NavigationModel.cs" />
+    <Compile Include="Models\LayoutModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <CodeAnalysisDictionary Include="..\..\CodeAnalysis\SolutionDictionary.xml">
       <Link>CodeAnalysis\SolutionDictionary.xml</Link>

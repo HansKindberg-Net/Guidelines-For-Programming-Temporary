@@ -6,27 +6,27 @@ namespace Company.MvcApplication.Models
 	{
 		#region Fields
 
-		private readonly NavigationModel _navigationModel;
+		private readonly LayoutModel _layoutModel;
 
 		#endregion
 
 		#region Constructors
 
-		protected SiteModel(NavigationModel navigationModel)
+		protected SiteModel(LayoutModel layoutModel)
 		{
-			if(navigationModel == null)
-				throw new ArgumentNullException("navigationModel");
+			if(layoutModel == null)
+				throw new ArgumentNullException("layoutModel");
 
-			this._navigationModel = navigationModel;
+			this._layoutModel = layoutModel;
 		}
 
 		#endregion
 
 		#region Properties
 
-		public virtual NavigationModel NavigationModel
+		public virtual LayoutModel LayoutModel
 		{
-			get { return this._navigationModel; }
+			get { return this._layoutModel; }
 		}
 
 		#endregion

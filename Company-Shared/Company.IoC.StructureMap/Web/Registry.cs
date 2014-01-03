@@ -40,7 +40,6 @@ namespace Company.IoC.StructureMap.Web
 			registry.For<HttpSessionStateBase>().HybridHttpOrThreadLocalScoped().Use<HttpSessionStateWrapper>();
 
 			registry.For<ISiteMap>().Singleton().Use<SiteMapWrapper>();
-			registry.For<ITreeFactory<ISiteMapNode>>().Singleton().Use<TreeFactory<ISiteMapNode>>();
 		}
 
 		#endregion

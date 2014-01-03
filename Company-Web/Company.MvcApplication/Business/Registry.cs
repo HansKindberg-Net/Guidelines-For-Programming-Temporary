@@ -1,5 +1,8 @@
 ﻿using System.Web.Mvc;
+using Company.Collections.Generic;
+using Company.Collections.Generic.Traversing;
 using Company.MvcApplication.Business.Web.Mvc.Models;
+using Company.Web;
 using DependencyResolver = Company.MvcApplication.Business.Web.Mvc.DependencyResolver;
 
 namespace Company.MvcApplication.Business
@@ -14,6 +17,8 @@ namespace Company.MvcApplication.Business
 
 			this.For<IDependencyResolver>().Use<DependencyResolver>();
 			this.For<IModelFactory>().Singleton().Use<ModelFactory>();
+			this.For<ITreeFactory<ISiteMapNode>>().Singleton().Use<TreeFactory<ISiteMapNode>>();
+			this.For<ITreeTraverserFactory<ISiteMapNode>>().Singleton().Use<TreeTraverserFactory<ISiteMapNode>>();
 		}
 
 		#endregion
