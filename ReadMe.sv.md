@@ -72,8 +72,12 @@ För att kunna enhetstesta en metod i en klass som har ett beroende till en annan
 
 Mitt sätt att se det: [**Inversion of control**](http://en.wikipedia.org/wiki/Inversion_of_control) är en teknik man kan använda för att hantera [**Dependency injection**](http://en.wikipedia.org/wiki/Dependency_injection).
 
-Kortfattat innebär det att man inte hårdkodar ett beroende till en annan klass utan man gör det möjligt att styra beroendet under körning. Martin Fowler har skrivit en artikel som behandlar detta område, [**Inversion of Control Containers and the Dependency Injection pattern**](http://martinfowler.com/articles/injection.html#ServiceLocatorVsDependencyInjection).
+Kortfattat innebär det att man inte hårdkodar ett beroende till en annan klass utan man gör det möjligt att styra beroendet under körning. Martin Fowler har skrivit en artikel som behandlar detta område, [**Inversion of Control Containers and the Dependency Injection pattern**](http://martinfowler.com/articles/injection.html#ServiceLocatorVsDependencyInjection). Martin Fowler skriver också om fördelar/nackdelar med att använda respektive teknik/metod för att hantera beroenden:
+- [Inversion of Control Containers and the Dependency Injection pattern - **Deciding which option to use**](http://martinfowler.com/articles/injection.html#DecidingWhichOptionToUse)
+- [Inversion of Control Containers and the Dependency Injection pattern - **Service Locator vs Dependency Injection**](http://martinfowler.com/articles/injection.html#ServiceLocatorVsDependencyInjection)
+- [Inversion of Control Containers and the Dependency Injection pattern - **Constructor versus Setter Injection**](http://martinfowler.com/articles/injection.html#ConstructorVersusSetterInjection)
 
+Den teknik/metod som förespråkas mest är **Constructor Injection** vilket innebär att beroenden anges i konstruktorn för en klass. Det går alltså inte att instansiera klassen utan att ange dess beroenden. Detta är anledningen till att denna teknik/metod förespråkas, det blir tydligt för programmerare att en klass har beroenden.
 
 
 

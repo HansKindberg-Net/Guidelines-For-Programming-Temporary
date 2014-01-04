@@ -69,6 +69,7 @@
     <Compile Include="IoC\ServiceLocator.cs" />
     <Compile Include="Net\Mail\EmailAddressValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemInformationType.cs" />
     <Compile Include="Validation\IValidationResult.cs" />
     <Compile Include="Validation\ValidationResult.cs" />
     <Compile Include="Web\ISiteMap.cs" />

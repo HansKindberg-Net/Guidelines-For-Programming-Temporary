@@ -28,9 +28,9 @@
 			</div>
 		</div>
 		<div class="container">
-			<div class="jumbotron row">
+			<div class="content row">
 				<div class="col-md-3 padding-0">
-					<WebControls:Tree Current="<%# SiteMap.CurrentNode %>" DataBindAutomatically="true" IncludeRoot="false" Root="<%# SiteMap.Enabled && SiteMap.Provider != null ? SiteMap.Provider.RootNode : null %>" runat="server">
+					<WebControls:Tree Current="<%# SiteMap.CurrentNode %>" DataBindAutomatically="true" EnableViewState="false" IncludeRoot="false" Root="<%# SiteMap.Enabled && SiteMap.Provider != null ? SiteMap.Provider.RootNode : null %>" runat="server">
 						<HeaderTemplate><ul class="navigation"></HeaderTemplate>
 						<LevelHeaderTemplate><ul></LevelHeaderTemplate>
 						<SelectedItemHeaderTemplate><li class="selected"></SelectedItemHeaderTemplate>

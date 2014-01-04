@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Company.WebApplication.Pages
+namespace Company.WebApplication.Pages.HardToTest
 {
 
 
-	public partial class EmailForm
+	public partial class Default
 	{
 	}
 }
