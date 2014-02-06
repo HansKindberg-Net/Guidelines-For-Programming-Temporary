@@ -2,6 +2,7 @@
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
     <siteMapNode url="~/" title="Home"  description="The startpage of the application.">
 		<siteMapNode url="~/Pages/HardToTest/Default.aspx" title="Hard to test" description="Examples of code that is hard to test.">
+			<siteMapNode url="~/Pages/HardToTest/Database.aspx" title="Database" description="A page with database-interaction that is hard to test." />
 			<siteMapNode url="~/Pages/HardToTest/EmailForm.aspx" title="Email-form" description="An email-form example that is hard to test." />
 		</siteMapNode>
     </siteMapNode>

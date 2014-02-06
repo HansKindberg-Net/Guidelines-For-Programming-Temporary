@@ -41,8 +41,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\CodeAnalysis\SolutionSuppressions.cs">
@@ -64,6 +67,12 @@
     <Compile Include="Collections\Generic\TreeFactory.cs" />
     <Compile Include="Collections\Generic\TreeNode.cs" />
     <Compile Include="Collections\Generic\TreeNodeCollection.cs" />
+    <Compile Include="Data\Common\DbProviderFactoriesWrapper.cs" />
+    <Compile Include="Data\Common\IDatabaseProviderFactoryRepository.cs" />
+    <Compile Include="Data\Databases\ExampleDatabase.cs" />
+    <Compile Include="Data\Entities\ExampleItem.cs" />
+    <Compile Include="Data\Entities\IExampleItem.cs" />
+    <Compile Include="Data\Repositories\IExampleRepository.cs" />
     <Compile Include="IoC\DefaultServiceLocator.cs" />
     <Compile Include="IoC\IServiceLocator.cs" />
     <Compile Include="IoC\ServiceLocator.cs" />

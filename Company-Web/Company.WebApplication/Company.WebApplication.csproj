@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +43,9 @@
     <CodeAnalysisRuleSet>..\..\CodeAnalysis\Solution.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap">
+      <HintPath>..\..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -61,6 +65,9 @@
       <Link>Style\Company.css</Link>
     </Content>
     <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="MailBox\ReadMe.txt" />
+    <Content Include="Pages\HardToTest\Database.aspx" />
     <Content Include="Pages\HardToTest\Default.aspx" />
     <Content Include="Pages\HardToTest\EmailForm.aspx" />
     <Content Include="UserControls\SystemInformation.ascx" />
@@ -73,6 +80,12 @@
     <Compile Include="..\..\Properties\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Business\Bootstrapper.cs" />
+    <Compile Include="Business\Data\Databases\ExampleDatabase.cs" />
+    <Compile Include="Business\Registry.cs" />
+    <Compile Include="Business\Web\UI\Page.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Business\Web\UI\WebControls\Tree.cs" />
     <Compile Include="Business\Web\UI\WebControls\HierarchyDataContainer.cs" />
     <Compile Include="CodeAnalysis\AssemblySuppressions.cs" />
@@ -83,12 +96,22 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="MasterPages\Default.master.cs">
       <DependentUpon>Default.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterPages\Default.master.designer.cs">
       <DependentUpon>Default.master</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HardToTest\Database.aspx.cs">
+      <DependentUpon>Database.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\HardToTest\Database.aspx.designer.cs">
+      <DependentUpon>Database.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\HardToTest\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -118,6 +141,7 @@
       <Link>Company.snk</Link>
     </Content>
     <Content Include="MasterPages\Default.master" />
+    <Content Include="packages.config" />
     <None Include="Web.Development.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -132,14 +156,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Company-Shared\Company.IoC.StructureMap\Company.IoC.StructureMap.csproj">
+      <Project>{9fc9c108-8cc9-493b-b217-cbc0f8c81463}</Project>
+      <Name>Company.IoC.StructureMap</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Company-Shared\Company\Company.csproj">
       <Project>{4a0595f1-27b1-426b-b597-a27d0dd6ab93}</Project>
       <Name>Company</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MailBox\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -175,6 +201,22 @@
   <PropertyGroup>
     <PreBuildEvent>XCOPY "$(SolutionDir)Company-Web\Style" "$(ProjectDir)Style" /S /Y</PreBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>if not exist "$(ProjectDir)App_Data" (
+    md "$(ProjectDir)App_Data"
+)
+
+if not exist "$(ProjectDir)App_Data\dbExample.mdf" (
+    copy "$(SolutionDir)Data\Databases\SQL Server\dbExample.mdf" "$(ProjectDir)App_Data" /y
+)</PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

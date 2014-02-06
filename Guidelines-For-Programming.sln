@@ -106,6 +106,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.MvcApplication.Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.MvpApplication.UnitTests", "Company-Web\Company.MvpApplication.UnitTests\Company.MvpApplication.UnitTests.csproj", "{F11A4CED-DBA8-4293-91C7-677DE0691C2B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{C69469C5-1DA6-4879-9A8A-D722D76D7DF7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Databases", "Databases", "{E3512878-9089-4931-A1A6-3F3787CDFAED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL Server", "SQL Server", "{C6D843DE-8CB0-4B6D-B9EB-FD64AED5DBEA}"
+	ProjectSection(SolutionItems) = preProject
+		Data\Databases\SQL Server\dbExample.mdf = Data\Databases\SQL Server\dbExample.mdf
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|Any CPU = Development|Any CPU
@@ -295,5 +304,7 @@ Global
 		{B792CB96-AEF0-457B-87CD-FA7AB049B03B} = {69994430-845D-43DF-9723-2C9E59CF3D47}
 		{171DBE6D-BE18-45A1-A70C-B1C06999349A} = {69994430-845D-43DF-9723-2C9E59CF3D47}
 		{A5CA01D9-5FFB-4910-A96E-0234DEECB8D3} = {6F7DE438-240E-4A62-A10E-D1771DFD38BB}
+		{E3512878-9089-4931-A1A6-3F3787CDFAED} = {C69469C5-1DA6-4879-9A8A-D722D76D7DF7}
+		{C6D843DE-8CB0-4B6D-B9EB-FD64AED5DBEA} = {E3512878-9089-4931-A1A6-3F3787CDFAED}
 	EndGlobalSection
 EndGlobal

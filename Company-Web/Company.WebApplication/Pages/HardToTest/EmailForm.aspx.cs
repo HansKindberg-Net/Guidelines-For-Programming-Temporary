@@ -4,13 +4,13 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
-using System.Web.Util;
 using Company.Net.Mail;
 using Company.Validation;
+using Company.WebApplication.Business.Web.UI;
 
 namespace Company.WebApplication.Pages.HardToTest
 {
-	public partial class EmailForm : System.Web.UI.Page
+	public partial class EmailForm : Page
 	{
 		#region Fields
 
@@ -25,19 +25,9 @@ namespace Company.WebApplication.Pages.HardToTest
 			get { return _emailAddressValidator; }
 		}
 
-		protected internal virtual RequestValidator RequestValidator
-		{
-			get { return RequestValidator.Current; }
-		}
-
 		#endregion
 
 		#region Methods
-
-		protected internal virtual void AddDangerousInputException(IValidationResult validationResult, string fieldName)
-		{
-			this.AddValidationException(validationResult, new FormatException(string.Format(CultureInfo.InvariantCulture, "\"{0}\" contains dangerous input. The characters \"<\" and \">\" are not allowed.", fieldName)));
-		}
 
 		protected internal virtual void AddInvalidEmailException(IValidationResult validationResult, string fieldName, string value)
 		{
@@ -47,21 +37,6 @@ namespace Company.WebApplication.Pages.HardToTest
 		protected internal virtual void AddRequiredValueException(IValidationResult validationResult, string fieldName)
 		{
 			this.AddValidationException(validationResult, new FormatException(string.Format(CultureInfo.InvariantCulture, "\"{0}\" can not be empty.", fieldName)));
-		}
-
-		protected internal virtual void AddValidationException(IValidationResult validationResult, Exception exception)
-		{
-			if(validationResult == null)
-				throw new ArgumentNullException("validationResult");
-
-			validationResult.Exceptions.Add(exception);
-		}
-
-		protected internal virtual bool ValidateDangerousInput(string value)
-		{
-			int validationFailureIndex;
-
-			return this.RequestValidator.InvokeIsValidRequestString(null, value, RequestValidationSource.Form, null, out validationFailureIndex);
 		}
 
 		protected internal virtual IValidationResult ValidateInput()
