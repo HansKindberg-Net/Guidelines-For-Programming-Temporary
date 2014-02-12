@@ -101,21 +101,21 @@ namespace Company.Data.Databases
 				if(queryFilter.Id.HasValue)
 				{
 					const string parameterName = "@Id";
-					whereClauses.Add("Id = " + parameterName);
+					whereClauses.Add("Id=" + parameterName);
 					parameterList.Add(this.CreateDatabaseParameter(DbType.Int32, parameterName, queryFilter.Id.Value));
 				}
 
 				if(!string.IsNullOrEmpty(queryFilter.Key))
 				{
 					const string parameterName = "@Key";
-					whereClauses.Add("Key LIKE = " + parameterName);
+					whereClauses.Add("Key LIKE " + parameterName);
 					parameterList.Add(this.CreateDatabaseParameter(DbType.String, parameterName, queryFilter.Key));
 				}
 
 				if(!string.IsNullOrEmpty(queryFilter.Value))
 				{
 					const string parameterName = "@Value";
-					whereClauses.Add("Value LIKE = " + parameterName);
+					whereClauses.Add("Value LIKE " + parameterName);
 					parameterList.Add(this.CreateDatabaseParameter(DbType.String, parameterName, queryFilter.Key));
 				}
 			}
@@ -124,9 +124,17 @@ namespace Company.Data.Databases
 			return whereClauses.ToArray();
 		}
 
+		[SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
 		public virtual bool Delete(int id)
 		{
-			throw new NotImplementedException();
+			DbCommand databaseCommand = this.DatabaseProviderFactory.CreateCommand();
+			// ReSharper disable PossibleNullReferenceException
+			databaseCommand.CommandText = string.Format(CultureInfo.InvariantCulture, "DELETE FROM {0} WHERE Id=@Id;", this.ExampleTableName);
+			databaseCommand.Connection = this.CreateDatabaseConnection();
+			databaseCommand.Parameters.Add(this.CreateDatabaseParameter(DbType.Int32, "@Id", id));
+			
+			return databaseCommand.ExecuteNonQuery() > 0;
+			// ReSharper restore PossibleNullReferenceException
 		}
 
 		[SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
@@ -180,9 +188,33 @@ namespace Company.Data.Databases
 			return true;
 		}
 
+		[SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
 		public virtual void Save(IExampleItem exampleItem)
 		{
-			throw new NotImplementedException();
+			if(exampleItem == null)
+				throw new ArgumentNullException("exampleItem");
+
+			DbCommand databaseCommand = this.DatabaseProviderFactory.CreateCommand();
+			// ReSharper disable PossibleNullReferenceException
+			databaseCommand.Connection = this.CreateDatabaseConnection();
+			
+			if(exampleItem.New)
+			{
+				databaseCommand.CommandText = string.Format(CultureInfo.InvariantCulture, "INSERT INTO {0} ([Key], [Value]) VALUES (@Key, @Value);", this.ExampleTableName);
+			}
+			else
+			{
+				databaseCommand.CommandText = string.Format(CultureInfo.InvariantCulture, "UPDATE {0} SET [Key]=@Key, [Value]=@Value WHERE Id=@Id;", this.ExampleTableName);
+				// ReSharper disable PossibleInvalidOperationException
+				databaseCommand.Parameters.Add(this.CreateDatabaseParameter(DbType.Int32, "@Id", exampleItem.Id.Value));
+				// ReSharper restore PossibleInvalidOperationException
+			}
+
+			databaseCommand.Parameters.Add(this.CreateDatabaseParameter(DbType.String, "@Key", exampleItem.Key));
+			databaseCommand.Parameters.Add(this.CreateDatabaseParameter(DbType.String, "@Value", exampleItem.Value));
+
+			databaseCommand.ExecuteNonQuery();
+			// ReSharper restore PossibleNullReferenceException
 		}
 
 		#endregion

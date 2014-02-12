@@ -83,6 +83,7 @@
     <Compile Include="Validation\ValidationResult.cs" />
     <Compile Include="Web\ISiteMap.cs" />
     <Compile Include="Web\ISiteMapNode.cs" />
+    <Compile Include="Web\ISystemInformation.cs" />
     <Compile Include="Web\SiteMapNodeWrapper.cs" />
     <Compile Include="Web\SiteMapWrapper.cs" />
     <Compile Include="Web\UI\Extensions\HierarchyDataExtension.cs" />
@@ -103,6 +104,7 @@
     </None>
     <None Include="Company.nuspec" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>"$(SolutionDir).nuget\NuGet.exe" pack "$(ProjectPath)" -Properties Configuration=$(ConfigurationName) -IncludeReferencedProjects</PostBuildEvent>

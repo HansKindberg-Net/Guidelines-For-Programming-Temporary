@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Company.Web;
 
 namespace Company.WebApplication.UserControls
 {
-	public partial class SystemInformation : System.Web.UI.UserControl
+	public partial class SystemInformation : System.Web.UI.UserControl, ISystemInformation
 	{
 		#region Fields
 
@@ -16,6 +17,8 @@ namespace Company.WebApplication.UserControls
 				{SystemInformationType.Warning, "alert-warning"}
 			};
 
+		private string _heading;
+
 		#endregion
 
 		#region Properties
@@ -25,13 +28,37 @@ namespace Company.WebApplication.UserControls
 			get { return _alertCssClassDictionary[this.Type]; }
 		}
 
-		public virtual string Heading { get; set; }
+		public virtual string Heading
+		{
+			get { return this._heading ?? (this._heading = this.GetHeading(this.Type)); }
+			set { this._heading = value; }
+		}
+
 		public virtual string Information { get; set; }
 		public virtual IEnumerable<string> InformationList { get; set; }
 		protected internal virtual bool IsDataBound { get; set; }
 
 		[SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
 		public virtual SystemInformationType Type { get; set; }
+
+		#endregion
+
+		#region Methods
+
+		protected internal virtual string GetHeading(SystemInformationType systemInformationType)
+		{
+			switch(systemInformationType)
+			{
+				case SystemInformationType.Confirmation:
+					return "Confirmation";
+				case SystemInformationType.Exception:
+					return "Error";
+				case SystemInformationType.Warning:
+					return "Warning";
+				default:
+					return "Information";
+			}
+		}
 
 		#endregion
 

@@ -22,6 +22,15 @@ namespace Company.WebApplication.MasterPages {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder TitleContentPlaceHolder;
         
         /// <summary>
+        /// SystemInformationControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Company.WebApplication.UserControls.SystemInformation SystemInformationControl;
+        
+        /// <summary>
         /// HeadingContentPlaceHolder control.
         /// </summary>
         /// <remarks>

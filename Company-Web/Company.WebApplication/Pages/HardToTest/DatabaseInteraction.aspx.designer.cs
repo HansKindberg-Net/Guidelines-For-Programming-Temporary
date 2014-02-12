@@ -10,7 +10,16 @@
 namespace Company.WebApplication.Pages.HardToTest {
     
     
-    public partial class Database {
+    public partial class DatabaseInteraction {
+        
+        /// <summary>
+        /// AddNewItemPlaceHolder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder AddNewItemPlaceHolder;
         
         /// <summary>
         /// ConfirmationControl control.
@@ -22,6 +31,15 @@ namespace Company.WebApplication.Pages.HardToTest {
         protected global::Company.WebApplication.UserControls.SystemInformation ConfirmationControl;
         
         /// <summary>
+        /// WarningControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Company.WebApplication.UserControls.SystemInformation WarningControl;
+        
+        /// <summary>
         /// ExceptionControl control.
         /// </summary>
         /// <remarks>
@@ -29,6 +47,15 @@ namespace Company.WebApplication.Pages.HardToTest {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Company.WebApplication.UserControls.SystemInformation ExceptionControl;
+        
+        /// <summary>
+        /// EditPlaceHolder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder EditPlaceHolder;
         
         /// <summary>
         /// KeyTextBox control.
@@ -47,6 +74,33 @@ namespace Company.WebApplication.Pages.HardToTest {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ValueTextBox;
+        
+        /// <summary>
+        /// SearchPlaceHolder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder SearchPlaceHolder;
+        
+        /// <summary>
+        /// KeyCriteriaTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox KeyCriteriaTextBox;
+        
+        /// <summary>
+        /// ValueCriteriaTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ValueCriteriaTextBox;
         
         /// <summary>
         /// ExampleItemRepeater control.

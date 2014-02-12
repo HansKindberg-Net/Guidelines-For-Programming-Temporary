@@ -61,17 +61,22 @@
     <CodeAnalysisDictionary Include="..\..\CodeAnalysis\SolutionDictionary.xml">
       <Link>CodeAnalysis\SolutionDictionary.xml</Link>
     </CodeAnalysisDictionary>
+    <Content Include="..\Scripts\Company.js">
+      <Link>Scripts\Company.js</Link>
+    </Content>
     <Content Include="..\Style\Company.css">
       <Link>Style\Company.css</Link>
     </Content>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="MailBox\ReadMe.txt" />
-    <Content Include="Pages\HardToTest\Database.aspx" />
+    <Content Include="Pages\HardToTest\DatabaseInteraction.aspx" />
     <Content Include="Pages\HardToTest\Default.aspx" />
     <Content Include="Pages\HardToTest\EmailForm.aspx" />
     <Content Include="UserControls\SystemInformation.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\CodeAnalysis\SolutionSuppressions.cs">
@@ -81,8 +86,9 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Business\Bootstrapper.cs" />
-    <Compile Include="Business\Data\Databases\ExampleDatabase.cs" />
+    <Compile Include="Business\Data\Databases\StaticExampleDatabase.cs" />
     <Compile Include="Business\Registry.cs" />
+    <Compile Include="Business\Web\HttpVerb.cs" />
     <Compile Include="Business\Web\UI\Page.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -106,12 +112,12 @@
     <Compile Include="MasterPages\Default.master.designer.cs">
       <DependentUpon>Default.master</DependentUpon>
     </Compile>
-    <Compile Include="Pages\HardToTest\Database.aspx.cs">
-      <DependentUpon>Database.aspx</DependentUpon>
+    <Compile Include="Pages\HardToTest\DatabaseInteraction.aspx.cs">
+      <DependentUpon>DatabaseInteraction.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\HardToTest\Database.aspx.designer.cs">
-      <DependentUpon>Database.aspx</DependentUpon>
+    <Compile Include="Pages\HardToTest\DatabaseInteraction.aspx.designer.cs">
+      <DependentUpon>DatabaseInteraction.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\HardToTest\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -199,7 +205,8 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PreBuildEvent>XCOPY "$(SolutionDir)Company-Web\Style" "$(ProjectDir)Style" /S /Y</PreBuildEvent>
+    <PreBuildEvent>XCOPY "$(SolutionDir)Company-Web\Scripts" "$(ProjectDir)Scripts" /S /Y
+XCOPY "$(SolutionDir)Company-Web\Style" "$(ProjectDir)Style" /S /Y</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>if not exist "$(ProjectDir)App_Data" (

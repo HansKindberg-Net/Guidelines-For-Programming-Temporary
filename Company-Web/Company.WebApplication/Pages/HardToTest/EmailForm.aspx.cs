@@ -104,6 +104,7 @@ namespace Company.WebApplication.Pages.HardToTest
 			catch(Exception exception)
 			{
 				this.ExceptionControl.Information = exception.Message;
+				this.ExceptionControl.Visible = true;
 			}
 		}
 
