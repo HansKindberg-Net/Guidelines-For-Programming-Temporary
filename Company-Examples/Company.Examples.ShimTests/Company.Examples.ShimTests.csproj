@@ -39,6 +39,9 @@
     <CodeAnalysisRuleSet>..\..\CodeAnalysis\Solution.Tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Company.Examples.Fakes">
+      <HintPath>FakesAssemblies\Company.Examples.Fakes.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="mscorlib.4.0.0.0.Fakes">
       <HintPath>FakesAssemblies\mscorlib.4.0.0.0.Fakes.dll</HintPath>
@@ -68,8 +71,9 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="CodeAnalysis\AssemblySuppressions.cs" />
-    <Compile Include="HardToTest\EmailFormTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Testability\HardToTest\ClassWithSmtpClientDependencyTest.cs" />
+    <Compile Include="Testability\HardToTest\ClassWithStaticDependencyTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="CodeAnalysis\AssemblyDictionary.xml">
@@ -92,6 +96,10 @@
   </ItemGroup>
   <ItemGroup>
     <Fakes Include="Fakes\mscorlib.fakes" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Fakes Include="Fakes\Company.Examples.fakes" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
