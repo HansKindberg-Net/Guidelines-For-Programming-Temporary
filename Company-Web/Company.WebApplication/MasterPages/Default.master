@@ -20,7 +20,7 @@
 		<![endif]-->
 	</head>
 	<body>
-		<UserControls:SystemInformation id="SystemInformationControl" runat="server" />
+		<UserControls:SystemInformation id="SystemInformationControl" EnableViewState="false" Visible="false" runat="server" />
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">

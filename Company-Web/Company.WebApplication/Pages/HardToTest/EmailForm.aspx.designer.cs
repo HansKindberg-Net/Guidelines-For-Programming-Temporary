@@ -13,24 +13,6 @@ namespace Company.WebApplication.Pages.HardToTest {
     public partial class EmailForm {
         
         /// <summary>
-        /// ConfirmationControl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Company.WebApplication.UserControls.SystemInformation ConfirmationControl;
-        
-        /// <summary>
-        /// ExceptionControl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Company.WebApplication.UserControls.SystemInformation ExceptionControl;
-        
-        /// <summary>
         /// ToTextBox control.
         /// </summary>
         /// <remarks>

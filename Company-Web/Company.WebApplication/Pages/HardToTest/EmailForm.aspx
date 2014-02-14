@@ -1,25 +1,8 @@
 <%@ Page Language="C#" MasterPageFile="~/MasterPages/Default.master" AutoEventWireup="false" CodeBehind="EmailForm.aspx.cs" Inherits="Company.WebApplication.Pages.HardToTest.EmailForm" %>
-<%@ Register TagPrefix="UserControls" TagName="SystemInformation" Src="~/UserControls/SystemInformation.ascx" %>
 <asp:Content ContentPlaceHolderID="TitleContentPlaceHolder" runat="server">Email-form</asp:Content>
 <asp:Content ContentPlaceHolderID="HeadingContentPlaceHolder" runat="server">Email-form</asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
 	<p>Send an email to a friend.</p>
-	<UserControls:SystemInformation
-		id="ConfirmationControl"
-		Heading="Confirmation"
-		Information="The email have been sent."
-		Type="Confirmation"
-		Visible="false"
-		runat="server"
-	/>
-	<UserControls:SystemInformation
-		id="ExceptionControl"
-		Heading="Error"
-		Information="Invalid input."
-		Type="Exception"
-		Visible="false"
-		runat="server"
-	/>
 	<form role="form" runat="server">
 		<div class="form-group">
 			<asp:Label AssociatedControlID="ToTextBox" runat="server">To</asp:Label>

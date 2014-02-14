@@ -39,6 +39,11 @@ namespace Company.WebApplication.Pages.HardToTest
 			this.AddValidationException(validationResult, new FormatException(string.Format(CultureInfo.InvariantCulture, "\"{0}\" can not be empty.", fieldName)));
 		}
 
+		protected internal virtual void ClearInput()
+		{
+			this.ToTextBox.Text = this.CopyTextBox.Text = this.SubjectTextBox.Text = this.MessageTextBox.Text = string.Empty;
+		}
+
 		protected internal virtual IValidationResult ValidateInput()
 		{
 			IValidationResult validationResult = new ValidationResult();
@@ -67,15 +72,14 @@ namespace Company.WebApplication.Pages.HardToTest
 		[SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
 		protected internal virtual void OnSendClick(object sender, EventArgs e)
 		{
-			this.ConfirmationControl.Visible = false;
-			this.ExceptionControl.Visible = false;
-
 			var validationResult = this.ValidateInput();
 
 			if(!validationResult.IsValid)
 			{
-				this.ExceptionControl.InformationList = validationResult.Exceptions.Select(exception => exception.Message);
-				this.ExceptionControl.Visible = true;
+				this.SystemInformation.Information = "Invalid input.";
+				this.SystemInformation.InformationList = validationResult.Exceptions.Select(exception => exception.Message);
+				this.SystemInformation.Type = SystemInformationType.Exception;
+				this.SystemInformation.Visible = true;
 				return;
 			}
 
@@ -99,12 +103,17 @@ namespace Company.WebApplication.Pages.HardToTest
 					}
 				}
 
-				this.ConfirmationControl.Visible = true;
+				this.SystemInformation.Information = "The email have been sent.";
+				this.SystemInformation.Type = SystemInformationType.Confirmation;
+				this.SystemInformation.Visible = true;
+
+				this.ClearInput();
 			}
 			catch(Exception exception)
 			{
-				this.ExceptionControl.Information = exception.Message;
-				this.ExceptionControl.Visible = true;
+				this.SystemInformation.Information = exception.Message;
+				this.SystemInformation.Type = SystemInformationType.Exception;
+				this.SystemInformation.Visible = true;
 			}
 		}
 

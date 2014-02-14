@@ -118,6 +118,13 @@ label {
 	overflow-x: scroll;
 	overflow-y: auto;
 }
+#server-alert {
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 51px;
+	z-index: 1040;
+}
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
 	.navbar-header,
