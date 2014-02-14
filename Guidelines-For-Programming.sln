@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{243275
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{3889197F-3788-42BE-BB71-C90D66B568E2}"
 	ProjectSection(SolutionItems) = preProject
+		Documents\Dependencies.md = Documents\Dependencies.md
+		Documents\Dependencies.sv.md = Documents\Dependencies.sv.md
 		ReadMe.md = ReadMe.md
 		ReadMe.sv.md = ReadMe.sv.md
 	EndProjectSection

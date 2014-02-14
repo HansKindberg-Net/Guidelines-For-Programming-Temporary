@@ -65,6 +65,26 @@ Fördelar med testbarhet:
 ### 2.2 Beroenden (dependencies)
 Klasser har beroenden till andra klasser. Idén med enhetstestning är att testa kod utan att testa dess beroenden. Tanken är att om en klass fungerar som den är designad och dess beroende klasser likaså så borde de fungera tillsammans som tänkt.
 
+
+
+
+#### 2.2.1 Exempel/övning
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### 2.3 Hantera beroenden
 För att kunna enhetstesta en metod i en klass som har ett beroende till en annan klass på ett bra sätt så måste man kunna hantera detta beroende. Detta kan hanteras med hjälp av:
 - [**Dependency injection**](http://en.wikipedia.org/wiki/Dependency_injection) - ett design mönster
