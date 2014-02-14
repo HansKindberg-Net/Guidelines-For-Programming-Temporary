@@ -69,7 +69,7 @@ Klasser har beroenden till andra klasser. Idén med enhetstestning är att testa k
 
 
 #### 2.2.1 Exempel/övning
-
+Gå igenom följande exempel/övning, [**Beroenden (dependencies) - exempel/övning**](/Documents/Dependencies.sv.md), för att få en förståelse för vad beroenden är och hur beroenden påverkar testning.
 
 
 
