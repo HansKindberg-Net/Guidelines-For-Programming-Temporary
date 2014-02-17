@@ -22,11 +22,13 @@ Det här projektet innehåller riktlinjer för programmering. Riktlinjerna gäller i
 Detta projekt består av en **VS-solution** med diverse **VS-project** med exempel kod. Programmeringsspråket som används är **C#**, **.NET Framework 4.5**. Jag vill visa hur jag menar genom exempel. **VS-solution** innehåller flera **VS-project** och därför har jag valt att gruppera/strukturera dem med hjälp av **Solution Folders**.
 - **.nuget** - katalogen innehåller filer för **NuGet Package Restore**, dessa filer skapas när man slår på **NuGet Package Restore** ([3.1.1 Enable NuGet Package Restore](/ReadMe.sv.md#311-enable-nuget-package-restore))
 - **CodeAnalysis** - globala filer/inställningar för **Code Analysis** ([Code Analysis for Managed Code Overview](http://msdn.microsoft.com/en-us/library/3z0aeatx.aspx)), länkas in av **VS-project**
+- **Company-Console** - innehåller ett Windows-console-application projekt + tillhörande **VS-test-project**
 - **Company-Examples** - innehåller ett **Class Library** (**VS-project**) med mer allmän exempel-kod vad gäller testbarhet + tillhörande **VS-test-project**
 - **Company-Services** - innehåller WCF och WebService (asmx) projekt + tillhörande **VS-test-project**
 - **Company-Shared** - innehåller generella funktioner för hela lösningen
 - **Company-Web** - innehåller webbapplikationer (MVC, MVP och traditionell Web Forms) + tillhörande **VS-test-project**
 - **Company-Windows** - innehåller ett Windows-forms-application projekt + tillhörande **VS-test-project**
+- **Data** - innehåller en liten exempel-databas fil
 - **Documents** - **ReadMe.md** filerna för detta projekt
 - **Properties** - globala **Assembly** inställningar, länkas in av **VS-project**
 - **Signing** - global **Strong Name Key** fil, länkas in av **VS-project**
@@ -65,26 +67,6 @@ Fördelar med testbarhet:
 ### 2.2 Beroenden (dependencies)
 Klasser har beroenden till andra klasser. Idén med enhetstestning är att testa kod utan att testa dess beroenden. Tanken är att om en klass fungerar som den är designad och dess beroende klasser likaså så borde de fungera tillsammans som tänkt.
 
-
-
-
-#### 2.2.1 Exempel/övning
-Gå igenom följande exempel/övning, [**Beroenden (dependencies) - exempel/övning**](/Documents/Dependencies.sv.md), för att få en förståelse för vad beroenden är och hur beroenden påverkar testning.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### 2.3 Hantera beroenden
 För att kunna enhetstesta en metod i en klass som har ett beroende till en annan klass på ett bra sätt så måste man kunna hantera detta beroende. Detta kan hanteras med hjälp av:
 - [**Dependency injection**](http://en.wikipedia.org/wiki/Dependency_injection) - ett design mönster
@@ -99,20 +81,67 @@ Kortfattat innebär det att man inte hårdkodar ett beroende till en annan klass u
 
 Den teknik/metod som förespråkas mest är **Constructor Injection** vilket innebär att beroenden anges i konstruktorn för en klass. Det går alltså inte att instansiera klassen utan att ange dess beroenden. Detta är anledningen till att denna teknik/metod förespråkas, det blir tydligt för programmerare att en klass har beroenden.
 
-
-
-
-
-
-
 #### [2.3.1 Dependency Injection (DI)](http://en.wikipedia.org/wiki/Dependency_injection)
 
 #### [2.3.2 Inversion of Control (IoC)](http://en.wikipedia.org/wiki/Inversion_of_control)
 
 ##### 2.3.2.1 Inversion of Control Containers (IoC Containers)
 
+### 2.4 Mock
+Ett vanligt begrepp inom enhets-testning är **Mock** - *För att kunna utföra enhets-tester på en klass så mockar man dess beroenden*. Det finns flera ramverk för att använda vid testning/enhets-testning som innehåller begreppet **Mock**:
 
-### 2.4 Exempel
+- [**EasyMock.NET**](http://sourceforge.net/projects/easymocknet/)
+- [**JustMock**](http://www.telerik.com/products/mocking.aspx)
+- [**Moq**](http://www.moqthis.com/)
+- [**NMock**](http://nmock3.codeplex.com/)
+- [**Rhino Mocks**](http://hibernatingrhinos.com/oss/rhino-mocks)
+- [**TypeMock Isolator**](http://www.typemock.com/)
+
+Ska man vara korrekt så är **Mock** bara en del i ett vidare begrepp, [**Test Double**](http://en.wikipedia.org/wiki/Test_double).
+
+Gerard Meszaros har definierat begrepp för olika typer av [**Test Double**](http://xunitpatterns.com/Test%20Double.html) som han kallar det:
+
+- **Dummy object** - used when a parameter is needed for the tested method but without actually needing to use the parameter
+- **Fake object** - used as a simpler implementation, e.g. using an in-memory database in the tests instead of doing real database access
+- **Mock object** - used for verifying "indirect output" of the tested code, by first defining the expectations before the tested code is executed
+- **Test spy** - used for verifying "indirect output" of the tested code, by asserting the expectations afterwards, without having defined the expectations before the tested code is executed
+- **Test stub** - used for providing the tested code with "indirect input"
+
+Vad det handlar om är att sätta upp egenskaper och förväntningar på beroenden och på så sätt testa olika scenarior för den klass som är under test. Det man använder mock-ramverken till är att skapa upp klasser dynamiskt under körningen av enhets-testet. Det kräver att beroenden är **mock-bara** (mitt begrepp):
+- **Interface** - alla medlemmar (egenskaper/metoder) i ett interface är **alltid** mock-bara
+- **Abstract* - abstracta medlemmar (egenskaper/metoder) är ofta mock-bara
+- **Virtual (C#)** - virtuella medlemmar (egenskaper/metoder) är ofta mock-bara
+
+**Interface** är alltid mock-bara eftersom de inte innehåller någon implementation. Abstrakta klasser, klasser med abstrakta medlemmar eller klasser med virtuella medlemmar är ofta mock-bara, men de behöver inte vara det. T.ex. så kan koden i konstrukorn för en abstrakt klass göra att den inte går att mocka.
+
+#### 2.4.1 Mock the unmockable
+Det finns **Mock**-ramverk som dock kan mocka det mesta:
+
+- [**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx) - kräver Visual Studio Premium/Ultimate 2012/2013 ([Isolating Code Under Test with Microsoft Fakes](http://msdn.microsoft.com/en-us/library/hh549175.aspx))
+- [**Typemock Isolator**](http://www.typemock.com/isolator-product-page)
+- [**Telerik JustMock**](http://www.telerik.com/products/mocking.aspx)
+
+Dessa ramverk fungerar genom att de går in och manipulerar vid bygget av en solution. De kan vara bra att använda när man inte har kontroll över kod man vill testa. Men om man använder dessa ramverk rakt igenom så leder det inte till någon bättre mjukvaru-arkitektur. De kan t.ex. vara bra att använda något av dessa ramverk om man vill enhets-testa en **Wrapper**.
+
+### 2.5 Design Patterns
+För att kunna skriva testbar kod behöver man många gånger använda sig av **Design Patterns**. Vanliga mönster för att hantera dependency injection är:
+- [**Adapter**](http://www.blackwasp.co.uk/Adapter.aspx) - koda **Wrappers** för att ge befintliga svår-mockade klasser ett användbart gränssnitt
+- [**Factory Method**](http://www.blackwasp.co.uk/FactoryMethod.aspx) - ett mönster som används för att instansiera klasser (om en klass kräver en eller flera beroende-parametrar i sin konstruktor så kan det underlätta genom att ha en fabrik som instansierar objekt)
+
+### 2.6 Exempel
+Det vanligaste problemet med att enhets-testa kod är att beroenden i en klass är hårdkodade. Hårdkodade beroenden går inte att styra utifrån vilket man behöver kunna göra om man ska kunna enhets-testa. 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -147,9 +176,7 @@ Metoden ovan är svår att testa i huvudsak för att den skapar en instans av typen
 
 Om vi skippar tänket på god kod-design så skulle vi kunna testa dessa två scenarier ändå om vi har tillgång till något av följande:
 
-- [**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx) - kräver Visual Studio Premium/Ultimate 2012/2013 ([Isolating Code Under Test with Microsoft Fakes](http://msdn.microsoft.com/en-us/library/hh549175.aspx))
-- [**Typemock Isolator**](http://www.typemock.com/isolator-product-page)
-- [**Telerik JustMock**](http://www.telerik.com/products/mocking.aspx)
+
 
 Test för scenario 1, löst med [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims) ([/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs](/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs)):
 
@@ -398,3 +425,17 @@ SlowCheetah on NuGet: http://www.nuget.org/packages/SlowCheetah/
 SlowCheetah on GitHub: https://github.com/sayedihashimi/slow-cheetah
 
 ### 3.4 ReSharper
+
+### 3.5 Solution Folder
+I Visual Studio kan man skapa kataloger på solution-nivå. Om man högerklickar VS-solution i **Solution Explorer** får man upp valet **Add** -> **New Solution Folder**.
+När man skapar en **Solution Folder** skapas inte en katalog på disk. Lägger man till en fil, genom att högerklicka på katalogen och väljer **Add** -> **New Item** så kommer den nya filen visuellt att ligga i den **Solution Folder** man valde att lägga till filen in men fysiskt så hamnar filen i rotkatalogen för VS-solution.
+Man kan korrigera så att den visuella strukturen stämmer överens med den fysiska strukturen men det kräver manuella åtgärder. Exempel:
+1. Lägg till en **Solution Folder**.
+2. Lägg till en katalog på disk i rot-katalogen för din VS-solution och ge den samma namn.
+3. Lägg till en fil från Visual Studio.
+4. Ta bort samma fil från Visual Studio (den kommer bara att tas bort visuellt i Visual Studio, inte fysiskt på disk).
+5. Flytta den fysiska filen (som du tog bort i steget innan) från rot-katalogen till den aktuella fysiska katalogen på disk.
+6. Välj **Add** -> **Existing Item** genom att högerklicka på katalogen i **Solution Explorer**.
+Detta gäller även sub-kataloger. Om man nu lägger till den VS-solution till source-control så kommer katalogstrukturen för all VS-solution kataloger vara den samma både fysiskt och visuellt i VS-solution.
+
+
