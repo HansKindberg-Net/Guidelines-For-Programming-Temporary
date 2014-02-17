@@ -109,7 +109,7 @@ Gerard Meszaros har definierat begrepp för olika typer av [**Test Double**](http
 
 Vad det handlar om är att sätta upp egenskaper och förväntningar på beroenden och på så sätt testa olika scenarior för den klass som är under test. Det man använder mock-ramverken till är att skapa upp klasser dynamiskt under körningen av enhets-testet. Det kräver att beroenden är **mock-bara** (mitt begrepp):
 - **Interface** - alla medlemmar (egenskaper/metoder) i ett interface är **alltid** mock-bara
-- **Abstract* - abstracta medlemmar (egenskaper/metoder) är ofta mock-bara
+- **Abstract** - abstracta medlemmar (egenskaper/metoder) är ofta mock-bara
 - **Virtual (C#)** - virtuella medlemmar (egenskaper/metoder) är ofta mock-bara
 
 **Interface** är alltid mock-bara eftersom de inte innehåller någon implementation. Abstrakta klasser, klasser med abstrakta medlemmar eller klasser med virtuella medlemmar är ofta mock-bara, men de behöver inte vara det. T.ex. så kan koden i konstrukorn för en abstrakt klass göra att den inte går att mocka.
@@ -134,14 +134,9 @@ För att kunna skriva testbar kod behöver man många gånger använda sig av **Desig
 Det vanligaste problemet med att enhets-testa kod är att beroenden i en klass är hårdkodade. Hårdkodade beroenden går inte att styra utifrån vilket man behöver kunna göra om man ska kunna enhets-testa. Om man inte har möjlighet att styra detta kan man använda sig av något av de ramverk som beskrivs under [2.4.1 Mock the unmockable](/ReadMe.sv.md#241-mock-the-unmockable). Men man bör sträva efter att kunna styra beroenden utifrån för att få en bra mjukvaru-arkitektur. Varje exempel som följer har en tillhörande test-class, även om det inte går att testa. I test-klassen står beskrivet vad man skulle vilja testa.
 
 Exempel på kod som är svår att enhets-testa:
-
-ClassWithStaticDependency
-
+- [**ClassWithStaticDependency**](/Company-Examples/Company.Examples/Testability/HardToTest/ClassWithStaticDependency.cs): [ClassWithStaticDependencyTest](/Company-Examples/Company.Examples.UnitTests/Testability/HardToTest/ClassWithStaticDependencyTest.cs)
 
 
-
-
-(/Company-Examples/Company.Examples/Testability/HardToTest/ClassWithStaticDependency.cs):
 
 
 Om vi skippar tänket på god kod-design så skulle vi kunna testa dessa två scenarier ändå om vi har tillgång till något av följande:
