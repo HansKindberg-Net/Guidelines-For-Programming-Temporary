@@ -88,7 +88,7 @@ Den teknik/metod som förespråkas mest är **Constructor Injection** vilket innebä
 ##### 2.3.2.1 Inversion of Control Containers (IoC Containers)
 
 ### 2.4 Mock
-Ett vanligt begrepp inom enhets-testning är **Mock** - *För att kunna utföra enhets-tester på en klass så mockar man dess beroenden*. Det finns flera ramverk för att använda vid testning/enhets-testning som innehåller begreppet **Mock**:
+Ett vanligt begrepp inom enhets-testning är **Mock** - *För att kunna utföra enhets-tester på en klass så mockar man dess beroenden*. Det finns ramverk att använda vid testning/enhets-testning som innehåller begreppet **Mock**:
 
 - [**EasyMock.NET**](http://sourceforge.net/projects/easymocknet/)
 - [**JustMock**](http://www.telerik.com/products/mocking.aspx)
@@ -114,6 +114,8 @@ Vad det handlar om är att sätta upp egenskaper och förväntningar på beroenden oc
 
 **Interface** är alltid mock-bara eftersom de inte innehåller någon implementation. Abstrakta klasser, klasser med abstrakta medlemmar eller klasser med virtuella medlemmar är ofta mock-bara, men de behöver inte vara det. T.ex. så kan koden i konstrukorn för en abstrakt klass göra att den inte går att mocka.
 
+Man kan även skriva sina **Test Doubles** själv men det underlättar om man använder ett ramverk.
+
 #### 2.4.1 Mock the unmockable
 Det finns **Mock**-ramverk som dock kan mocka det mesta:
 
@@ -121,7 +123,7 @@ Det finns **Mock**-ramverk som dock kan mocka det mesta:
 - [**Typemock Isolator**](http://www.typemock.com/isolator-product-page)
 - [**Telerik JustMock**](http://www.telerik.com/products/mocking.aspx)
 
-Dessa ramverk fungerar genom att de går in och manipulerar vid bygget av en solution. De kan vara bra att använda när man inte har kontroll över kod man vill testa. Men om man använder dessa ramverk rakt igenom så leder det inte till någon bättre mjukvaru-arkitektur. De kan t.ex. vara bra att använda något av dessa ramverk om man vill enhets-testa en **Wrapper**.
+Dessa ramverk fungerar genom att de går in och manipulerar vid bygget av en solution. De kan vara bra att använda när man inte har kontroll över beroenden till kod man vill testa. Men om man använder dessa ramverk rakt igenom så leder det inte till någon bättre mjukvaru-arkitektur. De kan t.ex. vara bra att använda något av dessa ramverk om man vill enhets-testa en **Wrapper**.
 
 ### 2.5 Design Patterns
 För att kunna skriva testbar kod behöver man många gånger använda sig av **Design Patterns**. Vanliga mönster för att hantera dependency injection är:
@@ -129,50 +131,18 @@ För att kunna skriva testbar kod behöver man många gånger använda sig av **Desig
 - [**Factory Method**](http://www.blackwasp.co.uk/FactoryMethod.aspx) - ett mönster som används för att instansiera klasser (om en klass kräver en eller flera beroende-parametrar i sin konstruktor så kan det underlätta genom att ha en fabrik som instansierar objekt)
 
 ### 2.6 Exempel
-Det vanligaste problemet med att enhets-testa kod är att beroenden i en klass är hårdkodade. Hårdkodade beroenden går inte att styra utifrån vilket man behöver kunna göra om man ska kunna enhets-testa. 
+Det vanligaste problemet med att enhets-testa kod är att beroenden i en klass är hårdkodade. Hårdkodade beroenden går inte att styra utifrån vilket man behöver kunna göra om man ska kunna enhets-testa. Om man inte har möjlighet att styra detta kan man använda sig av något av de ramverk som beskrivs under [2.4.1 Mock the unmockable](/ReadMe.sv.md#241-mock-the-unmockable). Men man bör sträva efter att kunna styra beroenden utifrån för att få en bra mjukvaru-arkitektur. Varje exempel som följer har en tillhörande test-class, även om det inte går att testa. I test-klassen står beskrivet vad man skulle vilja testa.
+
+Exempel på kod som är svår att enhets-testa:
+
+ClassWithStaticDependency
 
 
 
 
 
+(/Company-Examples/Company.Examples/Testability/HardToTest/ClassWithStaticDependency.cs):
 
-
-
-
-
-
-
-
-
-
-
-
-
-Följande exempel visar en svårtestad metod ([/Company-Examples/Company.Examples/HardToTest/EmailForm.cs](/Company-Examples/Company.Examples/HardToTest/EmailForm.cs)):
-
-	public void Send()
-	{
-		IValidationResult validationResult = this.ValidateInput();
-
-		if(!validationResult.IsValid)
-			throw validationResult.Exceptions.First();
-
-		using(MailMessage mailMessage = new MailMessage("noreply@company.net", this.To))
-		{
-			mailMessage.Body = this.Message;
-			mailMessage.Subject = this.Subject;
-
-			using(SmtpClient smtpClient = new SmtpClient())
-			{
-				smtpClient.Send(mailMessage);
-			}
-		}
-	}
-
-Metoden ovan är svår att testa i huvudsak för att den skapar en instans av typen SmtpClient och sedan kallar på metoden Send(MailMessage mailMessage). Det finns bl.a två scenarier vi skulle vilja testa för denna metod:
-
-1. Om ValidateInput() returnerar ett object där IsValid == true, så ska Send(mailMessage) anropas.
-2. Om ValidateInput() returnerar ett object där IsValid == false, så ska den kasta ett fel och Send(mailMessage) ska inte anropas.
 
 Om vi skippar tänket på god kod-design så skulle vi kunna testa dessa två scenarier ändå om vi har tillgång till något av följande:
 
@@ -180,85 +150,6 @@ Om vi skippar tänket på god kod-design så skulle vi kunna testa dessa två scenar
 
 Test för scenario 1, löst med [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims) ([/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs](/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs)):
 
-	[TestMethod]
-	public void Send_IfTheInputIsValid_ShouldCallSmtpClientSend()
-	{
-		using(ShimsContext.Create())
-		{
-			bool sendIsCalled = false;
-			MailMessage sentMailMessage = null;
-
-			ShimSmtpClient.AllInstances.SendMailMessage = delegate(SmtpClient client, MailMessage mailMessage)
-			{
-				sentMailMessage = mailMessage;
-				sendIsCalled = true;
-			};
-
-			Assert.IsFalse(sendIsCalled);
-			Assert.IsNull(sentMailMessage);
-
-			EmailForm emailForm = new EmailForm
-				{
-					Message = _testMessage,
-					Subject = _testSubject,
-					To = _testReceiver
-				};
-
-			emailForm.Send();
-
-			Assert.IsTrue(sendIsCalled);
-			Assert.IsNotNull(sentMailMessage);
-			Assert.AreEqual(_testMessage, sentMailMessage.Body);
-			Assert.AreEqual(_testReceiver, sentMailMessage.To.First().Address);
-			Assert.AreEqual(_testSubject, sentMailMessage.Subject);
-		}
-	}
-
-Test för scenario 2, löst med [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims) ([/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs](/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs)) :
-
-	[TestMethod]
-	[ExpectedException(typeof(Exception))]
-	public void Send_IfTheInputIsNotValid_ShouldNotCallSmtpClientSendAndShouldThrowAnException()
-	{
-		using(ShimsContext.Create())
-		{
-			bool sendIsCalled = false;
-			MailMessage sentMailMessage = null;
-
-			ShimSmtpClient.AllInstances.SendMailMessage = delegate(SmtpClient client, MailMessage mailMessage)
-			{
-				sentMailMessage = mailMessage;
-				sendIsCalled = true;
-			};
-
-			Assert.IsFalse(sendIsCalled);
-			Assert.IsNull(sentMailMessage);
-
-			EmailForm emailForm = new EmailForm
-				{
-					Message = _testMessage,
-					Subject = _testSubject,
-					To = null
-				};
-
-			Exception expectedException = null;
-
-			try
-			{
-				emailForm.Send();
-			}
-			catch(Exception exception)
-			{
-				expectedException = exception;
-			}
-
-			Assert.IsFalse(sendIsCalled);
-			Assert.IsNull(sentMailMessage);
-
-			if(expectedException != null)
-				throw new Exception();
-		}
-	}
 
 
 
