@@ -1,3 +1,6 @@
+using Company.Examples.Testability.Dependencies.HardToMock.Fakes;
+using Company.Examples.Testability.HardToTest;
+using Microsoft.QualityTools.Testing.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Company.Examples.ShimTests.Testability.HardToTest
@@ -10,10 +13,22 @@ namespace Company.Examples.ShimTests.Testability.HardToTest
 		[TestMethod]
 		public void Method_ShouldCallMethodOnTheClassWithStaticMethod()
 		{
-			//// The only thing we want to test is that when we call "new ClassWithStaticDependency().Method()" we want to verify that ClassWithStaticMethod.Method() have been called.
-			//// We can not verify that ClassWithStaticMethod.Method() is called because we do not have control over that class and it is a static method.
-			//new ClassWithStaticDependency().Method();
-			//Assert.Fail("It is impossible to test this because you can not verify if the static method of the dependency have been called.");
+			using(ShimsContext.Create())
+			{
+				bool methodIsCalled = false;
+
+				ShimClassWithStaticMethod.Method = delegate
+				{
+					methodIsCalled = true;
+					return "Test";
+				};
+
+				Assert.IsFalse(methodIsCalled);
+
+				new ClassWithStaticDependency().Method();
+
+				Assert.IsTrue(methodIsCalled);
+			}
 		}
 
 		#endregion

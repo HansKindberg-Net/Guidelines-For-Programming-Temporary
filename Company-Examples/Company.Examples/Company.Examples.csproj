@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\CodeAnalysis\SolutionSuppressions.cs">
@@ -46,13 +47,25 @@
     </Compile>
     <Compile Include="CodeAnalysis\AssemblySuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Testability\Dependencies\HardToMock\ClassWithSealedMethod.cs" />
     <Compile Include="Testability\Dependencies\HardToMock\ClassWithStaticMethod.cs" />
+    <Compile Include="Testability\Dependencies\Mockable\ClassWithVirtualMethod.cs" />
     <Compile Include="Testability\Dependencies\Mockable\IClassWithStaticMethod.cs" />
+    <Compile Include="Testability\Dependencies\Mockable\IDependency.cs" />
     <Compile Include="Testability\Dependencies\Wrappers\ClassWithStaticMethodWrapper.cs" />
     <Compile Include="Testability\HardToTest\ClassWithSmtpClientDependency.cs" />
     <Compile Include="Testability\HardToTest\ClassWithStaticDependency.cs" />
-    <Compile Include="Testability\Testable\ClassWithConstructorInjectableDependency.cs" />
-    <Compile Include="Testability\Testable\ClassWithSetterInjectableDependency.cs" />
+    <Compile Include="Testability\HardToTest\ClassWithSealedDependency.cs" />
+    <Compile Include="Testability\HardToTest\ClassWithVirtualDependency.cs" />
+    <Compile Include="Testability\HardToTest\ClassWithDirectoryEntryDependency.cs" />
+    <Compile Include="Testability\HardToTest\ClassWithDateTimeNowDependency.cs" />
+    <Compile Include="Testability\Testable\ClassWithConstructorInjectableInterfaceDependency.cs" />
+    <Compile Include="Testability\Testable\ClassWithDateTimeNowDependencyMadeTestable.cs" />
+    <Compile Include="Testability\Testable\ClassWithDirectoryEntryDependencyMadeTestable.cs" />
+    <Compile Include="Testability\Testable\ClassWithSetterInjectableInterfaceDependency.cs" />
+    <Compile Include="Testability\Testable\ClassWithSmtpClientDependencyMadeTestableFirstAlternative.cs" />
+    <Compile Include="Testability\Testable\ClassWithStaticDependencyMadeTestable.cs" />
+    <Compile Include="Testability\Testable\ClassWithSmtpClientDependencyMadeTestableSecondAlternative.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

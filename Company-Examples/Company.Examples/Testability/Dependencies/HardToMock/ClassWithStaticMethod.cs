@@ -11,7 +11,7 @@ namespace Company.Examples.Testability.Dependencies.HardToMock
 		[SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
 		public static string Method()
 		{
-			return string.Format(CultureInfo.InvariantCulture, "This value is returned from the method \"{0}.GetStringValue()\".", typeof(ClassWithStaticMethod));
+			return string.Format(CultureInfo.InvariantCulture, "This value is returned from the method \"{0}.Method()\".", typeof(ClassWithStaticMethod));
 		}
 
 		#endregion

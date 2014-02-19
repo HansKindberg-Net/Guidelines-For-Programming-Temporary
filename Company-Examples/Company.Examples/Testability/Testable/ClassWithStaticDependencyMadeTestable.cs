@@ -3,7 +3,7 @@ using Company.Examples.Testability.Dependencies.Mockable;
 
 namespace Company.Examples.Testability.Testable
 {
-	public class ClassWithConstructorInjectableDependency
+	public class ClassWithStaticDependencyMadeTestable
 	{
 		#region Fields
 
@@ -13,7 +13,7 @@ namespace Company.Examples.Testability.Testable
 
 		#region Constructors
 
-		public ClassWithConstructorInjectableDependency(IClassWithStaticMethod classWithStaticMethod)
+		public ClassWithStaticDependencyMadeTestable(IClassWithStaticMethod classWithStaticMethod)
 		{
 			if(classWithStaticMethod == null)
 				throw new ArgumentNullException("classWithStaticMethod");
@@ -23,11 +23,20 @@ namespace Company.Examples.Testability.Testable
 
 		#endregion
 
+		#region Properties
+
+		protected internal virtual IClassWithStaticMethod ClassWithStaticMethod
+		{
+			get { return this._classWithStaticMethod; }
+		}
+
+		#endregion
+
 		#region Methods
 
 		public virtual void Method()
 		{
-			this._classWithStaticMethod.Method();
+			this.ClassWithStaticMethod.Method();
 		}
 
 		#endregion

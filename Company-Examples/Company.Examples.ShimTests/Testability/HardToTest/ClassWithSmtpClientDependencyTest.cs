@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Mail;
 using System.Net.Mail.Fakes;
@@ -13,6 +14,7 @@ namespace Company.Examples.ShimTests.Testability.HardToTest
 		#region Methods
 
 		[TestMethod]
+		[SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Company.Examples.Testability.HardToTest.ClassWithSmtpClientDependency.Send(System.String,System.String,System.String)")]
 		public void Send_ShouldCallSmtpClientSend()
 		{
 			const string testMessage = "Test message";
