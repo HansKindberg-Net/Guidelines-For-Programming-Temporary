@@ -5,7 +5,13 @@ namespace Company.Examples.Testability.Testable
 {
 	public class ClassWithDateTimeNowDependencyMadeTestable
 	{
+		#region Fields
+
 		private readonly IDateTimeContext _dateTimeContext;
+
+		#endregion
+
+		#region Constructors
 
 		public ClassWithDateTimeNowDependencyMadeTestable(IDateTimeContext dateTimeContext)
 		{
@@ -15,10 +21,16 @@ namespace Company.Examples.Testability.Testable
 			this._dateTimeContext = dateTimeContext;
 		}
 
+		#endregion
+
+		#region Properties
+
 		protected internal virtual IDateTimeContext DateTimeContext
 		{
 			get { return this._dateTimeContext; }
 		}
+
+		#endregion
 
 		#region Methods
 

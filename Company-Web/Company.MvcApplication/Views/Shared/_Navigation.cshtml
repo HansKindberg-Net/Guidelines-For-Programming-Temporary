@@ -1,5 +1,5 @@
 ﻿@model Company.MvcApplication.Models.LayoutModel
-@foreach(var siteMapNode in this.Model.GetSiteMapNodes(false, null, true))
+@foreach(var siteMapNode in Model.GetSiteMapNodes(false, null, true))
 {
 	if(siteMapNode.IsHeader)
 	{

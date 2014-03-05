@@ -120,6 +120,11 @@ namespace Company.DirectoryServices
 			this.PropertyCollection.CopyTo(array.Select(this.GetPropertyValueCollection).ToArray(), index);
 		}
 
+		public static PropertyCollectionWrapper FromPropertyCollection(PropertyCollection propertyCollection)
+		{
+			return propertyCollection;
+		}
+
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return this.GetEnumerator();
@@ -134,11 +139,6 @@ namespace Company.DirectoryServices
 		public virtual void Remove(object key)
 		{
 			((IDictionary) this.PropertyCollection).Remove(key);
-		}
-
-		public static PropertyCollectionWrapper FromPropertyCollection(PropertyCollection propertyCollection)
-		{
-			return propertyCollection;
 		}
 
 		#endregion

@@ -148,6 +148,11 @@ namespace Company.DirectoryServices
 			this.DirectoryEntry.Dispose();
 		}
 
+		public static DirectoryEntryWrapper FromDirectoryEntry(DirectoryEntry directoryEntry)
+		{
+			return directoryEntry;
+		}
+
 		public virtual object Invoke(string methodName, params object[] args)
 		{
 			return this.DirectoryEntry.Invoke(methodName, args);
@@ -186,11 +191,6 @@ namespace Company.DirectoryServices
 		public virtual void Rename(string newName)
 		{
 			this.DirectoryEntry.Rename(newName);
-		}
-
-		public static DirectoryEntryWrapper FromDirectoryEntry(DirectoryEntry directoryEntry)
-		{
-			return directoryEntry;
 		}
 
 		#endregion

@@ -100,31 +100,31 @@ namespace Company.Collections.Generic.Traversing
 					continue;
 
 				var itemHeaderNode = new TreeTraversingMetadataNode<T>(item)
-					{
-						IsItemHeader = true,
-						IsSelectedAncestorHeader = selectedNode != null && selectedNode.Ancestors.Contains(item),
-						IsSelectedItemHeader = item.Equals(selectedNode)
-					};
+				{
+					IsItemHeader = true,
+					IsSelectedAncestorHeader = selectedNode != null && selectedNode.Ancestors.Contains(item),
+					IsSelectedItemHeader = item.Equals(selectedNode)
+				};
 
 				traversingNodes.Add(itemHeaderNode);
 
 				var itemNode = new TreeTraversingItemNode<T>(item)
-					{
-						IsItem = true,
-						IsSelectedAncestor = selectedNode != null && selectedNode.Ancestors.Contains(item),
-						IsSelectedItem = item.Equals(selectedNode)
-					};
+				{
+					IsItem = true,
+					IsSelectedAncestor = selectedNode != null && selectedNode.Ancestors.Contains(item),
+					IsSelectedItem = item.Equals(selectedNode)
+				};
 
 				traversingNodes.Add(itemNode);
 
 				this.Populate(traversingNodes, item.Children, selectedNode, level + 1, numberOfLevels, expandAllNodes);
 
 				var itemFooterNode = new TreeTraversingMetadataNode<T>(item)
-					{
-						IsItemFooter = true,
-						IsSelectedAncestorFooter = selectedNode != null && selectedNode.Ancestors.Contains(item),
-						IsSelectedItemFooter = item.Equals(selectedNode)
-					};
+				{
+					IsItemFooter = true,
+					IsSelectedAncestorFooter = selectedNode != null && selectedNode.Ancestors.Contains(item),
+					IsSelectedItemFooter = item.Equals(selectedNode)
+				};
 
 				traversingNodes.Add(itemFooterNode);
 			}

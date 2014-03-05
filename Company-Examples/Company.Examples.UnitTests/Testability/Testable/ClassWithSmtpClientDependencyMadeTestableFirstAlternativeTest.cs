@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Mail;
@@ -24,7 +23,7 @@ namespace Company.Examples.UnitTests.Testability.Testable
 			const string to = "nobody@company.net";
 
 			var smtpClientMock = new Mock<ISmtpClient>();
-			smtpClientMock.Setup(smtpClient => smtpClient.Send(It.IsAny<MailMessage>())).Callback((MailMessage mailMessage) => 
+			smtpClientMock.Setup(smtpClient => smtpClient.Send(It.IsAny<MailMessage>())).Callback((MailMessage mailMessage) =>
 			{
 				Assert.AreEqual(from, mailMessage.From.Address);
 				Assert.AreEqual(message, mailMessage.Body);

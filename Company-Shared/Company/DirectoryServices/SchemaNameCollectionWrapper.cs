@@ -120,6 +120,11 @@ namespace Company.DirectoryServices
 			this.SchemaNameCollection.CopyTo(stringArray, index);
 		}
 
+		public static SchemaNameCollectionWrapper FromSchemaNameCollection(SchemaNameCollection schemaNameCollection)
+		{
+			return schemaNameCollection;
+		}
+
 		public virtual IEnumerator GetEnumerator()
 		{
 			return this.SchemaNameCollection.GetEnumerator();
@@ -158,11 +163,6 @@ namespace Company.DirectoryServices
 		public virtual void RemoveAt(int index)
 		{
 			this.SchemaNameCollection.RemoveAt(index);
-		}
-
-		public static SchemaNameCollectionWrapper FromSchemaNameCollection(SchemaNameCollection schemaNameCollection)
-		{
-			return schemaNameCollection;
 		}
 
 		#endregion

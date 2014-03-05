@@ -14,13 +14,14 @@ namespace Company.WebApplication.Pages.HardToTest
 {
 	public partial class DatabaseInteraction : Page
 	{
-		private const string _actionParameterName = "Action";
+		#region Fields
+
 		private HttpVerb? _action;
-		
+		private const string _actionParameterName = "Action";
+
+		#endregion
 
 		#region Properties
-
-		protected internal virtual IEnumerable<IExampleItem> ExampleItems { get; set; }
 
 		protected internal virtual HttpVerb Action
 		{
@@ -44,16 +45,6 @@ namespace Company.WebApplication.Pages.HardToTest
 			}
 		}
 
-		public virtual Uri AddNewItemUrl
-		{
-			get { return this.CreateRelativeUrl(HttpVerb.Post); }
-		}
-
-		public virtual Uri EditItemUrl
-		{
-			get { return this.CreateRelativeUrl(HttpVerb.Put); }
-		}
-
 		protected internal virtual string ActionParameterName
 		{
 			get { return _actionParameterName; }
@@ -64,9 +55,9 @@ namespace Company.WebApplication.Pages.HardToTest
 			get { return this.Action == HttpVerb.Post; }
 		}
 
-		public virtual bool EditItem
+		public virtual Uri AddNewItemUrl
 		{
-			get { return this.Action == HttpVerb.Put; }
+			get { return this.CreateRelativeUrl(HttpVerb.Post); }
 		}
 
 		public virtual bool DeleteItem
@@ -74,12 +65,26 @@ namespace Company.WebApplication.Pages.HardToTest
 			get { return this.Action == HttpVerb.Delete; }
 		}
 
+		public virtual bool EditItem
+		{
+			get { return this.Action == HttpVerb.Put; }
+		}
+
+		public virtual Uri EditItemUrl
+		{
+			get { return this.CreateRelativeUrl(HttpVerb.Put); }
+		}
+
+		protected internal virtual IEnumerable<IExampleItem> ExampleItems { get; set; }
+
 		public virtual bool Search
 		{
 			get { return this.Action == HttpVerb.Get; }
 		}
 
 		#endregion
+
+		#region Methods
 
 		protected internal virtual Uri CreateRelativeUrl(HttpVerb action)
 		{
@@ -112,9 +117,6 @@ namespace Company.WebApplication.Pages.HardToTest
 		//{
 		//	this.AddValidationException(validationResult, new FormatException(string.Format(CultureInfo.InvariantCulture, "\"{0}\" can not be empty.", fieldName)));
 		//}
-
-		#region Methods
-
 		protected internal virtual IValidationResult ValidateSearchInput()
 		{
 			IValidationResult validationResult = new ValidationResult();

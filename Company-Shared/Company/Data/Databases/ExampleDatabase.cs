@@ -132,7 +132,7 @@ namespace Company.Data.Databases
 			databaseCommand.CommandText = string.Format(CultureInfo.InvariantCulture, "DELETE FROM {0} WHERE Id=@Id;", this.ExampleTableName);
 			databaseCommand.Connection = this.CreateDatabaseConnection();
 			databaseCommand.Parameters.Add(this.CreateDatabaseParameter(DbType.Int32, "@Id", id));
-			
+
 			return databaseCommand.ExecuteNonQuery() > 0;
 			// ReSharper restore PossibleNullReferenceException
 		}
@@ -197,7 +197,7 @@ namespace Company.Data.Databases
 			DbCommand databaseCommand = this.DatabaseProviderFactory.CreateCommand();
 			// ReSharper disable PossibleNullReferenceException
 			databaseCommand.Connection = this.CreateDatabaseConnection();
-			
+
 			if(exampleItem.New)
 			{
 				databaseCommand.CommandText = string.Format(CultureInfo.InvariantCulture, "INSERT INTO {0} ([Key], [Value]) VALUES (@Key, @Value);", this.ExampleTableName);

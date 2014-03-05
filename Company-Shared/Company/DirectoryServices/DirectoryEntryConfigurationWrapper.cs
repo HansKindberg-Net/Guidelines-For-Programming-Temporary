@@ -64,6 +64,11 @@ namespace Company.DirectoryServices
 
 		#region Methods
 
+		public static DirectoryEntryConfigurationWrapper FromDirectoryEntryConfiguration(DirectoryEntryConfiguration directoryEntryConfiguration)
+		{
+			return directoryEntryConfiguration;
+		}
+
 		public virtual string GetCurrentServerName()
 		{
 			return this.DirectoryEntryConfiguration.GetCurrentServerName();
@@ -77,11 +82,6 @@ namespace Company.DirectoryServices
 		public virtual void SetUserNameQueryQuota(string accountName)
 		{
 			this.DirectoryEntryConfiguration.SetUserNameQueryQuota(accountName);
-		}
-
-		public static DirectoryEntryConfigurationWrapper FromDirectoryEntryConfiguration(DirectoryEntryConfiguration directoryEntryConfiguration)
-		{
-			return directoryEntryConfiguration;
 		}
 
 		#endregion

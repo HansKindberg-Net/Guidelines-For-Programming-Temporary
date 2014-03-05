@@ -15,6 +15,11 @@ namespace Company.WebApplication.Business.Data.Databases
 
 		#region Methods
 
+		public static bool Delete(int id)
+		{
+			return _exampleDatabaseInstance.Delete(id);
+		}
+
 		public static IEnumerable<IExampleItem> Find(IExampleItem queryFilter)
 		{
 			return _exampleDatabaseInstance.Find(queryFilter);
@@ -23,11 +28,6 @@ namespace Company.WebApplication.Business.Data.Databases
 		public static void Save(IExampleItem exampleItem)
 		{
 			_exampleDatabaseInstance.Save(exampleItem);
-		}
-
-		public static bool Delete(int id)
-		{
-			return _exampleDatabaseInstance.Delete(id);
 		}
 
 		#endregion

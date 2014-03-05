@@ -72,9 +72,9 @@
 			</HeaderTemplate>
 			<ItemTemplate>
 				<tr>
-					<td><%# ((IExampleItem)Container.DataItem).Id %></td>
-					<td><%# ((IExampleItem)Container.DataItem).Key %></td>
-					<td><%# ((IExampleItem)Container.DataItem).Value %></td>
+					<td><%# ((IExampleItem) Container.DataItem).Id %></td>
+					<td><%# ((IExampleItem) Container.DataItem).Key %></td>
+					<td><%# ((IExampleItem) Container.DataItem).Value %></td>
 				</tr>
 			</ItemTemplate>
 			<FooterTemplate>

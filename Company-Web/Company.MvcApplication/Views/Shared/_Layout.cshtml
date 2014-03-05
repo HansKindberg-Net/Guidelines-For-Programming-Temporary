@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Company - @this.ViewBag.Title</title>
+		<title>Company - @ViewBag.Title</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="Company - mvc-application">
@@ -28,11 +28,11 @@
 		<div class="container">
 			<div class="content row">
 				<div class="col-md-3 padding-0">
-					@this.Html.Partial("~/Views/Shared/_Navigation.cshtml", this.Model.LayoutModel)
+					@Html.Partial("~/Views/Shared/_Navigation.cshtml", Model.LayoutModel)
 				</div>
 				<div class="col-md-9">
-					<h1>@this.ViewBag.Heading</h1>
-					@this.RenderSection("MainContent")
+					<h1>@ViewBag.Heading</h1>
+					@RenderSection("MainContent")
 				</div>
 			</div>
 			<div class="footer">

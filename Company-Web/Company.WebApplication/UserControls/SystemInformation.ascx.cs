@@ -10,12 +10,12 @@ namespace Company.WebApplication.UserControls
 		#region Fields
 
 		private static readonly IDictionary<SystemInformationType, string> _alertCssClassDictionary = new Dictionary<SystemInformationType, string>
-			{
-				{SystemInformationType.Confirmation, "alert-success"},
-				{SystemInformationType.Exception, "alert-danger"},
-				{SystemInformationType.Information, "alert-info"},
-				{SystemInformationType.Warning, "alert-warning"}
-			};
+		{
+			{SystemInformationType.Confirmation, "alert-success"},
+			{SystemInformationType.Exception, "alert-danger"},
+			{SystemInformationType.Information, "alert-info"},
+			{SystemInformationType.Warning, "alert-warning"}
+		};
 
 		private string _heading;
 

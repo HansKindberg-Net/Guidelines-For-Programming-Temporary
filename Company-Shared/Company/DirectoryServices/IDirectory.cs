@@ -16,6 +16,7 @@ namespace Company.DirectoryServices
 		#region Methods
 
 		bool Exists(string path);
+
 		[SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get")]
 		IDirectoryEntry Get(string path);
 

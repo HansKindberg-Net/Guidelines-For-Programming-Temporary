@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.DirectoryServices;
 
 namespace Company.DirectoryServices
 {

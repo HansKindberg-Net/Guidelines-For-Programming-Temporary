@@ -60,6 +60,11 @@ namespace Company.DirectoryServices
 			return (DirectoryEntryWrapper) this.DirectoryEntries.Find(name, schemaClassName);
 		}
 
+		public static DirectoryEntriesWrapper FromDirectoryEntries(DirectoryEntries directoryEntries)
+		{
+			return directoryEntries;
+		}
+
 		public virtual IEnumerator GetEnumerator()
 		{
 			return this.DirectoryEntries.Cast<DirectoryEntry>().Select(directoryEntry => (DirectoryEntryWrapper) directoryEntry).GetEnumerator();
@@ -68,11 +73,6 @@ namespace Company.DirectoryServices
 		public virtual void Remove(IDirectoryEntry entry)
 		{
 			this.DirectoryEntries.Remove(this.GetDirectoryEntry(entry));
-		}
-
-		public static DirectoryEntriesWrapper FromDirectoryEntries(DirectoryEntries directoryEntries)
-		{
-			return directoryEntries;
 		}
 
 		#endregion
