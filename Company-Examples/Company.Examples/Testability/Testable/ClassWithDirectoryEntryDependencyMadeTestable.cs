@@ -54,7 +54,7 @@ namespace Company.Examples.Testability.Testable
 		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
 		public IEnumerable<string> GetLdapRootPropertyNames()
 		{
-			using(IDirectoryEntry directoryEntry = this.Directory.GetDirectoryEntry(this.LdapUrl))
+			using(IDirectoryEntry directoryEntry = this.Directory.Get(this.LdapUrl))
 			{
 				return directoryEntry.Properties.Keys.Cast<string>().ToArray();
 			}

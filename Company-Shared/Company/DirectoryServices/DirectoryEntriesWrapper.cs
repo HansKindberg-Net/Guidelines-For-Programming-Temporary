@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.DirectoryServices;
 using System.Linq;
+using Company.DirectoryServices.Extensions;
 
 namespace Company.DirectoryServices
 {
-	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-	public class DirectoryEntriesWrapper : IDirectoryEntries
+	[SuppressMessage("Microsoft.Design", "CA1010:CollectionsShouldImplementGenericInterface", Justification = "This is a wrapper.")]
+	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "This is a wrapper.")]
+	public class DirectoryEntriesWrapper : IDirectoryEntryCollection
 	{
 		#region Fields
 
@@ -30,9 +31,14 @@ namespace Company.DirectoryServices
 
 		#region Properties
 
-		protected internal virtual DirectoryEntries DirectoryEntries
+		public virtual DirectoryEntries DirectoryEntries
 		{
 			get { return this._directoryEntries; }
+		}
+
+		public virtual ISchemaNameCollection SchemaFilter
+		{
+			get { return (SchemaNameCollectionWrapper) this.DirectoryEntries.SchemaFilter; }
 		}
 
 		#endregion
@@ -54,36 +60,19 @@ namespace Company.DirectoryServices
 			return (DirectoryEntryWrapper) this.DirectoryEntries.Find(name, schemaClassName);
 		}
 
-		public static DirectoryEntriesWrapper FromDirectoryEntries(DirectoryEntries directoryEntries)
+		public virtual IEnumerator GetEnumerator()
 		{
-			return directoryEntries;
-		}
-
-		public virtual IEnumerator<IDirectoryEntry> GetEnumerator()
-		{
-			return this.ToList().GetEnumerator();
-		}
-
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
+			return this.DirectoryEntries.Cast<DirectoryEntry>().Select(directoryEntry => (DirectoryEntryWrapper) directoryEntry).GetEnumerator();
 		}
 
 		public virtual void Remove(IDirectoryEntry entry)
 		{
-			DirectoryEntryWrapper directoryEntryWrapper = entry as DirectoryEntryWrapper;
-
-			if(directoryEntryWrapper == null)
-				throw new NotImplementedException("Don't know how to implement this yet.");
-
-			DirectoryEntry directoryEntry = directoryEntryWrapper.DirectoryEntry;
-
-			directoryEntry.Parent.Children.Remove(directoryEntry);
+			this.DirectoryEntries.Remove(this.GetDirectoryEntry(entry));
 		}
 
-		protected internal virtual IList<IDirectoryEntry> ToList()
+		public static DirectoryEntriesWrapper FromDirectoryEntries(DirectoryEntries directoryEntries)
 		{
-			return (from DirectoryEntry directoryEntry in this.DirectoryEntries select (DirectoryEntryWrapper) directoryEntry).Cast<IDirectoryEntry>().ToList();
+			return directoryEntries;
 		}
 
 		#endregion

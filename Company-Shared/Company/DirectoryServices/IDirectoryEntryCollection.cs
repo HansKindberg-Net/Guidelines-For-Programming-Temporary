@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections;
 
 namespace Company.DirectoryServices
 {
-	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-	public interface IDirectoryEntries : IEnumerable<IDirectoryEntry>
+	public interface IDirectoryEntryCollection : IEnumerable
 	{
+		#region Properties
+
+		ISchemaNameCollection SchemaFilter { get; }
+
+		#endregion
+
 		#region Methods
 
 		IDirectoryEntry Add(string name, string schemaClassName);

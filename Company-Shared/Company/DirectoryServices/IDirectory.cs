@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.DirectoryServices;
 
 namespace Company.DirectoryServices
 {
@@ -6,18 +7,17 @@ namespace Company.DirectoryServices
 	{
 		#region Properties
 
-		[SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")]
-		string HostUrl { get; }
+		AuthenticationTypes AuthenticationTypes { get; set; }
+		string Password { get; set; }
+		string UserName { get; set; }
 
 		#endregion
 
 		#region Methods
 
-		IDirectoryEntry GetDirectoryEntry(string path);
-		string GetPath(string distinguishedName);
-
-		[SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-		IDirectoryEntry GetRoot();
+		bool Exists(string path);
+		[SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get")]
+		IDirectoryEntry Get(string path);
 
 		#endregion
 	}

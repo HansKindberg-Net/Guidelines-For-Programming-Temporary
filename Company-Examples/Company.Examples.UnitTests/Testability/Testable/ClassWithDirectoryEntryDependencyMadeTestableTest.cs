@@ -15,7 +15,7 @@ namespace Company.Examples.UnitTests.Testability.Testable
 
 		private static IDirectory CreateDirectory()
 		{
-			return new Directory {AuthenticationType = AuthenticationTypes.Anonymous};
+			return new Directory {AuthenticationTypes = AuthenticationTypes.Anonymous};
 		}
 
 		[TestMethod]
