@@ -145,28 +145,24 @@ Det vi vill testa är att när ClassWithStaticDependency.Method() anropas så ska C
 Lösningar:
 
 - [**Shim-test**](/Company-Examples/Company.Examples.ShimTests/Testability/HardToTest/ClassWithStaticDependencyTest.cs)
+- [**ClassWithStaticDependencyMadeTestable** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithStaticDependencyMadeTestable.cs)
 - [**ClassWithStaticDependencyMadeTestable**](/Company-Examples/Company.Examples/Testability/Testable/ClassWithStaticDependencyMadeTestable.cs)
 - [**ClassWithStaticDependencyMadeTestable**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithStaticDependencyMadeTestableTest.cs)
 
+#### 2.6.2 Klass med beroende till en klass med en sealed (sluten) metod
 
+Det vi vill testa är att när ClassWithSealedDependency.Method() anropas så ska ClassWithSealedMethod.Method() anropas.
 
+- [**ClassWithSealedDependency**](/Company-Examples/Company.Examples/Testability/HardToTest/ClassWithSealedDependency.cs)
+- [**ClassWithSealedDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/HardToTest/ClassWithSealedDependencyTest.cs)
 
-Om vi skippar tänket på god kod-design så skulle vi kunna testa dessa två scenarier ändå om vi har tillgång till något av följande:
+Lösningar:
 
+- [**ClassWithSetterInjectableInterfaceDependency** - Setter injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithConstructorInjectableInterfaceDependency.cs)
+- [**ClassWithSetterInjectableInterfaceDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithSetterInjectableInterfaceDependencyTest.cs)
+- [**ClassWithConstructorInjectableInterfaceDependency** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithSetterInjectableInterfaceDependency.cs)
+- [**ClassWithConstructorInjectableInterfaceDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithConstructorInjectableInterfaceDependencyTest.cs)
 
-
-Test för scenario 1, löst med [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims) ([/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs](/Company-Examples/Company.Examples.ShimTests/HardToTest/EmailFormTest.cs)):
-
-
-
-
-
-
-
-
-
-
-	
 
 
 
