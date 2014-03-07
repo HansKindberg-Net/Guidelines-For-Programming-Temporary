@@ -13,8 +13,8 @@ namespace Company.Examples.UnitTests.Testability.HardToTest
 		[TestMethod]
 		public void GetLdapRootPropertyNames_IfConditionIsFalse_ShouldReturnThePropertyNamesOfTheRootDirectoryEntryOfVerisign()
 		{
-			// I dont think this is a good test. Just an example of the difficulty to test a method than depends on System.DirectoryServices and DirectoryEntry.
-			// We test something that depends on data that we do not have control over.
+			// I dont think this is a good test. Just an example of the difficulty to test a method that depends on System.DirectoryServices and DirectoryEntry.
+			// We test something that depends on data that we do not have control over. If more properties are added to the data source (directory) the test will fail.
 			// If this test throws an exception a firewall is probably blocking the traffic (port 389).
 
 			IEnumerable<string> propertyNames = new ClassWithDirectoryEntryDependency {Condition = false}.GetLdapRootPropertyNames().ToArray();
@@ -32,8 +32,8 @@ namespace Company.Examples.UnitTests.Testability.HardToTest
 		[TestMethod]
 		public void GetLdapRootPropertyNames_IfConditionIsTrue_ShouldReturnThePropertyNamesOfTheRootDirectoryEntryOfDtrust()
 		{
-			// I dont think this is a good test. Just an example of the difficulty to test a method than depends on System.DirectoryServices and DirectoryEntry.
-			// We test something that depends on data that we do not have control over.
+			// I dont think this is a good test. Just an example of the difficulty to test a method that depends on System.DirectoryServices and DirectoryEntry.
+			// We test something that depends on data that we do not have control over. If more properties are added to the data source (directory) the test will fail.
 			// If this test throws an exception a firewall is probably blocking the traffic (port 389).
 
 			IEnumerable<string> propertyNames = new ClassWithDirectoryEntryDependency {Condition = false}.GetLdapRootPropertyNames().ToArray();
