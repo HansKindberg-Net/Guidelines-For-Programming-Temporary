@@ -193,7 +193,7 @@ Lösningar:
 	- Lösningen hanteras med hjälp av [**IDateTimeContext**](/Company-Shared/Company/IDateTimeContext.cs) ([**DateTimeContext**](/Company-Shared/Company/DateTimeContext.cs) är ett exempel på en klass som implementerar [**IDateTimeContext**](/Company-Shared/Company/IDateTimeContext.cs) och som kan användas när ett system körs på "riktigt")
 - [**ClassWithDateTimeNowDependencyMadeTestableTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithDateTimeNowDependencyMadeTestableTest.cs)
 
-#### 2.6.5 Klass med beroende till SmtpClient
+#### 2.6.5 Klass med beroende till SmtpClient (System.Net.Mail)
 
 Det vi vill testa är att när ClassWithSmtpClientDependency.Send(string to, string subject, string message) anropas så ska SmtpClient.Send(...) anropas med korrekta värden.
 
@@ -209,6 +209,31 @@ Lösningar:
 - [**ClassWithSmtpClientDependencyMadeTestableSecondAlternative** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithSmtpClientDependencyMadeTestableSecondAlternative.cs)
 	- Lösningen hanteras med hjälp av [**ISmtpClientFactory**](/Company-Shared/Company/Net/Mail/ISmtpClientFactory.cs) ([**DefaultSmtpClientFactory**](/Company-Shared/Company/Net/Mail/DefaultSmtpClientFactory.cs) är ett exempel på en klass som implementerar [**ISmtpClientFactory**](/Company-Shared/Company/Net/Mail/ISmtpClientFactory.cs) och som kan användas när ett system körs på "riktigt")
 - [**ClassWithSmtpClientDependencyMadeTestableSecondAlternativeTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithSmtpClientDependencyMadeTestableSecondAlternativeTest.cs)
+
+
+
+
+
+#### 2.6.6 Klass med beroende till DirectoryEntry (System.DirectoryServices)
+
+Nu blir det mer komplicerat. Denna klass kanske till och med ska designas på ett annat sätt som gör den lättare att testa. Men detta är ett exemple så...
+
+Ett scenario vi vill testa är att när ClassWithDirectoryEntryDependency.GetLdapRootPropertyNames() anropas så ska den anropa DirectoryEntry.Properties.PropertyNames och returnera en samling namn.
+
+- [**ClassWithDirectoryEntryDependency**](/Company-Examples/Company.Examples/Testability/HardToTest/ClassWithDirectoryEntryDependency.cs)
+- [**ClassWithDirectoryEntryDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/HardToTest/ClassWithDirectoryEntryDependencyTest.cs)
+
+Lösningar:
+
+- [**Shim-test**](/Company-Examples/Company.Examples.ShimTests/Testability/HardToTest/ClassWithSmtpClientDependencyTest.cs)
+- [**ClassWithSmtpClientDependencyMadeTestableFirstAlternative** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithSmtpClientDependencyMadeTestableFirstAlternative.cs)
+	- Lösningen hanteras med hjälp av [**ISmtpClient**](/Company-Shared/Company/Net/Mail/ISmtpClient.cs) ([**SmtpClientWrapper**](/Company-Shared/Company/Net/Mail/SmtpClientWrapper.cs) är ett exempel på en klass som implementerar [**ISmtpClient**](/Company-Shared/Company/Net/Mail/ISmtpClient.cs) och som kan användas när ett system körs på "riktigt")
+- [**ClassWithSmtpClientDependencyMadeTestableFirstAlternativeTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithSmtpClientDependencyMadeTestableFirstAlternativeTest.cs)
+- [**ClassWithSmtpClientDependencyMadeTestableSecondAlternative** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithSmtpClientDependencyMadeTestableSecondAlternative.cs)
+	- Lösningen hanteras med hjälp av [**ISmtpClientFactory**](/Company-Shared/Company/Net/Mail/ISmtpClientFactory.cs) ([**DefaultSmtpClientFactory**](/Company-Shared/Company/Net/Mail/DefaultSmtpClientFactory.cs) är ett exempel på en klass som implementerar [**ISmtpClientFactory**](/Company-Shared/Company/Net/Mail/ISmtpClientFactory.cs) och som kan användas när ett system körs på "riktigt")
+- [**ClassWithSmtpClientDependencyMadeTestableSecondAlternativeTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithSmtpClientDependencyMadeTestableSecondAlternativeTest.cs)
+
+
 
 ## 3. Visual Studio
 
