@@ -133,8 +133,18 @@ För att kunna skriva testbar kod behöver man många gånger använda sig av **Desig
 ### 2.6 Exempel
 Det vanligaste problemet med att enhets-testa kod är att beroenden i en klass är hårdkodade. Hårdkodade beroenden går inte att styra utifrån vilket man behöver kunna göra om man ska kunna enhets-testa. Om man inte har möjlighet att styra detta kan man använda sig av något av de ramverk som beskrivs under [2.4.1 Mock the unmockable](/ReadMe.sv.md#241-mock-the-unmockable). Men man bör sträva efter att kunna styra beroenden utifrån för att få en bra mjukvaru-arkitektur. Varje exempel som följer har en tillhörande test-class, även om det inte går att testa. I test-klassen står beskrivet vad man skulle vilja testa.
 
-Exempel på kod som är svår att enhets-testa:
-- [**ClassWithStaticDependency**](/Company-Examples/Company.Examples/Testability/HardToTest/ClassWithStaticDependency.cs): [ClassWithStaticDependencyTest](/Company-Examples/Company.Examples.UnitTests/Testability/HardToTest/ClassWithStaticDependencyTest.cs)
+Nedan följer exempel på kod som är svår att enhets-testa och hur man kan korrigera för att göra koden testbar. I vissa exempel finns även exempel på hur man kan lösa det med [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims)/**Shim**-tester. Att lösa det med [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims) är inte att rekommendera om man har kontroll över koden, det är med som ett exempel.
+
+#### 2.6.1 Klass med beroende till en klass med en statisk metod
+
+- [**ClassWithStaticDependency**](/Company-Examples/Company.Examples/Testability/HardToTest/ClassWithStaticDependency.cs)
+- [**ClassWithStaticDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/HardToTest/ClassWithStaticDependencyTest.cs)
+
+Lösningar:
+
+- [**Shim-test**](/Company-Examples/Company.Examples.ShimTests/Testability/HardToTest/ClassWithStaticDependencyTest.cs)
+- [**ClassWithStaticDependencyMadeTestable**](/Company-Examples/Company.Examples/Testability/Testable/ClassWithStaticDependencyMadeTestable.cs)
+- [**ClassWithStaticDependencyMadeTestable**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithStaticDependencyMadeTestableTest.cs)
 
 
 
