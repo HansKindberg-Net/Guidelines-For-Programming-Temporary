@@ -135,21 +135,7 @@ Det vanligaste problemet med att enhets-testa kod är att beroenden i en klass är
 
 Nedan följer exempel på kod som är svår att enhets-testa och hur man kan korrigera för att göra koden testbar. Varje exempel som följer har en tillhörande test-class, även om det inte går att testa. I vissa exempel finns även exempel på hur man kan lösa det med [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims)/**Shim**-tester. Att lösa det med [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims) är inte att rekommendera om man har kontroll över koden, det är med som ett exempel.
 
-#### 2.6.1 Klass med beroende till en klass med en sealed (sluten) metod
-
-Det vi vill testa är att när ClassWithSealedDependency.Method() anropas så ska ClassWithSealedMethod.Method() anropas.
-
-- [**ClassWithSealedDependency**](/Company-Examples/Company.Examples/Testability/HardToTest/ClassWithSealedDependency.cs)
-- [**ClassWithSealedDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/HardToTest/ClassWithSealedDependencyTest.cs)
-
-Lösningar:
-
-- [**ClassWithConstructorInjectableInterfaceDependency** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithConstructorInjectableInterfaceDependency.cs)
-- [**ClassWithConstructorInjectableInterfaceDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithConstructorInjectableInterfaceDependencyTest.cs)
-- [**ClassWithSetterInjectableInterfaceDependency** - Setter injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithSetterInjectableInterfaceDependency.cs)
-- [**ClassWithSetterInjectableInterfaceDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithSetterInjectableInterfaceDependencyTest.cs)
-
-#### 2.6.2 Klass med beroende till en klass med en statisk metod
+#### 2.6.1 Klass med beroende till en klass med en statisk metod
 
 Det vi vill testa är att när ClassWithStaticDependency.Method() anropas så ska ClassWithStaticMethod.Method() anropas.
 
@@ -163,12 +149,19 @@ Lösningar:
 - [**ClassWithStaticDependencyMadeTestable**](/Company-Examples/Company.Examples/Testability/Testable/ClassWithStaticDependencyMadeTestable.cs)
 - [**ClassWithStaticDependencyMadeTestableTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithStaticDependencyMadeTestableTest.cs)
 
+#### 2.6.2 Klass med beroende till en klass med en sealed (sluten) metod
 
+Det vi vill testa är att när ClassWithSealedDependency.Method() anropas så ska ClassWithSealedMethod.Method() anropas.
 
+- [**ClassWithSealedDependency**](/Company-Examples/Company.Examples/Testability/HardToTest/ClassWithSealedDependency.cs)
+- [**ClassWithSealedDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/HardToTest/ClassWithSealedDependencyTest.cs)
 
+Lösningar:
 
-
-
+- [**ClassWithConstructorInjectableInterfaceDependency** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithConstructorInjectableInterfaceDependency.cs)
+- [**ClassWithConstructorInjectableInterfaceDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithConstructorInjectableInterfaceDependencyTest.cs)
+- [**ClassWithSetterInjectableInterfaceDependency** - Setter injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithSetterInjectableInterfaceDependency.cs)
+- [**ClassWithSetterInjectableInterfaceDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithSetterInjectableInterfaceDependencyTest.cs)
 
 
 
