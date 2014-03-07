@@ -179,7 +179,7 @@ Lösningar:
 - [**ClassWithVirtualDependencyMadeTestable** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithVirtualDependencyMadeTestable.cs)
 - [**ClassWithVirtualDependencyMadeTestableTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithVirtualDependencyMadeTestableTest.cs)
 
-#### 2.6.3 Klass med beroende till DateTime.Now
+#### 2.6.4 Klass med beroende till DateTime.Now
 
 Det vi vill testa är att när ClassWithDateTimeNowDependency.GetCurrentDateTime() anropas så ska DateTime.Now anropas och returnera värdet.
 
@@ -193,10 +193,22 @@ Lösningar:
 	- Lösningen hanteras med hjälp av [**IDateTimeContext**](/Company-Shared/Company/IDateTimeContext.cs) ([**DateTimeContext**](/Company-Shared/Company/DateTimeContext.cs) är ett exempel på en klass som implementerar [**IDateTimeContext**](/Company-Shared/Company/IDateTimeContext.cs) och som kan användas när ett system körs på "riktigt")
 - [**ClassWithDateTimeNowDependencyMadeTestableTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithDateTimeNowDependencyMadeTestableTest.cs)
 
+#### 2.6.5 Klass med beroende till SmtpClient
 
+Det vi vill testa är att när ClassWithSmtpClientDependency.Send(string to, string subject, string message) anropas så ska SmtpClient.Send(...) anropas med korrekta värden.
 
+- [**ClassWithSmtpClientDependency**](/Company-Examples/Company.Examples/Testability/HardToTest/ClassWithSmtpClientDependency.cs)
+- [**ClassWithSmtpClientDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/HardToTest/ClassWithSmtpClientDependencyTest.cs)
 
+Lösningar:
 
+- [**Shim-test**](/Company-Examples/Company.Examples.ShimTests/Testability/HardToTest/ClassWithSmtpClientDependencyTest.cs)
+- [**ClassWithSmtpClientDependencyMadeTestableFirstAlternative** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithSmtpClientDependencyMadeTestableFirstAlternative.cs)
+	- Lösningen hanteras med hjälp av [**ISmtpClient**](/Company-Shared/Company/Net/Mail/ISmtpClient.cs) ([**SmtpClientWrapper**](/Company-Shared/Company/Net/Mail/SmtpClientWrapper.cs) är ett exempel på en klass som implementerar [**ISmtpClient**](/Company-Shared/Company/Net/Mail/ISmtpClient.cs) och som kan användas när ett system körs på "riktigt")
+- [**ClassWithSmtpClientDependencyMadeTestableFirstAlternativeTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithSmtpClientDependencyMadeTestableFirstAlternativeTest.cs)
+- [**ClassWithSmtpClientDependencyMadeTestableSecondAlternative** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithSmtpClientDependencyMadeTestableSecondAlternative.cs)
+	- Lösningen hanteras med hjälp av [**ISmtpClientFactory**](/Company-Shared/Company/Net/Mail/ISmtpClientFactory.cs) ([**DefaultSmtpClientFactory**](/Company-Shared/Company/Net/Mail/DefaultSmtpClientFactory.cs) är ett exempel på en klass som implementerar [**ISmtpClientFactory**](/Company-Shared/Company/Net/Mail/ISmtpClientFactory.cs) och som kan användas när ett system körs på "riktigt")
+- [**ClassWithSmtpClientDependencyMadeTestableSecondAlternativeTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithSmtpClientDependencyMadeTestableSecondAlternativeTest.cs)
 
 ## 3. Visual Studio
 
