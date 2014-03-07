@@ -144,10 +144,10 @@ Det vi vill testa är att när ClassWithSealedDependency.Method() anropas så ska C
 
 Lösningar:
 
-- [**ClassWithSetterInjectableInterfaceDependency** - Setter injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithConstructorInjectableInterfaceDependency.cs)
-- [**ClassWithSetterInjectableInterfaceDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithSetterInjectableInterfaceDependencyTest.cs)
-- [**ClassWithConstructorInjectableInterfaceDependency** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithSetterInjectableInterfaceDependency.cs)
+- [**ClassWithConstructorInjectableInterfaceDependency** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithConstructorInjectableInterfaceDependency.cs)
 - [**ClassWithConstructorInjectableInterfaceDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithConstructorInjectableInterfaceDependencyTest.cs)
+- [**ClassWithSetterInjectableInterfaceDependency** - Setter injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithSetterInjectableInterfaceDependency.cs)
+- [**ClassWithSetterInjectableInterfaceDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithSetterInjectableInterfaceDependencyTest.cs)
 
 #### 2.6.2 Klass med beroende till en klass med en statisk metod
 
