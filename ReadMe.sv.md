@@ -146,7 +146,6 @@ Lösningar:
 
 - [**Shim-test**](/Company-Examples/Company.Examples.ShimTests/Testability/HardToTest/ClassWithStaticDependencyTest.cs)
 - [**ClassWithStaticDependencyMadeTestable** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithStaticDependencyMadeTestable.cs)
-- [**ClassWithStaticDependencyMadeTestable**](/Company-Examples/Company.Examples/Testability/Testable/ClassWithStaticDependencyMadeTestable.cs)
 - [**ClassWithStaticDependencyMadeTestableTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithStaticDependencyMadeTestableTest.cs)
 
 #### 2.6.2 Klass med beroende till en klass med en sealed (sluten) metod
@@ -163,6 +162,30 @@ Lösningar:
 - [**ClassWithSetterInjectableInterfaceDependency** - Setter injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithSetterInjectableInterfaceDependency.cs)
 - [**ClassWithSetterInjectableInterfaceDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithSetterInjectableInterfaceDependencyTest.cs)
 
+#### 2.6.3 Klass med beroende till en klass med en virtual metod
+
+Det vi vill testa är att när ClassWithVirtualDependency.Method() anropas så ska ClassWithVirtualMethod.Method() anropas.
+
+- [**ClassWithVirtualDependency**](/Company-Examples/Company.Examples/Testability/HardToTest/ClassWithVirtualDependency.cs)
+- [**ClassWithVirtualDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/HardToTest/ClassWithVirtualDependencyTest.cs)
+
+Lösningar:
+
+- [**ClassWithVirtualDependencyMadeTestable** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithVirtualDependencyMadeTestable.cs)
+- [**ClassWithVirtualDependencyMadeTestableTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithVirtualDependencyMadeTestableTest.cs)
+
+#### 2.6.3 Klass med beroende till en klass med en virtual metod
+
+Det vi vill testa är att när ClassWithDateTimeNowDependency.GetCurrentDateTime() anropas så ska DateTime.Now anropas och returnera värdet.
+
+- [**ClassWithDateTimeNowDependency**](/Company-Examples/Company.Examples/Testability/HardToTest/ClassWithDateTimeNowDependency.cs)
+- [**ClassWithDateTimeNowDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/HardToTest/ClassWithDateTimeNowDependencyTest.cs)
+
+Lösningar:
+
+- [**Shim-test**](/Company-Examples/Company.Examples.ShimTests/Testability/HardToTest/ClassWithDateTimeNowDependencyTest.cs)
+- [**ClassWithDateTimeNowDependencyMadeTestable** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithDateTimeNowDependencyMadeTestable.cs)
+- [**ClassWithDateTimeNowDependencyMadeTestableTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithDateTimeNowDependencyMadeTestableTest.cs)
 
 
 

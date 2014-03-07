@@ -82,6 +82,7 @@
     <Compile Include="Testability\Testable\ClassWithSmtpClientDependencyMadeTestableFirstAlternativeTest.cs" />
     <Compile Include="Testability\Testable\ClassWithSmtpClientDependencyMadeTestableSecondAlternativeTest.cs" />
     <Compile Include="Testability\Testable\ClassWithStaticDependencyMadeTestableTest.cs" />
+    <Compile Include="Testability\Testable\ClassWithVirtualDependencyMadeTestableTest.cs" />
     <Compile Include="Testability\Testable\Mocks\ClassWithStaticMethodMock.cs" />
   </ItemGroup>
   <ItemGroup>

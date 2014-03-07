@@ -64,6 +64,7 @@
     <Compile Include="Testability\Testable\ClassWithDirectoryEntryDependencyMadeTestable.cs" />
     <Compile Include="Testability\Testable\ClassWithSetterInjectableInterfaceDependency.cs" />
     <Compile Include="Testability\Testable\ClassWithSmtpClientDependencyMadeTestableFirstAlternative.cs" />
+    <Compile Include="Testability\Testable\ClassWithVirtualDependencyMadeTestable.cs" />
     <Compile Include="Testability\Testable\ClassWithStaticDependencyMadeTestable.cs" />
     <Compile Include="Testability\Testable\ClassWithSmtpClientDependencyMadeTestableSecondAlternative.cs" />
   </ItemGroup>
