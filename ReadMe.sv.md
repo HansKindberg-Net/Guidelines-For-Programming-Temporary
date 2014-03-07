@@ -146,6 +146,7 @@ Lösningar:
 
 - [**Shim-test**](/Company-Examples/Company.Examples.ShimTests/Testability/HardToTest/ClassWithStaticDependencyTest.cs)
 - [**ClassWithStaticDependencyMadeTestable** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithStaticDependencyMadeTestable.cs)
+	- Lösningen hanteras med hjälp av [**IClassWithStaticMethod**](/Company-Examples/Company.Examples/Testability/Mockable/IClassWithStaticMethod.cs) & [**ClassWithStaticMethodWrapper**](/Company-Examples/Company.Examples/Testability/Wrappers/ClassWithStaticMethodWrapper.cs)
 - [**ClassWithStaticDependencyMadeTestableTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithStaticDependencyMadeTestableTest.cs)
 
 #### 2.6.2 Klass med beroende till en klass med en sealed (sluten) metod
@@ -155,11 +156,15 @@ Det vi vill testa är att när ClassWithSealedDependency.Method() anropas så ska C
 - [**ClassWithSealedDependency**](/Company-Examples/Company.Examples/Testability/HardToTest/ClassWithSealedDependency.cs)
 - [**ClassWithSealedDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/HardToTest/ClassWithSealedDependencyTest.cs)
 
+Följande lösningar är exempel på generella lösningar, lösningar som generellt gäller för att lösa alla typer av problem med svårtestad kod.
+
 Lösningar:
 
 - [**ClassWithConstructorInjectableInterfaceDependency** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithConstructorInjectableInterfaceDependency.cs)
+	- Lösningen hanteras med hjälp av [**IDependency**](/Company-Examples/Company.Examples/Testability/Mockable/IDependency.cs) (vid en riktig/konkret implementering krävs en klass som implementerar [**IDependency**](/Company-Examples/Company.Examples/Testability/Mockable/IDependency.cs))
 - [**ClassWithConstructorInjectableInterfaceDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithConstructorInjectableInterfaceDependencyTest.cs)
 - [**ClassWithSetterInjectableInterfaceDependency** - Setter injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithSetterInjectableInterfaceDependency.cs)
+	- Lösningen hanteras med hjälp av [**IDependency**](/Company-Examples/Company.Examples/Testability/Mockable/IDependency.cs) (vid en riktig/konkret implementering krävs en klass som implementerar [**IDependency**](/Company-Examples/Company.Examples/Testability/Mockable/IDependency.cs))
 - [**ClassWithSetterInjectableInterfaceDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithSetterInjectableInterfaceDependencyTest.cs)
 
 #### 2.6.3 Klass med beroende till en klass med en virtual metod
@@ -174,7 +179,7 @@ Lösningar:
 - [**ClassWithVirtualDependencyMadeTestable** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithVirtualDependencyMadeTestable.cs)
 - [**ClassWithVirtualDependencyMadeTestableTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithVirtualDependencyMadeTestableTest.cs)
 
-#### 2.6.3 Klass med beroende till en klass med en virtual metod
+#### 2.6.3 Klass med beroende till DateTime.Now
 
 Det vi vill testa är att när ClassWithDateTimeNowDependency.GetCurrentDateTime() anropas så ska DateTime.Now anropas och returnera värdet.
 
@@ -185,6 +190,7 @@ Lösningar:
 
 - [**Shim-test**](/Company-Examples/Company.Examples.ShimTests/Testability/HardToTest/ClassWithDateTimeNowDependencyTest.cs)
 - [**ClassWithDateTimeNowDependencyMadeTestable** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithDateTimeNowDependencyMadeTestable.cs)
+	- Lösningen hanteras med hjälp av [**IDateTimeContext**](/Company-Shared/Company/IDateTimeContext.cs) ([**DateTimeContext**](/Company-Shared/Company/DateTimeContext.cs) är ett exempel på en klass som implementerar [**IDateTimeContext**](/Company-Shared/Company/IDateTimeContext.cs) och som kan användas när ett system körs på "riktigt")
 - [**ClassWithDateTimeNowDependencyMadeTestableTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithDateTimeNowDependencyMadeTestableTest.cs)
 
 
@@ -197,8 +203,8 @@ Lösningar:
 ### 3.1 NuGet
 Använd NuGet för att hantera referenser till external bibliotek. När du lägger till **NuGet** paket så hamnar paketen som standard i katalogen **packages** på samma nivå som din VS-solution-fil. Om du slår på (enable) **NuGet Package Restore** så kan utvecklare bygga din VS-solution direkt efter att de öppnat din VS-solution från **Source Control**. Alla paket som behövs laddas ner automatiskt vid första bygget (kan behöva byggas 2 gånger ibland för att det ska fungera). Det är viktigt att inte checka in eventuella **NuGet** paket, för då ser jag inte så så stor vits med **NuGet**. Om du dessutom korrigerar inställningarna ([3.1.2 Korrigera NuGet.targets](/ReadMe.sv.md#312-korrigera-nugettargets)) så:
 
-- behöver du inte ckecka in/commita **NuGet.exe** heller, det laddas också ner vid första bygget.
-- behöver inte andra utvecklare/programmerare som öppnar din VS-solution från **Source Control** ha **NuGet Package Manager** installerat över huvudtaget eller inte konfigurerat på samma sätt som dig för att de ändå ska kunna bygga VS-solution
+- behöver du inte ckecka in/commita **NuGet.exe** heller, det laddas också ner vid första bygget
+- behöver inte andra utvecklare/programmerare som öppnar din VS-solution från **Source Control** ha **NuGet Package Manager** installerat över huvudtaget eller inte konfigurerat på samma sätt som du för att de ändå ska kunna bygga VS-solution
 
 #### 3.1.1 Enable NuGet Package Restore
 - I **Solution Explorer** högerklicka på din **Solution**
