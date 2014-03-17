@@ -32,7 +32,6 @@ namespace Company.Examples.Testability.HardToTest
 		#region Methods
 
 		[SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
 		public IEnumerable<string> GetLdapRootPropertyNames()
 		{
 			using(DirectoryEntry directoryEntry = new DirectoryEntry(this.LdapUrl))

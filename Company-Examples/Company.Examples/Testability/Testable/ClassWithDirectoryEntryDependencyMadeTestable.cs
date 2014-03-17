@@ -51,12 +51,11 @@ namespace Company.Examples.Testability.Testable
 		#region Methods
 
 		[SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-		[SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
 		public IEnumerable<string> GetLdapRootPropertyNames()
 		{
 			using(IDirectoryEntry directoryEntry = this.Directory.Get(this.LdapUrl))
 			{
-				return directoryEntry.Properties.Keys.Cast<string>().ToArray();
+				return directoryEntry.Properties.PropertyNames.Cast<string>().ToArray();
 			}
 		}
 
