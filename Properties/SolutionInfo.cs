@@ -44,8 +44,8 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyFileVersion(SolutionInfo.AssemblyFileVersion)]
 [assembly: AssemblyInformationalVersion(SolutionInfo.AssemblyInformationalVersion)]
-[assembly: AssemblyProduct(AssemblyInfo.AssemblyName + " " + SolutionInfo.AssemblyInformationalVersion)]
-[assembly: AssemblyTitle(AssemblyInfo.AssemblyName + " " + SolutionInfo.AssemblyInformationalVersion)]
+[assembly: AssemblyProduct(AssemblyInfo.AssemblyName)]
+[assembly: AssemblyTitle(AssemblyInfo.AssemblyName)]
 [assembly: AssemblyVersion(SolutionInfo.AssemblyVersion)]
 #pragma warning restore 436
 
