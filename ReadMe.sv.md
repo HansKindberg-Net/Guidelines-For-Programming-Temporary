@@ -20,6 +20,7 @@ Det här projektet innehåller riktlinjer för programmering. Riktlinjerna gäller i
 
 ### 1.2 Projekt-struktur
 Detta projekt består av en **VS-solution** med diverse **VS-project** med exempel kod. Programmeringsspråket som används är **C#**, **.NET Framework 4.5**. Jag vill visa hur jag menar genom exempel. **VS-solution** innehåller flera **VS-project** och därför har jag valt att gruppera/strukturera dem med hjälp av **Solution Folders**.
+
 - **.nuget** - katalogen innehåller filer för **NuGet Package Restore**, dessa filer skapas när man slår på **NuGet Package Restore** ([3.1.1 Enable NuGet Package Restore](/ReadMe.sv.md#311-enable-nuget-package-restore))
 - **CodeAnalysis** - globala filer/inställningar för **Code Analysis** ([Code Analysis for Managed Code Overview](http://msdn.microsoft.com/en-us/library/3z0aeatx.aspx)), länkas in av **VS-project**
 - **Company-Console** - innehåller ett Windows-console-application projekt + tillhörande **VS-test-project**
@@ -38,6 +39,7 @@ Jag inleder alla **VS-project** namn med ansvarigt företags namn (eller organisa
 
 #### 1.3.1 VS-test-project
 Alla **VS-test-project** i den **VS-solution** som detta projekt består av är av typen **Unit Test Project**. Jag använder följande namngivning på **VS-test-project**:
+
 - [VS-project som ska testas].**IntegrationTests** - innehåller integrerade enhetstester där inte allt mockas
 - [VS-project som ska testas].**ShimTests** - innehåller enhetstester där typer som behöver mockas inte är mockbara utan [**Shims**](http://msdn.microsoft.com/en-us/library/hh549175.aspx#shims) ([**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx)) används istället ([Using shims to isolate your application from other assemblies for unit testing](http://msdn.microsoft.com/en-us/library/hh549176.aspx))
 - [VS-project som ska testas].**UnitTests** - innehåller enhetstester där typer som behöver mockas är mockbara
@@ -51,6 +53,7 @@ Jag är systemutvecklare och utvecklar/programmerar i huvudsak EPiServer-lösninga
 Det finns olika mål med testning ([SWEBOK - Chapter 5 Software Testing - Objectives of Testing](http://www.computer.org/portal/web/swebok/html/ch5#Ref2.2)). Detta avsnitt behandlar automatiserade/programmerbara funktionella tester, att skriva kod/programmera så att en applikation blir möjlig att automatiskt funktions-testa. 
 
 Mjukvara kan testas på på olika nivåer ([Software testing - Testing levels](http://en.wikipedia.org/wiki/Software_testing#Testing_levels), [SWEBOK - Chapter 5 Software Testing - Test Levels](http://www.computer.org/portal/web/swebok/html/ch5#Ref2))
+
 - **enhetstest** (unit test) – testa en minsta enhet, en metod/egenskap i en klass i ett system
 - **integrationstest** (integration test) – testa funktionalitet mellan enheter
 - **systemtest** (system test) – testa ett system som en helhet
@@ -59,6 +62,7 @@ För mig som programmerare handlar testbarhet mest om programmerbara/automatiska 
 
 ### 2.1 Fördelar
 Fördelar med testbarhet:
+
 - **Pluggbara** system – system/mjukvara där det är lätt att byta ut olika delar
 - System/mjukvara som kan köras i olika miljöer med olika förutsättningar, produktion, test, utveckling m.m.
 
@@ -69,12 +73,14 @@ Klasser har beroenden till andra klasser. Idén med enhetstestning är att testa k
 
 ### 2.3 Hantera beroenden
 För att kunna enhetstesta en metod i en klass som har ett beroende till en annan klass på ett bra sätt så måste man kunna hantera detta beroende. Detta kan hanteras med hjälp av:
+
 - [**Dependency injection**](http://en.wikipedia.org/wiki/Dependency_injection) - ett design mönster
 - [**Inversion of control**](http://en.wikipedia.org/wiki/Inversion_of_control) - en programmerings teknik
 
 Mitt sätt att se det: [**Inversion of control**](http://en.wikipedia.org/wiki/Inversion_of_control) är en teknik man kan använda för att hantera [**Dependency injection**](http://en.wikipedia.org/wiki/Dependency_injection).
 
 Kortfattat innebär det att man inte hårdkodar ett beroende till en annan klass utan man gör det möjligt att styra beroendet under körning. Martin Fowler har skrivit en artikel som behandlar detta område, [**Inversion of Control Containers and the Dependency Injection pattern**](http://martinfowler.com/articles/injection.html#ServiceLocatorVsDependencyInjection). Martin Fowler skriver också om fördelar/nackdelar med att använda respektive teknik/metod för att hantera beroenden:
+
 - [Inversion of Control Containers and the Dependency Injection pattern - **Deciding which option to use**](http://martinfowler.com/articles/injection.html#DecidingWhichOptionToUse)
 - [Inversion of Control Containers and the Dependency Injection pattern - **Service Locator vs Dependency Injection**](http://martinfowler.com/articles/injection.html#ServiceLocatorVsDependencyInjection)
 - [Inversion of Control Containers and the Dependency Injection pattern - **Constructor versus Setter Injection**](http://martinfowler.com/articles/injection.html#ConstructorVersusSetterInjection)
@@ -108,6 +114,7 @@ Gerard Meszaros har definierat begrepp för olika typer av [**Test Double**](http
 - **Test stub** - used for providing the tested code with "indirect input"
 
 Vad det handlar om är att sätta upp egenskaper och förväntningar på beroenden och på så sätt testa olika scenarior för den klass som är under test. Det man använder mock-ramverken till är att skapa upp klasser dynamiskt under körningen av enhets-testet. Det kräver att beroenden är **mock-bara** (mitt begrepp):
+
 - **Interface** - alla medlemmar (egenskaper/metoder) i ett interface är **alltid** mock-bara
 - **Abstract** - abstracta medlemmar (egenskaper/metoder) är ofta mock-bara
 - **Virtual (C#)** - virtuella medlemmar (egenskaper/metoder) är ofta mock-bara
@@ -127,6 +134,7 @@ Dessa ramverk fungerar genom att de går in och manipulerar vid bygget av en solu
 
 ### 2.5 Design Patterns
 För att kunna skriva testbar kod behöver man många gånger använda sig av **Design Patterns**. Vanliga mönster för att hantera dependency injection är:
+
 - [**Adapter**](http://www.blackwasp.co.uk/Adapter.aspx) - koda **Wrappers** för att ge befintliga svår-mockade klasser ett användbart gränssnitt
 - [**Factory Method**](http://www.blackwasp.co.uk/FactoryMethod.aspx) - ett mönster som används för att instansiera klasser (om en klass kräver en eller flera beroende-parametrar i sin konstruktor så kan det underlätta genom att ha en fabrik som instansierar objekt)
 
@@ -392,12 +400,14 @@ SlowCheetah on GitHub: https://github.com/sayedihashimi/slow-cheetah
 I Visual Studio kan man skapa kataloger på solution-nivå. Om man högerklickar VS-solution i **Solution Explorer** får man upp valet **Add** -> **New Solution Folder**.
 När man skapar en **Solution Folder** skapas inte en katalog på disk. Lägger man till en fil, genom att högerklicka på katalogen och väljer **Add** -> **New Item** så kommer den nya filen visuellt att ligga i den **Solution Folder** man valde att lägga till filen in men fysiskt så hamnar filen i rotkatalogen för VS-solution.
 Man kan korrigera så att den visuella strukturen stämmer överens med den fysiska strukturen men det kräver manuella åtgärder. Exempel:
+
 1. Lägg till en **Solution Folder**.
 2. Lägg till en katalog på disk i rot-katalogen för din VS-solution och ge den samma namn.
 3. Lägg till en fil från Visual Studio.
 4. Ta bort samma fil från Visual Studio (den kommer bara att tas bort visuellt i Visual Studio, inte fysiskt på disk).
 5. Flytta den fysiska filen (som du tog bort i steget innan) från rot-katalogen till den aktuella fysiska katalogen på disk.
 6. Välj **Add** -> **Existing Item** genom att högerklicka på katalogen i **Solution Explorer**.
-Detta gäller även sub-kataloger. Om man nu lägger till den VS-solution till source-control så kommer katalogstrukturen för all VS-solution kataloger vara den samma både fysiskt och visuellt i VS-solution.
+
+Detta gäller även sub-kataloger. Om man nu lägger till VS-solution till source-control så kommer katalogstrukturen för alla VS-solution kataloger vara den samma både fysiskt och visuellt i VS-solution.
 
 
