@@ -7,7 +7,8 @@
     - [1.2 Projekt-struktur](/ReadMe.sv.md#12-projekt-struktur)
     - [1.3 Namnkonvention](/ReadMe.sv.md#13-namnkonvention)
         - [1.3.1 VS-test-project](/ReadMe.sv.md#131-vs-test-project)
-    - [1.4 Övrigt](/ReadMe.sv.md#14-%C3%96vrigt)
+    - [1.4 Viktigt](/ReadMe.sv.md#14-viktigt)
+	- [1.5 Övrigt](/ReadMe.sv.md#15-%C3%96vrigt)
 - [2 Testbarhet](/ReadMe.sv.md#2-testbarhet)
 	- [2.1 Fördelar](/ReadMe.sv.md#21-f%C3%B6rdelar)
 	- [2.2 Beroenden (dependencies)](/ReadMe.sv.md#22-beroenden-dependencies)
@@ -67,7 +68,14 @@ Alla **VS-test-project** i den **VS-solution** som detta projekt består av är av
 
 [**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx) kräver Visual Studio Premium/Ultimate 2012/2013. Om man har Visual Studio 2010 eller Visual Studio Professional 2012/2013 kan inte ett VS-project där [**Microsoft Fakes**](http://msdn.microsoft.com/en-us/library/hh549175.aspx) används laddas. Om jag skulle blanda shim-tests med övriga enhets-tester skulle inga enhets-test projekt gå att ladda med dessa versioner. Det är därför jag gjort denna uppdelning.
 
-### 1.4 Övrigt
+### 1.4 Viktigt
+När man bygger denna **VS-solution** så körs anpassade (custom) [**MSBuild**-tasks](http://msdn.microsoft.com/en-us/library/7z253716.aspx). Bland annat så kopieras filer till *Solution-Output* katalogen som ligger/skapas i rot-katalogen för **VS-solution**. Om sökvägen till rot-katalogen för **VS-solution** är för lång så kommer ett fel genereras när man bygger:
+
+- *MSB3021: Unable to copy file "[SourcePath]" to "..\..\Solution-Output\[DestinationPath]". The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters, and the directory name must be less than 248 characters. (Sökvägen eller filnamnet, eller båda två, innehåller för många tecken. Det fullständiga filnamnet måste innehålla färre än 260 tecken och katalognamnet färre än 248.)*
+
+Detta händer om man klonar/hämtar ut denna **VS-solution** till t.ex. *"C:\Users\UserName\Documents\Visual Studio 201X\Projects"*. Så det är viktigt att klona/hämta ut till en katalog med kortare sökväg, t.ex. *"C:\Data\Projects"*.
+
+### 1.5 Övrigt
 Jag är systemutvecklare och utvecklar/programmerar i huvudsak EPiServer-lösningar och andra webbapplikationer. Jag har mindre erfarenhet av .NET WCF, .NET WebServices, .NET Windows Forms, ändå har jag velat ta med exempel inom dessa typer av applikationer. Jag anser mig heller inte expert på att skriva/programmera tester, däremot har jag byggt upp min kunskap på att göra programkod testbar.
 
 ## 2 Testbarhet
