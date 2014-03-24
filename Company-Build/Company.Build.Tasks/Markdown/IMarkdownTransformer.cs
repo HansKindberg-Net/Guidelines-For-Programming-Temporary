@@ -1,5 +1,8 @@
-﻿namespace Company.Build.Tasks.Markdown
+﻿using System;
+
+namespace Company.Build.Tasks.Markdown
 {
+	[CLSCompliant(false)]
 	public interface IMarkdownTransformer
 	{
 		#region Properties
