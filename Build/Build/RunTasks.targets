@@ -113,12 +113,38 @@
 			<ReplacementValue>#3.5%2520Solution%2520Folder</ReplacementValue>
 		</ReplacementAfterTransform>
 	</ItemGroup>
+	<ItemGroup Condition="@(CompanyExamplesExclude) == ''">
+		<CompanyExamplesExclude Include="$(SolutionDir)*.*" Exclude="$(SolutionDir)Company-Examples.sln" />
+		<CompanyExamplesExclude Include="$(SolutionDir)**\*.user" />
+		<CompanyExamplesExclude Include="$(SolutionDir)**\bin\**\*.*" />
+		<CompanyExamplesExclude Include="$(SolutionDir)**\obj\**\*.*" />
+		<CompanyExamplesExclude Include="$(SolutionDir).git\**\*.*" />
+		<CompanyExamplesExclude Include="$(SolutionDir).nuget\NuGet.exe" />
+		<CompanyExamplesExclude Include="$(SolutionDir)Build\**\*.*" />
+		<CompanyExamplesExclude Include="$(SolutionDir)Company-Build\**\*.*" />
+		<CompanyExamplesExclude Include="$(SolutionDir)Company-Console\**\*.*" />
+		<CompanyExamplesExclude Include="$(SolutionDir)Company-Services\**\*.*" />
+		<CompanyExamplesExclude Include="$(SolutionDir)Company-Shared\**\*.*" Exclude="$(SolutionDir)Company-Shared\Company\**\*.*" />
+		<CompanyExamplesExclude Include="$(SolutionDir)Company-Web\**\*.*" />
+		<CompanyExamplesExclude Include="$(SolutionDir)Company-Windows\**\*.*" />
+		<CompanyExamplesExclude Include="$(SolutionDir)Data\**\*.*" />
+		<CompanyExamplesExclude Include="$(SolutionDir)packages\**\*.*" />
+		<CompanyExamplesExclude Include="$(SolutionDir)Solution-Output\**\*.*" />
+		<CompanyExamplesExclude Include="$(SolutionDir)Targets\**\*.*" />
+	</ItemGroup>
+	<ItemGroup Condition="@(CompanyExamplesFile) == ''">
+		<CompanyExamplesFile Include="$(SolutionDir)**\*.*" Exclude="@(CompanyExamplesExclude)" />
+	</ItemGroup>
+	<ItemGroup Condition="@(CompanyExamplesProject) == ''">
+		<CompanyExamplesProject Include="$(OutDir)**\*.csproj" />
+	</ItemGroup>
 	<UsingTask AssemblyFile="$(CompanyBuildTasksLibrary)" TaskName="Company.Build.Tasks.TransformMarkdown" />
 	<UsingTask AssemblyFile="$(MSBuildCommunityTasksLibrary)" TaskName="MSBuild.Community.Tasks.FileUpdate" />
 	<Target Name="Build">
 		<RemoveDir
 			Directories="$(OutDir)"
 		/>
+		<!-- Create html-documentation from markdown-documentation. -->
 		<TransformMarkdown
 			DestinationFolder="$(OutDir)"
 			GenerateHeadingIdentifiers="true"
@@ -126,6 +152,17 @@
 			ReplacementsAfterTransform="@(ReplacementAfterTransform)"
 			ReplacementsBeforeTransform="@(ReplacementBeforeTransform)"
 			SourceFiles="@(MarkdownFile)"
+		/>
+		<!-- Copy the "Company-Examples"-solution to the output-directory. -->
+		<Copy
+			DestinationFiles="@(CompanyExamplesFile->'$(OutDir)Company-Examples\%(RecursiveDir)%(Filename)%(Extension)')"
+			SourceFiles="@(CompanyExamplesFile)"
+		/>
+		<!-- Disable code-analysis on build in the "Company-Examples"-solution projects. -->
+		<FileUpdate
+			Files="@(CompanyExamplesProject)"
+			Regex="&lt;RunCodeAnalysis&gt;true&lt;/RunCodeAnalysis&gt;"
+			ReplacementText="&lt;RunCodeAnalysis&gt;false&lt;/RunCodeAnalysis&gt;"
 		/>
 	</Target>
 </Project>

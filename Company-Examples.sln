@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{876F1B76-E483-4B10-BE1A-28CE3BCFD4AB}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.config = .nuget\NuGet.config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysis", "{B81E6B2C-8A6B-4F21-AB2D-04C3BF71283C}"
+	ProjectSection(SolutionItems) = preProject
+		CodeAnalysis\Solution.ruleset = CodeAnalysis\Solution.ruleset
+		CodeAnalysis\Solution.Tests.ruleset = CodeAnalysis\Solution.Tests.ruleset
+		CodeAnalysis\SolutionDictionary.xml = CodeAnalysis\SolutionDictionary.xml
+		CodeAnalysis\SolutionSuppressions.cs = CodeAnalysis\SolutionSuppressions.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", "{A5B5E0D1-E087-4E26-A73B-71F25EBC159F}"
+	ProjectSection(SolutionItems) = preProject
+		Properties\SolutionInfo.cs = Properties\SolutionInfo.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Signing", "Signing", "{33B02134-8740-47DF-B7C6-63D17AAB2151}"
+	ProjectSection(SolutionItems) = preProject
+		Signing\Company.snk = Signing\Company.snk
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Company-Examples", "Company-Examples", "{72F3F420-C121-489F-9F65-F8363E3823FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Company-Shared", "Company-Shared", "{7F45EEF8-0D00-43B8-AE74-C24BC4A81371}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Examples", "Company-Examples\Company.Examples\Company.Examples.csproj", "{47F8B1CF-27FE-447F-8059-EC3519939472}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Examples.ShimTests", "Company-Examples\Company.Examples.ShimTests\Company.Examples.ShimTests.csproj", "{452E4B5E-4BC1-4C0E-B280-50C1AC23F3B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Examples.UnitTests", "Company-Examples\Company.Examples.UnitTests\Company.Examples.UnitTests.csproj", "{21DB2F4D-003F-4E10-8818-96A77C7F8981}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company", "Company-Shared\Company\Company.csproj", "{4A0595F1-27B1-426B-B597-A27D0DD6AB93}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47F8B1CF-27FE-447F-8059-EC3519939472}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47F8B1CF-27FE-447F-8059-EC3519939472}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47F8B1CF-27FE-447F-8059-EC3519939472}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47F8B1CF-27FE-447F-8059-EC3519939472}.Release|Any CPU.Build.0 = Release|Any CPU
+		{452E4B5E-4BC1-4C0E-B280-50C1AC23F3B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{452E4B5E-4BC1-4C0E-B280-50C1AC23F3B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{452E4B5E-4BC1-4C0E-B280-50C1AC23F3B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{452E4B5E-4BC1-4C0E-B280-50C1AC23F3B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21DB2F4D-003F-4E10-8818-96A77C7F8981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21DB2F4D-003F-4E10-8818-96A77C7F8981}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21DB2F4D-003F-4E10-8818-96A77C7F8981}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21DB2F4D-003F-4E10-8818-96A77C7F8981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A0595F1-27B1-426B-B597-A27D0DD6AB93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A0595F1-27B1-426B-B597-A27D0DD6AB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A0595F1-27B1-426B-B597-A27D0DD6AB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A0595F1-27B1-426B-B597-A27D0DD6AB93}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{47F8B1CF-27FE-447F-8059-EC3519939472} = {72F3F420-C121-489F-9F65-F8363E3823FC}
+		{452E4B5E-4BC1-4C0E-B280-50C1AC23F3B4} = {72F3F420-C121-489F-9F65-F8363E3823FC}
+		{21DB2F4D-003F-4E10-8818-96A77C7F8981} = {72F3F420-C121-489F-9F65-F8363E3823FC}
+		{4A0595F1-27B1-426B-B597-A27D0DD6AB93} = {7F45EEF8-0D00-43B8-AE74-C24BC4A81371}
+	EndGlobalSection
+EndGlobal
