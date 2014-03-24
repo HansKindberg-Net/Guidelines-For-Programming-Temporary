@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<!--<OutDir Condition="$(OutDir) == ''">..\..\Solution-Output\$(Configuration)\</OutDir>-->
+		<SolutionDir Condition="$(SolutionDir) == ''">..\..\</SolutionDir>
+	</PropertyGroup>
+	<PropertyGroup>
+		<CompanyBuildTasksLibrary Condition="$(CompanyBuildTasksLibrary) == ''">$(SolutionDir)Company-Build\Company.Build.Tasks\bin\$(Configuration)\Company.Build.Tasks.dll</CompanyBuildTasksLibrary>
+		<NuGetPackagesDirectory Condition="$(NuGetPackagesDirectory) == ''">$(SolutionDir)packages\</NuGetPackagesDirectory>
+	</PropertyGroup>
+	<PropertyGroup>
+		<MSBuildCommunityTasksLibrary Condition="$(MSBuildCommunityTasksLibrary) == ''">$(NuGetPackagesDirectory)MSBuildTasks.1.4.0.65\tools\MSBuild.Community.Tasks.dll</MSBuildCommunityTasksLibrary>
+	</PropertyGroup>
+	<ItemGroup Condition="@(MarkdownFile) == ''">
+		<MarkdownFile Include="$(SolutionDir)*.md" />
+	</ItemGroup>
+	<!--
+		Replacement values, examples:
+		%25 = %
+		%20 = whitespace
+		
+		So to replace a whitespace we need to put:
+		%2520 to get %20, we must escape the "%" in "%20"
+	-->
+	<ItemGroup Condition="@(ReplacementBeforeTransform) == ''">
+		<ReplacementBeforeTransform Include="[English](/ReadMe.md)">
+			<ReplacementValue></ReplacementValue>
+		</ReplacementBeforeTransform>
+		<ReplacementBeforeTransform Include="(/Company-">
+			<ReplacementValue>(http://webtfs:8080/tfs/web/UI/Pages/Scc/ViewSource.aspx?path=%2524%252FGuidelines-For-Programming/Company-</ReplacementValue>
+		</ReplacementBeforeTransform>
+		<!--
+		http://webtfs:8080/tfs/web/UI/Pages/Scc/ViewSource.aspx?path=%24%2FGuidelines-For-Programming/
+		-->
+	</ItemGroup>
+	<ItemGroup Condition="@(ReplacementAfterTransform) == ''">
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#1-inledning">
+			<ReplacementValue>#1%2520Inledning</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#11-ordlista">
+			<ReplacementValue>#1.1%2520Ordlista</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#12-projekt-struktur">
+			<ReplacementValue>#1.2%2520Projekt-struktur</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#13-namnkonvention">
+			<ReplacementValue>#1.3%2520Namnkonvention</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#131-vs-test-project">
+			<ReplacementValue>#1.3.1%2520VS-test-project</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#14-%25C3%2596vrigt">
+			<ReplacementValue>#1.4%2520%25C3%2596vrigt</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#2-testbarhet">
+			<ReplacementValue>#2%2520Testbarhet</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#21-f%25C3%25B6rdelar">
+			<ReplacementValue>#2.1%2520F%25C3%25B6rdelar</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#22-beroenden-dependencies">
+			<ReplacementValue>#2.2%2520Beroenden%2520(dependencies)</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#23-hantera-beroenden">
+			<ReplacementValue>#2.3%2520Hantera%2520beroenden</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#231-dependency-injection-di">
+			<ReplacementValue>#2.3.1%2520Dependency%2520Injection%2520(DI)</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#232-inversion-of-control-ioc">
+			<ReplacementValue>#2.3.2%2520Inversion%2520of%2520Control%2520(IoC)</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#2321-inversion-of-control-containers-ioc-containers">
+			<ReplacementValue>#2.3.2.1%2520Inversion%2520of%2520Control%2520Containers%2520(IoC%2520Containers)</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#24-mock">
+			<ReplacementValue>#2.4%2520Mock</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#241-mock-the-unmockable">
+			<ReplacementValue>#2.4.1%2520Mock%2520the%2520unmockable</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#25-design-patterns">
+			<ReplacementValue>#2.5%2520Design%2520Patterns</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#26-exempel">
+			<ReplacementValue>#2.6%2520Exempel</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#3-visual-studio">
+			<ReplacementValue>#3%2520Visual%2520Studio</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#31-nuget">
+			<ReplacementValue>#3.1%2520NuGet</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#311-enable-nuget-package-restore">
+			<ReplacementValue>#3.1.1%2520Enable%2520NuGet%2520Package%2520Restore</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#312-korrigera-nugettargets">
+			<ReplacementValue>#3.1.2%2520Korrigera%2520NuGet.targets</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#313-bygg-nuget-paket-av-ett-projekt">
+			<ReplacementValue>#3.1.3%2520Bygg%2520NuGet%2520paket%2520av%2520ett%2520projekt</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#32-code-analysis">
+			<ReplacementValue>#3.2%2520Code%2520Analysis</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#33-config-transformering">
+			<ReplacementValue>#3.3%2520*.config%2520transformering</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#34-resharper">
+			<ReplacementValue>#3.4%2520ReSharper</ReplacementValue>
+		</ReplacementAfterTransform>
+		<ReplacementAfterTransform Include="/ReadMe.sv.md#35-solution-folder">
+			<ReplacementValue>#3.5%2520Solution%2520Folder</ReplacementValue>
+		</ReplacementAfterTransform>
+	</ItemGroup>
+	<UsingTask AssemblyFile="$(CompanyBuildTasksLibrary)" TaskName="Company.Build.Tasks.TransformMarkdown" />
+	<UsingTask AssemblyFile="$(MSBuildCommunityTasksLibrary)" TaskName="MSBuild.Community.Tasks.FileUpdate" />
+	<Target Name="Build">
+		<RemoveDir
+			Directories="$(OutDir)"
+		/>
+		<TransformMarkdown
+			DestinationFolder="$(OutDir)"
+			GenerateHeadingIdentifiers="true"
+			OverwriteReadOnlyFiles="true"
+			ReplacementsAfterTransform="@(ReplacementAfterTransform)"
+			ReplacementsBeforeTransform="@(ReplacementBeforeTransform)"
+			SourceFiles="@(MarkdownFile)"
+		/>
+	</Target>
+</Project>

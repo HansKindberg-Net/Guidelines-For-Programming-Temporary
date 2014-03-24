@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<BuildDependsOn>
+			<!--RestorePackages;-->
+			EntityDeploy;
+			BeforeBuild;
+			RunTasks;
+			<!--
+				We comment out CoreBuild:
+				CoreBuild;
+			-->
+			AfterBuild;
+		</BuildDependsOn>
+	</PropertyGroup>
+	<Target Name="RunTasks">
+		<!--<Exec Command="&quot;$(MSBuildToolsPath)\MSBuild.exe&quot; &quot;$(ProjectDir)RunTasks.targets&quot; /nologo /verbosity:minimal /property:Configuration=$(Configuration);SolutionDir=&quot;$(SolutionDir)" />-->
+		<Exec Command="&quot;$(MSBuildToolsPath)\MSBuild.exe&quot; &quot;$(ProjectDir)RunTasks.targets&quot; /nologo /verbosity:minimal /property:Configuration=$(Configuration);OutDir=$(OutDir)" />
+	</Target>
+</Project>

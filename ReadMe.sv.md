@@ -6,9 +6,28 @@
     - [1.1 Ordlista](/ReadMe.sv.md#11-ordlista)
     - [1.2 Projekt-struktur](/ReadMe.sv.md#12-projekt-struktur)
     - [1.3 Namnkonvention](/ReadMe.sv.md#13-namnkonvention)
-        - [VS-test-project](/ReadMe.sv.md#131-vs-test-project)
+        - [1.3.1 VS-test-project](/ReadMe.sv.md#131-vs-test-project)
     - [1.4 Övrigt](/ReadMe.sv.md#14-%C3%96vrigt)
 - [2 Testbarhet](/ReadMe.sv.md#2-testbarhet)
+	- [2.1 Fördelar](/ReadMe.sv.md#21-f%C3%B6rdelar)
+	- [2.2 Beroenden (dependencies)](/ReadMe.sv.md#22-beroenden-dependencies)
+	- [2.3 Hantera beroenden](/ReadMe.sv.md#23-hantera-beroenden)
+		- [2.3.1 Dependency Injection (DI)](/ReadMe.sv.md#231-dependency-injection-di)
+		- [2.3.2 Inversion of Control (IoC)](/ReadMe.sv.md#232-inversion-of-control-ioc)
+			- [2.3.2.1 Inversion of Control Containers (IoC Containers)](/ReadMe.sv.md#2321-inversion-of-control-containers-ioc-containers)
+	- [2.4 Mock](/ReadMe.sv.md#24-mock)
+		- [2.4.1 Mock the unmockable](/ReadMe.sv.md#241-mock-the-unmockable)
+	- [2.5 Design Patterns](/ReadMe.sv.md#25-design-patterns)
+	- [2.6 Exempel](/ReadMe.sv.md#26-exempel)
+- [3 Visual Studio](/ReadMe.sv.md#3-visual-studio)
+	- [3.1 NuGet](/ReadMe.sv.md#31-nuget)
+		- [3.1.1 Enable NuGet Package Restore](/ReadMe.sv.md#311-enable-nuget-package-restore)
+		- [3.1.2 Korrigera NuGet.targets](/ReadMe.sv.md#312-korrigera-nugettargets)
+		- [3.1.3 Bygg NuGet paket av ett projekt](/ReadMe.sv.md#313-bygg-nuget-paket-av-ett-projekt)
+	- [3.2 Code Analysis](/ReadMe.sv.md#32-code-analysis)
+	- [3.3 *.config transformering](/ReadMe.sv.md#33-config-transformering)
+	- [3.4 ReSharper](/ReadMe.sv.md#34-resharper)
+	- [3.5 Solution Folder](/ReadMe.sv.md#35-solution-folder)
 
 ## 1 Inledning
 Det här projektet innehåller riktlinjer för programmering. Riktlinjerna gäller i huvudsak för **.NET**, **C#** och **Visual Studio**. Avsnittet [**2 Testbarhet**](/ReadMe.sv.md#2-testbarhet) kan dock appliceras på andra programmeringsspråk. Jag anser att avsnittet [**2 Testbarhet**](/ReadMe.sv.md#2-testbarhet) är det viktigaste avsnittet och därför har jag valt att lägga det först.
@@ -22,7 +41,9 @@ Det här projektet innehåller riktlinjer för programmering. Riktlinjerna gäller i
 Detta projekt består av en **VS-solution** med diverse **VS-project** med exempel kod. Programmeringsspråket som används är **C#**, **.NET Framework 4.5**. Jag vill visa hur jag menar genom exempel. **VS-solution** innehåller flera **VS-project** och därför har jag valt att gruppera/strukturera dem med hjälp av **Solution Folders**.
 
 - **.nuget** - katalogen innehåller filer för **NuGet Package Restore**, dessa filer skapas när man slår på **NuGet Package Restore** ([3.1.1 Enable NuGet Package Restore](/ReadMe.sv.md#311-enable-nuget-package-restore))
+- **Build** - MSBuild för VS-solution
 - **CodeAnalysis** - globala filer/inställningar för **Code Analysis** ([Code Analysis for Managed Code Overview](http://msdn.microsoft.com/en-us/library/3z0aeatx.aspx)), länkas in av **VS-project**
+- **Company-Build** - innehåller ett **Class Library** med **MSBuild tasks** för att användas i denna **VS-solution** + tillhörande **VS-test-project**
 - **Company-Console** - innehåller ett Windows-console-application projekt + tillhörande **VS-test-project**
 - **Company-Examples** - innehåller ett **Class Library** (**VS-project**) med mer allmän exempel-kod vad gäller testbarhet + tillhörande **VS-test-project**
 - **Company-Services** - innehåller WCF och WebService (asmx) projekt + tillhörande **VS-test-project**
@@ -247,7 +268,7 @@ Lösningar:
 	- Lösningen hanteras med hjälp av [**IDirectory**](/Company-Shared/Company/DirectoryServices//IDirectory.cs) ([**Directory**](/Company-Shared/Company/DirectoryServices/Directory.cs) är ett exempel på en klass som implementerar [**IDirectory**](/Company-Shared/Company/DirectoryServices//IDirectory.cs) och som kan användas när ett system körs på "riktigt")
 - [**ClassWithDirectoryEntryDependencyMadeTestableTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithDirectoryEntryDependencyMadeTestableTest.cs)
 
-## 3. Visual Studio
+## 3 Visual Studio
 
 ### 3.1 NuGet
 Använd NuGet för att hantera referenser till external bibliotek. När du lägger till **NuGet** paket så hamnar paketen som standard i katalogen **packages** på samma nivå som din VS-solution-fil. Om du slår på (enable) **NuGet Package Restore** så kan utvecklare bygga din VS-solution direkt efter att de öppnat din VS-solution från **Source Control**. Alla paket som behövs laddas ner automatiskt vid första bygget (kan behöva byggas 2 gånger ibland för att det ska fungera). Det är viktigt att inte checka in eventuella **NuGet** paket, för då ser jag inte så så stor vits med **NuGet**. Om du dessutom korrigerar inställningarna ([3.1.2 Korrigera NuGet.targets](/ReadMe.sv.md#312-korrigera-nugettargets)) så:

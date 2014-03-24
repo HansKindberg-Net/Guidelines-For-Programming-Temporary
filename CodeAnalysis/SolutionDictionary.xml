@@ -13,6 +13,7 @@
 			<Word>mockable</Word>
 			<Word>Mvc</Word><!-- Model-View-Controller -->
 			<Word>Mvp</Word><!-- Model-View-Presenter -->
+			<Word>unescaped</Word>
 		</Recognized>
 	</Words>
 </Dictionary>

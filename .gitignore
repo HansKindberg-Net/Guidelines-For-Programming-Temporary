@@ -5,10 +5,12 @@ FakesAssemblies/
 obj/
 packages/*
 release/
+Solution-Output
 testresults/
 *.suo
 *.user
 .nuget/NuGet.exe
+Company-Build/Company.Build.Tasks.IntegrationTests/Output/*
 Company-Web/Company.MvcApplication/App_Data/
 Company-Web/Company.MvcApplication/Scripts/
 Company-Web/Company.MvcApplication/Style/
@@ -22,6 +24,8 @@ Company-Web/Company.WebApplication/App_Data/
 Company-Web/Company.WebApplication/Scripts/
 Company-Web/Company.WebApplication/Style/
 Company-Web/Company.WebApplication/MailBox/*
+Documents/Generator.dll
 
 !packages/repositories.config
+!Company-Build/Company.Build.Tasks.IntegrationTests/Output/ReadMe.txt
 !Company-Web/Company.WebApplication/MailBox/ReadMe.txt
