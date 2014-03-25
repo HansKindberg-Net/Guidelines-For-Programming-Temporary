@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
@@ -71,6 +72,12 @@ namespace Company.Build.Tasks.Markdown
 
 		#region Methods
 
+		[SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Html identifiers should be lower case.")]
+		protected internal virtual string CreateIdentifierValueFromText(string text)
+		{
+			return (text ?? string.Empty).Replace(" ", "-").ToLower(CultureInfo.InvariantCulture);
+		}
+
 		protected internal virtual string GenerateHeadingIdentifiers(string html)
 		{
 			if(!string.IsNullOrEmpty(html))
@@ -81,7 +88,7 @@ namespace Company.Build.Tasks.Markdown
 				{
 					var headingXml = heading.ToString();
 
-					heading.Add(new XAttribute("id", Uri.EscapeUriString(heading.Value)));
+					heading.Add(new XAttribute("id", this.CreateIdentifierValueFromText(heading.Value)));
 
 					html = html.Replace(headingXml, heading.ToString());
 				}
