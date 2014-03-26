@@ -183,7 +183,7 @@ Lösningar:
 
 - [**Shim-test**](/Company-Examples/Company.Examples.ShimTests/Testability/HardToTest/ClassWithStaticDependencyTest.cs)
 - [**ClassWithStaticDependencyMadeTestable** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithStaticDependencyMadeTestable.cs)
-	- Lösningen hanteras med hjälp av [**IClassWithStaticMethod**](/Company-Examples/Company.Examples/Testability/Mockable/IClassWithStaticMethod.cs) & [**ClassWithStaticMethodWrapper**](/Company-Examples/Company.Examples/Testability/Wrappers/ClassWithStaticMethodWrapper.cs)
+	- Lösningen hanteras med hjälp av [**IClassWithStaticMethod**](/Company-Examples/Company.Examples/Testability/Dependencies/Mockable/IClassWithStaticMethod.cs) & [**ClassWithStaticMethodWrapper**](/Company-Examples/Company.Examples/Testability/Dependencies/Wrappers/ClassWithStaticMethodWrapper.cs)
 - [**ClassWithStaticDependencyMadeTestableTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithStaticDependencyMadeTestableTest.cs)
 
 #### 2.6.2 Klass med beroende till en klass med en sealed (sluten) metod
@@ -438,5 +438,3 @@ Man kan korrigera så att den visuella strukturen stämmer överens med den fysiska
 6. Välj **Add** -> **Existing Item** genom att högerklicka på katalogen i **Solution Explorer**.
 
 Detta gäller även sub-kataloger. Om man nu lägger till VS-solution till source-control så kommer katalogstrukturen för alla VS-solution kataloger vara den samma både fysiskt och visuellt i VS-solution.
-
-
