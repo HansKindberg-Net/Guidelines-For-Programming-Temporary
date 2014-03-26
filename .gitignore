@@ -24,7 +24,6 @@ Company-Web/Company.WebApplication/App_Data/
 Company-Web/Company.WebApplication/Scripts/
 Company-Web/Company.WebApplication/Style/
 Company-Web/Company.WebApplication/MailBox/*
-Documents/Generator.dll
 
 !packages/repositories.config
 !Company-Build/Company.Build.Tasks.IntegrationTests/Output/ReadMe.txt
