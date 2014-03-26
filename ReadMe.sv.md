@@ -198,10 +198,10 @@ Följande lösningar är exempel på generella lösningar, lösningar som generellt gä
 Lösningar:
 
 - [**ClassWithConstructorInjectableInterfaceDependency** - Constructor injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithConstructorInjectableInterfaceDependency.cs)
-	- Lösningen hanteras med hjälp av [**IDependency**](/Company-Examples/Company.Examples/Testability/Mockable/IDependency.cs) (vid en riktig/konkret implementering krävs en klass som implementerar [**IDependency**](/Company-Examples/Company.Examples/Testability/Mockable/IDependency.cs))
+	- Lösningen hanteras med hjälp av [**IDependency**](/Company-Examples/Company.Examples/Testability/Dependencies/Mockable/IDependency.cs) (vid en riktig/konkret implementering krävs en klass som implementerar [**IDependency**](/Company-Examples/Company.Examples/Testability/Dependencies/Mockable/IDependency.cs))
 - [**ClassWithConstructorInjectableInterfaceDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithConstructorInjectableInterfaceDependencyTest.cs)
 - [**ClassWithSetterInjectableInterfaceDependency** - Setter injection](/Company-Examples/Company.Examples/Testability/Testable/ClassWithSetterInjectableInterfaceDependency.cs)
-	- Lösningen hanteras med hjälp av [**IDependency**](/Company-Examples/Company.Examples/Testability/Mockable/IDependency.cs) (vid en riktig/konkret implementering krävs en klass som implementerar [**IDependency**](/Company-Examples/Company.Examples/Testability/Mockable/IDependency.cs))
+	- Lösningen hanteras med hjälp av [**IDependency**](/Company-Examples/Company.Examples/Testability/Dependencies/Mockable/IDependency.cs) (vid en riktig/konkret implementering krävs en klass som implementerar [**IDependency**](/Company-Examples/Company.Examples/Testability/Dependencies/Mockable/IDependency.cs))
 - [**ClassWithSetterInjectableInterfaceDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/Testable/ClassWithSetterInjectableInterfaceDependencyTest.cs)
 
 #### 2.6.3 Klass med beroende till en klass med en virtual metod
@@ -256,7 +256,7 @@ Ett scenario vi vill testa är att när ClassWithDirectoryEntryDependency.GetLdapR
 - [**ClassWithDirectoryEntryDependency**](/Company-Examples/Company.Examples/Testability/HardToTest/ClassWithDirectoryEntryDependency.cs)
 - [**ClassWithDirectoryEntryDependencyTest**](/Company-Examples/Company.Examples.UnitTests/Testability/HardToTest/ClassWithDirectoryEntryDependencyTest.cs)
 
-Följande lösning/lösningar kräver flera gränssnitt (interfaces) och flera **Wrappers**. Se namespace [**Company.DirectoryServices**](Company-Shared/Company/DirectoryServices).
+Följande lösning/lösningar kräver flera gränssnitt (interfaces) och flera **Wrappers**. Se namespace [**Company.DirectoryServices**](/Company-Shared/Company/DirectoryServices).
 Ett enklare/vanligare sätt skulle kanske vara att bygga ett gränssnitt mer anpassat för det system/applikation det gäller, någon form av repository:
 
 **Company.Data.IOrganizationRepository**

@@ -6,15 +6,18 @@
 		<SolutionDir Condition="$(SolutionDir) == ''">..\..\</SolutionDir>
 		<TeamFoundationServerProjectGuid Condition="$(TeamFoundationServerProjectGuid) == ''">a7a4d9ea-8db4-4a50-ac08-04332c4c4493</TeamFoundationServerProjectGuid>
 		<TeamFoundationServerProjectName Condition="$(TeamFoundationServerProjectName) == ''">Guidelines-For-Programming</TeamFoundationServerProjectName>
+		<TeamFoundationServerWebPathPrefix Condition="$(TeamFoundationServerWebPathPrefix) == ''">http://webtfs:8080/tfs/web/UI/Pages/Scc/</TeamFoundationServerWebPathPrefix>
 	</PropertyGroup>
 	<PropertyGroup>
 		<CompanyBuildTasksLibrary Condition="$(CompanyBuildTasksLibrary) == ''">$(SolutionDir)Company-Build\Company.Build.Tasks\bin\$(Configuration)\Company.Build.Tasks.dll</CompanyBuildTasksLibrary>
 		<NuGetPackagesDirectory Condition="$(NuGetPackagesDirectory) == ''">$(SolutionDir)packages\</NuGetPackagesDirectory>
-		<!-- TeamFoundationServerProjectUrl: %26 = & -->
-		<TeamFoundationServerProjectUrl Condition="$(TeamFoundationServerProjectUrl) == ''">http://webtfs:8080/tfs/web/View.aspx?puri=vstfs:///Classification/TeamProject/$(TeamFoundationServerProjectGuid)%26path=$/$(TeamFoundationServerProjectName)/Main/Source/</TeamFoundationServerProjectUrl>
+		<!-- TeamFoundationServerWebPathSuffix: %26 = & -->
+		<TeamFoundationServerWebPathSuffix Condition="$(TeamFoundationServerWebPathSuffix) == ''">.aspx?pguid=$(TeamFoundationServerProjectGuid)%26path=$/$(TeamFoundationServerProjectName)/Main/Source/</TeamFoundationServerWebPathSuffix>
 	</PropertyGroup>
 	<PropertyGroup>
 		<MSBuildCommunityTasksLibrary Condition="$(MSBuildCommunityTasksLibrary) == ''">$(NuGetPackagesDirectory)MSBuildTasks.1.4.0.65\tools\MSBuild.Community.Tasks.dll</MSBuildCommunityTasksLibrary>
+		<TeamFoundationServerWebDirectoryPrefix Condition="$(TeamFoundationServerWebDirectoryPrefix) == ''">$(TeamFoundationServerWebPathPrefix)Explorer$(TeamFoundationServerWebPathSuffix)</TeamFoundationServerWebDirectoryPrefix>
+		<TeamFoundationServerWebFilePrefix Condition="$(TeamFoundationServerWebFilePrefix) == ''">$(TeamFoundationServerWebPathPrefix)ViewSource$(TeamFoundationServerWebPathSuffix)</TeamFoundationServerWebFilePrefix>
 	</PropertyGroup>
 	<ItemGroup Condition="@(MarkdownFile) == ''">
 		<MarkdownFile Include="$(SolutionDir)*.md" />
@@ -31,8 +34,11 @@
 		<ReplacementBeforeTransform Include="[English](/ReadMe.md)">
 			<ReplacementValue></ReplacementValue>
 		</ReplacementBeforeTransform>
+		<ReplacementBeforeTransform Include="(/Company-Shared/Company/DirectoryServices)">
+			<ReplacementValue>($(TeamFoundationServerWebDirectoryPrefix)Company-Shared/Company/DirectoryServices)</ReplacementValue>
+		</ReplacementBeforeTransform>
 		<ReplacementBeforeTransform Include="(/Company-">
-			<ReplacementValue>($(TeamFoundationServerProjectUrl)Company-</ReplacementValue>
+			<ReplacementValue>($(TeamFoundationServerWebFilePrefix)Company-</ReplacementValue>
 		</ReplacementBeforeTransform>
 	</ItemGroup>
 	<ItemGroup Condition="@(ReplacementAfterTransform) == ''">
