@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Target Name="BeforeBuild">
+		<!--
+			To avoid a bug:
+			Could not load project assembly for Microsoft Fakes generation -> http://connect.microsoft.com/VisualStudio/feedback/details/809792/could-not-load-project-assembly-for-microsoft-fakes-generation
+		-->
+		<Message
+			Condition="Exists(%(FileToRemoveBeforeBuild.Identity))"
+			Importance="high"
+			Text="Target 'BeforeBuild': removing file '%(FileToRemoveBeforeBuild.Identity)'."
+		/>
+		<Delete
+			Files="@(FileToRemoveBeforeBuild)"
+		/>
+	</Target>
+</Project>
